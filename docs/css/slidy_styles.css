@@ -132,7 +132,7 @@ div.info {
 }
 div.info::before {
   color: #72A7CF;
-  content: url(../slides/images/info_50x50.png);
+  content: url(info_50x50.png);
   display: block;
   width: 2em;
   font-size: 120%;
@@ -376,13 +376,18 @@ li.slides {
   list-style: none;
   font-size: 120%;
 }
-li.exercise {
+li.bonus:after {
+  content: '\1F31F';
+  color: red;
+  font-size: 100%;
+}
+li.exercises {
   margin-top: 1em;
   margin-left: 60px;
   list-style: none;
   font-size: 120%;
 }
-a.exercise {
+a.exercises {
   font-weight:normal;
   font-family:monospace;
 }
@@ -393,7 +398,7 @@ li.slides:before {
   text-align: left;
   width: 26px;
 }
-li.exercise:before {
+li.exercises:before {
   content: url(keyboard_24x24c.png);
   text-decoration: none;
   display: inline-block;
@@ -404,7 +409,7 @@ p.slides_desc {
   font-style:italic;
   font-size:90%;
 }
-p.exercise_desc {
+p.exercises_desc {
   margin-left: 92px;
   font-style:italic;
   font-size:90%;

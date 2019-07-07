@@ -256,15 +256,22 @@ h2 {
 <p>1. <strong>Download and install R</strong> (64-bit): <a href="https://cran.r-project.org/" target="_blank">https://cran.r-project.org/</a></p>
 <p>2. <strong>Download and install RStudio Desktop</strong> (free version is fine): <a href="https://www.rstudio.com/products/rstudio/download/" target="_blank">https://www.rstudio.com/products/rstudio/download/</a></p>
 <p>3. <strong>Install Packages</strong></p>
-<p>R packages are like add-ins - they expand the capabilities of R. To install the packages we’ll be using for the workshop, open RStudio and execute the following commands by copy-pasting them into the console and hitting enter (internet connection required).</p>
+<p class="indented1">
+R packages are like add-ins - they expand the capabilities of R. To install the packages we’ll be using for the workshop, open RStudio and execute the following commands by copy-pasting them into the console and hitting enter (internet connection required).
+</p>
 <textarea name="msg" cols="120" rows="7" style="font-family:monospace;">
-pkgs_req <- c("sp", "sf", "rgdal", "rgeos", "tmap", "leaflet", "ggmap", "maptools", "RColorBrewer", "raster", "maps", "zipcode", "tidyverse",  "jsonlite", "rasterVis")
+pkgs_req <- c("sp", "sf", "rgdal", "rgeos", "tmap", "leaflet", "ggmap", "maptools", "RColorBrewer", "raster", "maps", "zipcode", "tidyverse",  "jsonlite", "rasterVis", "GISTools", "adehabitatHR")
 
 pkgs_missing <- pkgs_req[!(pkgs_req %in% installed.packages()[,"Package"])]
 
 if (length(pkgs_missing)) install.packages(pkgs_missing, dependencies=TRUE)
 </textarea>
-<p><em>Mac users</em>: If you have a non-Intel processor, you may have to follow an alternative process to install <code>rgeos</code> and <code>rgdal</code> (CRAN does not store binaries for non-Intel versions of MacOS). If you get error messages, delete them from the first line above and install the others.</p>
+<p class="indented1">
+If you are prompted by the question, <em>‘Do you want to install from sources the package which needs compilation?’</em>, select No.
+</p>
+<p class="indented1">
+<em>Mac users</em>: If you have a non-Intel processor, you may have to follow an alternative process to install <code>rgeos</code> and <code>rgdal</code> (CRAN does not store binaries for non-Intel versions of MacOS). If you get error messages, delete them from the first line above and install the others.
+</p>
 <p>4. <strong>Download workshop materials</strong></p>
 <p>The workshop materials are on GitHub. Please download the workshop materials by visiting the site (<em>not yet ready - please check back the day before the workshop</em>), and clicking the green download <img src="images/clone_download_btn_114x24.png" /> button. Unzip the file. The worshop materials including the data file will be found in the ‘docs’ folder.<br />
 <br />
