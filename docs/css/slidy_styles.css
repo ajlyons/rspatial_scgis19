@@ -415,6 +415,11 @@ p.exercises_desc {
   font-size:90%;
 }
 
+.copyme {
+  background-color:#e6fee6;
+}
+
+
 /* ======== No longer used ==============
 td {
   border: 1px dotted grey;
