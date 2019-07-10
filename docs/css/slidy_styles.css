@@ -301,6 +301,10 @@ h1 {
   font-weight: bold;
   color: #007020;
 }
+h1.break {
+  color: dimgray;
+  font-weight: normal;
+}
 .faux-h1 {
   font-size: 160%;
   font-weight: bold;
@@ -308,6 +312,8 @@ h1 {
   margin-bottom: 14.933px;
   line-height: 35.84px;
 }
+
+
 h2 {
   margin-left: 28px;
   font-size:130%;
