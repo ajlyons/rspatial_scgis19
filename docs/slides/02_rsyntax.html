@@ -151,6 +151,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="pres-title">R Syntax Review</span>
   </p>
 </div>
+<div class="slide section level1">
+
+<style>
+span.operator {font-family:monospace; color:dimgray; margin:0 1em;}
+</style>
+</div>
 <div id="r-as-a-fancy-calculator" class="slide section level1">
 <h1>R as a fancy calculator</h1>
 <script type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
@@ -163,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="tip">
 <p>White space is generally ignored in R (but helpful for readability).</p>
 <p>Everything in R is case sensitive.</p>
-<p>The <tt>#</tt> character indicates a comment.</p>
+<p>The <tt>#</tt> character tells R that what comes afer is a comment.</p>
 </div>
 </div>
 <div id="variables" class="slide section level1">
@@ -184,7 +190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;vanilla&quot;</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">start_date &lt;-<span class="st"> </span><span class="kw">Sys.Date</span>()</a>
 <a class="sourceLine" id="cb5-2" title="2">start_date</a></code></pre></div>
-<pre><code>## [1] &quot;2019-07-11&quot;</code></pre>
+<pre><code>## [1] &quot;2019-07-13&quot;</code></pre>
 </div>
 <div id="updating-variables" class="slide section level1">
 <h1>Updating Variables</h1>
@@ -279,8 +285,8 @@ SignatureMethod
 </tbody>
 </table>
 </div>
-<div id="variable-data-types" class="slide section level1">
-<h1>Variable Data Types</h1>
+<div id="data-types" class="slide section level1">
+<h1>Data Types</h1>
 <p>All variables have a class or data type, which you can view using <tt><strong>class()</strong></tt>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">num_plots &lt;-<span class="st"> </span><span class="dv">10</span></a>
 <a class="sourceLine" id="cb10-2" title="2"><span class="kw">class</span>(num_plots)</a></code></pre></div>
@@ -318,14 +324,14 @@ SignatureMethod
 <tt><strong>rnorm()</strong></tt> is a function that can generate multiple random numbers:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">devs &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb16-2" title="2">devs</a></code></pre></div>
-<pre><code>## [1]  0.54775618  0.03851955 -2.07022736 -0.06889942  0.83044164</code></pre>
+<pre><code>## [1]  0.2615098  1.7711064  1.0897384 -0.3825341 -0.7802743</code></pre>
 <p><br />
 <tt>c()</tt> stands for <em>combine</em>. It returns a vector containing the arguments passed (which all have to be the same type).</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">yn &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb18-2" title="2">yn</a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
 <p><br />
-<tt>LETTERS</tt> is an example of a built-in constant. It contains a vector of length 26 containing characters:</p>
+<tt>LETTERS</tt> is an example of a built-in <strong>constant</strong>. It contains a vector of length 26 containing characters:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">LETTERS</a></code></pre></div>
 <pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot;
 ## [18] &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
@@ -371,6 +377,43 @@ SignatureMethod
 </div>
 <p>This illustrates that many operators and functions are <strong><em>vectorized</em></strong>. In other words, the operation takes place on each element individually.</p>
 </div>
+<div id="comparing-variables" class="slide section level1">
+<h1>Comparing Variables</h1>
+<p>Comparison operators:</p>
+<p>Test for equality: <span class="operator">==</span> <span class="operator">!=</span></p>
+<p>Contains: <span class="operator">%in%</span></p>
+<p>Relationships: <span class="operator">&gt;</span> <span class="operator">&gt;=</span> <span class="operator">&lt;</span> <span class="operator">&lt;=</span></p>
+<div class="tryit">
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb35"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="st">&quot;abc&quot;</span> <span class="op">==</span><span class="st"> &quot;ABC&quot;</span></a>
+<a class="sourceLine" id="cb35-2" title="2"></a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="st">&quot;abc&quot;</span> <span class="op">==</span><span class="st"> &quot;abc&quot;</span></a>
+<a class="sourceLine" id="cb35-4" title="4"></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="st">&quot;ABCDEF&quot;</span> <span class="op">!=</span><span class="st"> &quot;ABC&quot;</span></a>
+<a class="sourceLine" id="cb35-6" title="6"></a>
+<a class="sourceLine" id="cb35-7" title="7"><span class="dv">1</span><span class="op">:</span><span class="dv">3</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb35-8" title="8"></a>
+<a class="sourceLine" id="cb35-9" title="9"><span class="dv">3</span><span class="op">:</span><span class="dv">1</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb35-10" title="10"></a>
+<a class="sourceLine" id="cb35-11" title="11"><span class="st">&quot;banana&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;mango&quot;</span>)</a></code></pre></div>
+</div>
+</div>
+<div class="tip">
+<p>You can save the results of a comparison to a variable:</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">equal_vals_yn &lt;-<span class="st"> </span>(<span class="dv">3</span><span class="op">:</span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb36-2" title="2">equal_vals_yn</a></code></pre></div>
+<pre><code>## [1] FALSE  TRUE FALSE</code></pre>
+</div>
+<p><tt>which(x)</tt> returns the indices of the elements of x which are true</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="dv">3</span><span class="op">:</span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
+<pre><code>## [1] FALSE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">which</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+</div>
+</div>
+</div>
 <div id="base-r-plotting-functions" class="slide section level1">
 <h1>Base R Plotting Functions</h1>
 <p>While there are <em>many</em> plotting packages, plotting functions in Base R include:</p>
@@ -386,36 +429,36 @@ SignatureMethod
 <div class="tryit">
 <p>Generate these plots. What do the <tt>pch</tt> and <tt>cex</tt> arguments do?</p>
 <div class="indented1 indented1-r">
-<div class="sourceCode" id="cb35"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="dv">1</span>)</a></code></pre></div>
 </div>
 <p><span id="soln_ntveye" class="showhidesoln" onclick="showHide(&#39;ntveye&#39;);return false;">[Solution]</span></p>
 <div id="ntveye" class="hint">
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="fl">0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="fl">0.5</span>)</a></code></pre></div>
 <p><img src="02_rsyntax_files/figure-slidy/plot_exercise_ans-1.png" width="768" /></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">5</span>, <span class="dt">cex=</span><span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">5</span>, <span class="dt">cex=</span><span class="dv">3</span>)</a></code></pre></div>
 <p><img src="02_rsyntax_files/figure-slidy/plot_exercise_ans-2.png" width="768" /></p>
 <p><tt>pch</tt> controls the <strong>symbol shape</strong> (plot character), and <tt>cex</tt> controls the <strong>symbol size</strong> (character extension factor).</p>
 </div>
 </div>
 <div class="challenge">
 <div class="indented1 indented1-r">
-<div class="sourceCode" id="cb38"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="co">## Generate 500 random numbers normally distributed</span></a>
-<a class="sourceLine" id="cb38-2" title="2"></a>
-<a class="sourceLine" id="cb38-3" title="3"><span class="co">## Compute the average of those numbers</span></a>
-<a class="sourceLine" id="cb38-4" title="4"></a>
-<a class="sourceLine" id="cb38-5" title="5"><span class="co">## Create a histogram of the distribution</span></a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co">## Generate 500 random numbers normally distributed</span></a>
+<a class="sourceLine" id="cb45-2" title="2"></a>
+<a class="sourceLine" id="cb45-3" title="3"><span class="co">## Compute the average of those numbers</span></a>
+<a class="sourceLine" id="cb45-4" title="4"></a>
+<a class="sourceLine" id="cb45-5" title="5"><span class="co">## Create a histogram of the distribution</span></a></code></pre></div>
 </div>
 <p><span id="soln_xfdcum" class="showhidesoln" onclick="showHide(&#39;xfdcum&#39;);return false;">[Solution]</span></p>
 <div id="xfdcum" class="hint">
-<div class="sourceCode" id="cb39"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="co">## Generate 500 random numbers normally distributed</span></a>
-<a class="sourceLine" id="cb39-2" title="2">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">500</span>)</a>
-<a class="sourceLine" id="cb39-3" title="3"><span class="kw">length</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="co">## Generate 500 random numbers normally distributed</span></a>
+<a class="sourceLine" id="cb46-2" title="2">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">500</span>)</a>
+<a class="sourceLine" id="cb46-3" title="3"><span class="kw">length</span>(x)</a></code></pre></div>
 <pre><code>## [1] 500</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co">## Compute the average of those numbers</span></a>
-<a class="sourceLine" id="cb41-2" title="2"><span class="kw">mean</span>(x)</a></code></pre></div>
-<pre><code>## [1] -0.002284135</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co">## Create a histogram of the distribution</span></a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="kw">hist</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="co">## Compute the average of those numbers</span></a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="kw">mean</span>(x)</a></code></pre></div>
+<pre><code>## [1] 0.04225851</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="co">## Create a histogram of the distribution</span></a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="kw">hist</span>(x)</a></code></pre></div>
 <p><img src="02_rsyntax_files/figure-slidy/challenge1_ans-1.png" width="768" /></p>
 </div>
 </div>
@@ -484,19 +527,19 @@ draw axes
 <p>See the function’s help page to determine which arguments are expected.</p>
 <p><img src="./images/rnorm_help_16cols_930x690.png" style="border:1px solid gray; margin-left:1em;" /></p>
 <p>If you pass arguments to a function <strong>in the order expected</strong> and <strong>don’t skip any</strong>, you don’t have to name them:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">rnorm</span>(<span class="dv">500</span>, <span class="dv">50</span>, <span class="dv">3</span>)  <span class="co">## generate 500 normally distributed random</span></a>
-<a class="sourceLine" id="cb44-2" title="2">                   <span class="co">## numbers with a mean of 50 and stand dev = 3.</span></a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">rnorm</span>(<span class="dv">500</span>, <span class="dv">50</span>, <span class="dv">3</span>)  <span class="co">## generate 500 normally distributed random</span></a>
+<a class="sourceLine" id="cb51-2" title="2">                   <span class="co">## numbers with a mean of 50 and stand dev = 3.</span></a></code></pre></div>
 <p>If you don’t pass arguments in expected order (or skip some), you have to name them in the parentheses:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">sd=</span><span class="fl">0.3</span>) <span class="co">## generate 100 normally distributed random</span></a>
-<a class="sourceLine" id="cb45-2" title="2">                     <span class="co">## numbers with stand deviation = 0.3</span></a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">sd=</span><span class="fl">0.3</span>) <span class="co">## generate 100 normally distributed random</span></a>
+<a class="sourceLine" id="cb52-2" title="2">                     <span class="co">## numbers with stand deviation = 0.3</span></a></code></pre></div>
 <div class="challenge">
 <div class="indented1 indented1-r">
-<div class="sourceCode" id="cb46"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="co">## Generate a sequence of exactly 8 numbers from 5 to 15</span></a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="co">## Generate a sequence of exactly 8 numbers from 5 to 15</span></a></code></pre></div>
 </div>
 <p><span id="soln_phoshd" class="showhidesoln" onclick="showHide(&#39;phoshd&#39;);return false;">[Solution]</span></p>
 <div id="phoshd" class="hint">
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="co">## Generate a sequence of 8 numbers from 5 to 15</span></a>
-<a class="sourceLine" id="cb47-2" title="2"><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">5</span>, <span class="dt">to=</span><span class="dv">15</span>, <span class="dt">length.out=</span><span class="dv">8</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="co">## Generate a sequence of 8 numbers from 5 to 15</span></a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">5</span>, <span class="dt">to=</span><span class="dv">15</span>, <span class="dt">length.out=</span><span class="dv">8</span>)</a></code></pre></div>
 <pre><code>## [1]  5.000000  6.428571  7.857143  9.285714 10.714286 12.142857 13.571429
 ## [8] 15.000000</code></pre>
 </div>
@@ -506,42 +549,42 @@ draw axes
 <h1>File Names and Directories</h1>
 <p>When you import or save objects to disk using a command, you don’t have the luxury of an interactive file dialog. You have to know where it’s going.</p>
 <p>All file paths are relative to the <em>working directory</em>. You can view or set the working directory from RStudio or with commands at the console:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">setwd</span>(<span class="st">&quot;/projects/soc101/sf_census/&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">setwd</span>(<span class="st">&quot;/projects/soc101/sf_census/&quot;</span>)</a></code></pre></div>
 <div class="tip">
 <p>You can set the working directory from the RStudio <em>Session</em> menu.</p>
 </div>
 <p>R uses standard Linux notion when interpreting directory names. The default <strong>‘Home’ directory</strong> is usually your Documents folder, and can be specified with the <tt><strong>~</strong></tt> character.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">tools<span class="op">::</span><span class="kw">file_path_as_absolute</span>(<span class="st">&quot;~&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">tools<span class="op">::</span><span class="kw">file_path_as_absolute</span>(<span class="st">&quot;~&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;C:/Users/Andy/Documents&quot;</code></pre>
 <p>The <strong>‘root’ directory</strong> on the current volume (drive) can be specified with the ‘<tt><strong>/</strong></tt>’ character. You can specify the drive letter if you’d like also (e.g., <tt>c:/</tt>).</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1">tools<span class="op">::</span><span class="kw">file_path_as_absolute</span>(<span class="st">&quot;/&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">tools<span class="op">::</span><span class="kw">file_path_as_absolute</span>(<span class="st">&quot;/&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;C:/&quot;</code></pre>
 <div class="info">
 <p><strong>Important Note for Windows users</strong></p>
 <p>R requires forward slashes (<tt>/</tt>), not back slashes (<tt>\</tt>). If you really want to keep using back slashes, you can use a double back slash (<tt>\\</tt>)</p>
 </div>
 <p>Current working directory: ‘<tt><strong>.</strong></tt>’.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1">tools<span class="op">::</span><span class="kw">file_path_as_absolute</span>(<span class="st">&quot;.&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">tools<span class="op">::</span><span class="kw">file_path_as_absolute</span>(<span class="st">&quot;.&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;C:/Workshops/R-Spatial/rspatial_mod/rmd_slides&quot;</code></pre>
 <p>Go up one directory level: ‘<tt><strong>..</strong></tt>’</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1">tools<span class="op">::</span><span class="kw">file_path_as_absolute</span>(<span class="st">&quot;~/..&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">tools<span class="op">::</span><span class="kw">file_path_as_absolute</span>(<span class="st">&quot;~/..&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;C:/Users/Andy&quot;</code></pre>
 <p>You can specify the current directory with a period (<tt>.</tt>). If you want to save something to a sub-directory of the active directory, start with the period and then keep going.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">setwd</span>(<span class="st">&quot;/projects/soc101/sf_census&quot;</span>)</a>
-<a class="sourceLine" id="cb58-2" title="2"><span class="kw">getwd</span>()</a>
-<a class="sourceLine" id="cb58-3" title="3"><span class="kw">setwd</span>(<span class="st">&quot;./data&quot;</span>)</a>
-<a class="sourceLine" id="cb58-4" title="4"><span class="kw">getwd</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="kw">setwd</span>(<span class="st">&quot;/projects/soc101/sf_census&quot;</span>)</a>
+<a class="sourceLine" id="cb65-2" title="2"><span class="kw">getwd</span>()</a>
+<a class="sourceLine" id="cb65-3" title="3"><span class="kw">setwd</span>(<span class="st">&quot;./data&quot;</span>)</a>
+<a class="sourceLine" id="cb65-4" title="4"><span class="kw">getwd</span>()</a></code></pre></div>
 <div class="tryit">
 <p>Try these functions:</p>
 <div class="indented1 indented1-r">
-<div class="sourceCode" id="cb59"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="kw">getwd</span>()</a>
-<a class="sourceLine" id="cb59-2" title="2"><span class="kw">path.expand</span>(<span class="st">&quot;~&quot;</span>)</a>
-<a class="sourceLine" id="cb59-3" title="3"><span class="kw">list.files</span>(<span class="st">&quot;~&quot;</span>)</a>
-<a class="sourceLine" id="cb59-4" title="4">tools<span class="op">::</span><span class="kw">file_path_as_absolute</span>(<span class="st">&quot;./data&quot;</span>)</a>
-<a class="sourceLine" id="cb59-5" title="5"><span class="kw">list.files</span>(<span class="st">&quot;./data&quot;</span>, <span class="dt">pattern=</span><span class="st">&quot;.shp$&quot;</span>)</a>
-<a class="sourceLine" id="cb59-6" title="6">x &lt;-<span class="st"> </span><span class="kw">file.choose</span>()</a>
-<a class="sourceLine" id="cb59-7" title="7">x</a>
-<a class="sourceLine" id="cb59-8" title="8"><span class="kw">file.exists</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">getwd</span>()</a>
+<a class="sourceLine" id="cb66-2" title="2"><span class="kw">path.expand</span>(<span class="st">&quot;~&quot;</span>)</a>
+<a class="sourceLine" id="cb66-3" title="3"><span class="kw">list.files</span>(<span class="st">&quot;~&quot;</span>)</a>
+<a class="sourceLine" id="cb66-4" title="4">tools<span class="op">::</span><span class="kw">file_path_as_absolute</span>(<span class="st">&quot;./data&quot;</span>)</a>
+<a class="sourceLine" id="cb66-5" title="5"><span class="kw">list.files</span>(<span class="st">&quot;./data&quot;</span>, <span class="dt">pattern=</span><span class="st">&quot;.shp$&quot;</span>)</a>
+<a class="sourceLine" id="cb66-6" title="6">x &lt;-<span class="st"> </span><span class="kw">file.choose</span>()</a>
+<a class="sourceLine" id="cb66-7" title="7">x</a>
+<a class="sourceLine" id="cb66-8" title="8"><span class="kw">file.exists</span>(x)</a></code></pre></div>
 </div>
 </div>
 <div class="tip">
@@ -554,23 +597,24 @@ draw axes
 <h1>Saving Your Work</h1>
 <p>You can save individual variables to disk with the <tt><strong>save()</strong></tt> function. <tt>save()</tt> saves objects in a binary, compressed file format that R understands. This makes it very flexible and easy to bring back into R using the sister function <strong><tt>load()</tt></strong>.</p>
 <p>If you don’t specify a directory as part of the file name, it will go in the working directory.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">x_nums &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>) <span class="op">*</span><span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb60-2" title="2"></a>
-<a class="sourceLine" id="cb60-3" title="3"><span class="co">## Save to to My Documents</span></a>
-<a class="sourceLine" id="cb60-4" title="4"><span class="kw">save</span>(x_nums, <span class="dt">file=</span><span class="st">&quot;~/my_random_numbers.RData&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">x_nums &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>) <span class="op">*</span><span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb67-2" title="2"></a>
+<a class="sourceLine" id="cb67-3" title="3"><span class="co">## Save to to My Documents</span></a>
+<a class="sourceLine" id="cb67-4" title="4"><span class="kw">save</span>(x_nums, <span class="dt">file=</span><span class="st">&quot;~/my_random_numbers.RData&quot;</span>)</a></code></pre></div>
 <div class="info">
 <p><strong>.RData</strong> and <strong>.Rda</strong> are common extensions for R data files, but you can name your file anyting you want.</p>
+<p>R introduced a new compression standard in version 3.5. To be backwards compatible with earlier versions of R, add <tt>version=2</tt> to <tt>save()</tt>.</p>
 </div>
 <p>To save your entire <strong>workspace</strong> (all variables in memory), use the <tt>save.image()</tt> function. RStudio also has a ‘Save Workspace’ button on the ‘Environment’ window, and will probably ask if you want to save your workspace when you quit the program.</p>
 <h2 id="loading-saved-variables-back-into-r">Loading Saved Variables Back into R</h2>
 <p>To load a file back into memory, use the <tt><strong>load()</strong></tt> function.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="kw">load</span>(<span class="st">&quot;~/first_try.RData&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">load</span>(<span class="st">&quot;~/first_try.RData&quot;</span>)</a></code></pre></div>
 </div>
 <div id="saving-scripts" class="slide section level1">
 <h1>Saving Scripts</h1>
 <p>You can save and open scripts, R Markdown files, etc. from the RStudio <strong>File</strong> menu.</p>
 <p>If you have a set of commands that you want to rerun repeatedly, you can save them as a *.R file and then run them all at once with <tt><strong>source()</strong></tt> function.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="kw">source</span>(<span class="st">&quot;import_clean_data.R&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="kw">source</span>(<span class="st">&quot;import_clean_data.R&quot;</span>)</a></code></pre></div>
 <div class="tip">
 <p><tt><strong>source()</strong></tt> automatically runs all the commands in a script, so only use it with scripts that are ‘ready-to-go’. To run commands one-by-one, open it in RStudio.</p>
 </div>
