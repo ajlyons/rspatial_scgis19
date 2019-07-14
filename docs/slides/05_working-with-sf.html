@@ -210,25 +210,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Common epsg numbers</h1>
 <h2 id="geographic-crss">Geographic CRSs</h2>
 <div class="indented2">
-<ol start="4326" style="list-style-type: decimal">
-<li>Geographic, WGS84 (default for lon/lat)<br />
-</li>
-<li>Geographic, NAD83 (USA Fed agencies like Census)</li>
-</ol>
+<p>4326. Geographic, WGS84 (default for lon/lat)<br />
+4269. Geographic, NAD83 (USA Fed agencies like Census)</p>
 </div>
 <h2 id="projected-crss">Projected CRSs</h2>
 <div class="indented2">
-<ol start="5070" style="list-style-type: decimal">
-<li>USA Contiguous Albers Equal Area Conic<br />
-</li>
-<li>CA ALbers Equal Area<br />
-</li>
-<li>UTM Zone 10, WGS84 (Northern Cal)<br />
-</li>
-<li>UTM Zone 11, WGS84 (Southern Cal)<br />
-</li>
-<li>Web Mercator (web maps)</li>
-</ol>
+<p>5070. USA Contiguous Albers Equal Area Conic<br />
+3310. CA ALbers Equal Area<br />
+32610. UTM Zone 10, WGS84 (Northern Cal)<br />
+32611. UTM Zone 11, WGS84 (Southern Cal)<br />
+3857. Web Mercator (web maps)</p>
 </div>
 <div class="infobox">
 <p>The one-stop shop for finding proj4 strings and epsg numbers is <a href="http://www.spatialreference.org" target="_blank">http://www.spatialreference.org</a>. (Google usually works also).</p>
@@ -728,16 +719,33 @@ POLYGON ((1 0, 3 4, 5 1, 1 0))
 ## 4 268620.1 4178344
 ## 5 269052.6 4178870
 ## 6 270931.1 4179771</code></pre>
+<p>Convert a <tt>sp</tt> object into a <tt>sf</tt> object</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">sf_obj_new &lt;-<span class="st"> </span><span class="kw">st_as_sf</span>(sp_obj)</a></code></pre></div>
+<p>Convert a <tt>sf</tt> object into a <tt>sp</tt> object</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1">sp_obj_new &lt;-<span class="st"> </span><span class="kw">as</span>(sf_object, <span class="st">&quot;Spatial&quot;</span>)</a></code></pre></div>
 </div>
-<div id="next-up" class="slide section level1">
-<h1>Next Up</h1>
-<p><a href="../exercises/ex01_ex_basicr.html">Exercise 1: Creating a Yosemite Map</a></p>
+<div id="summary-and-next-up" class="slide section level1">
+<h1>Summary and Next-Up</h1>
+<p>Today we saw how to:</p>
+<div class="compact">
+<ul>
+<li>how to refer to known CRS’s</li>
+<li>view and assign projections to <tt>sf</tt> objects</li>
+<li>(re)project sf objects with <tt>st_transform()</tt></li>
+<li>use <tt>dplyr</tt> functions for data munging and attribute queries</li>
+<li>import a csv file</li>
+<li>turn a data frame with coordinates into a <tt>sf</tt> object</li>
+<li>convert a <tt>sf</tt> object into a <tt>sp</tt> object and vice-versa</li>
+</ul>
+</div>
 <div class="infobox">
 <p>Additional Resources</p>
 <div class="indented1">
-
+<p><a href="https://r-spatial.github.io/sf/articles/sf1.html" target="_blank">sf Vignette 1</a>, sf package Vignette</p>
 </div>
 </div>
+<p>Next:</p>
+<p><a href="06_geoprocessing.html">Geoprocessing</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

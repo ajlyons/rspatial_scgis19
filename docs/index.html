@@ -267,11 +267,24 @@ SCGIS Conference, 2019
 <p style="font-size:200%; font-family:monospace;">
 <br/><a href="https://ajlyons.github.io/rspatial_scgis19/" class="uri">https://ajlyons.github.io/rspatial_scgis19/</a>
 </p>
-<div id="vfelgf" class="billboard">
-<p>As we get settled, please introduce yourself on the Community Forum:</p>
-<p style="font-family:monospace;">
-<a href="https://tinyurl.com/rspatial-scgis19" target="_blank">https://tinyurl.com/rspatial-scgis19</a>
-</p>
+<div id="vfelgf" class="billboard" style="font-size:180%;">
+<div style="float:right; width:220px; border:2px solid DimGray; text-align:center; font-size:70%; background-color:Azure; padding:0.5em; margin-left:1em;">
+<p>R Newbies:<br/>feel free to sit next to a designated R Wizard</p>
+<p><img src="images/r-wizard_120x170.png" /></p>
+</div>
+<p>As we get settled…</p>
+<div style="font-size:80%;">
+<p>Download the workshop materials from GitHub:<br />
+<span style="font-family:monospace;"><a href="https://tinyurl.com/rspatial-scgis19" target="_blank">https://github.com/ajlyons/rspatial_scgis19</a></span><br />
+<img src="images/clone_download_btn_172x36.png" /><br />
+Unzip to c:\<br />
+<br />
+Introduce yourself on the Community Forum:<br />
+<span style="font-family:monospace;"><a href="https://tinyurl.com/rspatial-scgis19" target="_blank">https://tinyurl.com/rspatial-scgis19</a></span></p>
+</div>
+<div style="clear:both;">
+
+</div>
 </div>
 <div class="hrleft">
 
@@ -281,6 +294,30 @@ Part I. Intro and Working with Spatial Data
 </h1>
 <p style="font-size:90%;">
 9:00 - 10:15 am
+</p>
+<li class="slides">
+<a target="_blank" class="slides" href="slides/01_intro.html">Introduction</a>
+</li>
+<p class="slides_desc">
+Workshop overview, resources, R vs GIS, RStudio
+</p>
+<li class="slides">
+<a target="_blank" class="slides" href="slides/02_rsyntax.html">R Syntax Review</a>
+</li>
+<p class="slides_desc">
+Syntax rules, variables, naming styles, data types, sequences, basic plotting, functions, file names and directories, saving your work
+</p>
+<li class="slides">
+<a target="_blank" class="slides" href="slides/03_packages.html">Working with Packages</a>
+</li>
+<p class="slides_desc">
+Finding packages, spatial package ecosystem, tidyverse, installing and loading packages, what’s in a package
+</p>
+<li class="slides">
+<a target="_blank" class="slides" href="slides/04_import-plot-geospatial.html">Importing and Plotting Vector Data</a>
+</li>
+<p class="slides_desc">
+Importing from Shapefiles, KMLs and geodabases, basic plotting, leaflet
 </p>
 <div class="hrleft">
 
@@ -300,6 +337,18 @@ Part II. Manipulating Vector Data
 <p style="font-size:90%;">
 10:30 am - 12:00 pm
 </p>
+<li class="slides">
+<a target="_blank" class="slides" href="slides/05_working-with-sf.html">Working with sf Objects</a>
+</li>
+<p class="slides_desc">
+Projections, data frame methods, piping, dplyr, converting csv files into sf, well known text
+</p>
+<li class="slides">
+<a target="_blank" class="slides" href="slides/06_geoprocessing.html">Geoprocessing</a>
+</li>
+<p class="slides_desc">
+Geoprocessing
+</p>
 <div class="hrleft">
 
 </div>
@@ -316,7 +365,19 @@ Lunch
 Part III. Working with Raster Data
 </h1>
 <p style="font-size:90%;">
-1:00 - 2:30 pm
+1:00 - 2:45 pm
+</p>
+<li class="slides">
+<a target="_blank" class="slides" href="slides/07_rastser1-import-plot.html">Importing and Plotting Raster Data</a>
+</li>
+<p class="slides_desc">
+Importing rasters, raster metadata, crop, color, slope, aspect, and hill shade
+</p>
+<li class="slides">
+Common Raster Manipulations
+</li>
+<p class="slides_desc">
+Projecting a raster, mask, resample, stretch, stack, rasterize vectors, export
 </p>
 <div class="hrleft">
 
@@ -325,34 +386,16 @@ Part III. Working with Raster Data
 Break
 </h1>
 <p style="font-size:90%;">
-2:30 - 2:45 pm
+2:45 - 3:00 pm
 </p>
 <div class="hrleft">
 
 </div>
-<h1 id="batch-processing-and-automation" class>
-Part IV. Batch Processing and Automation
+<h1 id="projects" class>
+Projects
 </h1>
 <p style="font-size:90%;">
-2:45 - 3:30 pm
-</p>
-<div class="hrleft">
-
-</div>
-<h1 id="conservation-example" class>
-Conservation Example
-</h1>
-<p style="font-size:90%;">
-3:30 - 4:15 pm
-</p>
-<div class="hrleft">
-
-</div>
-<h1 id="rarcgis-bridge" class>
-Part V. R-ArcGIS Bridge
-</h1>
-<p style="font-size:90%;">
-4:15 - 5:00 pm
+3:00 - 5:00 pm
 </p>
 <div class="hrleft">
 
@@ -360,6 +403,27 @@ Part V. R-ArcGIS Bridge
 <h1 id="bonus-material" class>
 Bonus Material
 </h1>
+<li class="slides bonus">
+<a target="_blank" class="slides" href="slides/geocoding.html">Geocoding</a>
+</li>
+<p class="slides_desc">
+Geocoding with Google, ESRI World Geocoding Service, and OSM Nominatim
+</p>
+<li class="slides bonus">
+R Markdown
+</li>
+<p class="slides_desc">
+R Markdown
+</p>
+<div class="hrleft">
+
+</div>
+<h1 id="rarcgis-bridge" class>
+Part IV. R-ArcGIS Bridge
+</h1>
+<p style="font-size:90%;">
+2:45 - 3:30 pm
+</p>
 <div class="hrleft">
 
 </div>

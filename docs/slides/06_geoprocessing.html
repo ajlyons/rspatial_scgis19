@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Geoprocessing" />
+  <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href='../index.html'>Course Homepage</a></span><span class='footer-right'>Forum:&nbsp<a href=' https://tinyurl.com/rspatial-scgis19 ' target='_blank'> https://tinyurl.com/rspatial-scgis19 </a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
+  <meta name="font-size-adjustment" content="2"/>
+  <title>Spatial Data Analysis with R</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACkUlEQVQ4jX2SW0jTcRTHTzNyeZlh6lqmm3POdNPC6SxSEzaqafkykOFoIxTDWpKRFV6iQMNLFyMSsQvUW0WORc2WWBmGKEGZXUyz0NrmNmfa1PYgfHsQ1v5oHjgvX875/M45vy/R8mDJ9caxrFIL5CUWJB00Q9n+7Q+l1BetUMuMTL3JpTB0QVnejd1Hu9DQ60G5eQbqB7PIvj0L2bUZ0KZzghWbs0o7Fx3Tc/B6vStm6+g0wrQvIKh2gKKyUxnNSZoO685SC1YDeL1e9Ll+Ia7WCd5pJ4hojQ8g1nViezETYBqZx93BOdwa9jAgsdUT4J6ZQqC6f4GIiLYU9/RzNWYIdU9hd/8rLjN7UGT8DbWROVVMlQsBBWas142DiIikdfbFMF0POIVm2NzM1zwLS+mvcSsnEajpBSv/8RIgucGJ1EYXEs+NwjrlWfUGMee/Y2PFJIJLrFibex8kOsahhCYnUlpnIL1kh9X9/yMKG2yIOOlAsPYnAveZsE75EEQUQLwTwy5Rsxvx9UxApKEPEYY+BiSizA623oaggkdgq4xLKwRLq7i8sy6EFlpg8wNEVwyAd3wAbZ8cPu3CazeCC/sRojYjaL8Jvm8MPWLDBm03A8CveQ9+7RBia4cYU4QfeokwzTOwc6/4OzKXHap/C5ufD0RNo0i4OAZR81dcnnD69Mp3PxBe9GRkuZdFKk7sqTcQ132EpGUMydetSLnpgOSGHVtbxpHU9AX8mkFEG55/ZrjQL1h82V6esPLVh8Sr40i940J6xzzS7s1C0m6HqHEEiTnatgT5gcPijHxltFwhjpRIQpZjBAJ2lFTBFW5TiOPT8mXx6apdcRl5OaJM1Q6hLC9ls3RPTLgok0NELCKiv02kPqt/O1MZAAAAAElFTkSuQmCC" rel="icon" type="image/x-icon" />
+  <script language="javascript" type="text/javascript">
+  function TriShowHide(shID) {
+    shIDspan = shID + "span";
+    shIDdiv = shID + "div";
+    if (document.getElementById(shIDdiv).style.display != 'block') {
+      document.getElementById(shIDdiv).style.display = 'block';
+      txtSpan = "&#9660;";
+    } else {
+      document.getElementById(shIDdiv).style.display = 'none';
+      txtSpan = "&#9654;";
+    }
+    document.getElementById(shIDspan).innerHTML = txtSpan + " ";
+  }
+  function showHide(shID) {
+    if (shID=="soln-show-all") {
+      var allAnswerCode = document.getElementsByClassName("answer-code");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'block';
+      }
+    } else if (shID=="soln-hide-all") {
+      var allAnswerCode = document.getElementsByClassName("answer-code");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'none';
+      }
+    } else if (shID=="hints-show-all") {
+      var allAnswerCode = document.getElementsByClassName("hint");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'block';
+      }
+    } else if (shID=="hints-hide-all") {
+      var allAnswerCode = document.getElementsByClassName("hint");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'none';
+      }
+    } else {
+      if (document.getElementById(shID)) {
+        if (document.getElementById(shID).style.display != 'block') {
+          document.getElementById(shID).style.display = 'block';
+        } else {
+          document.getElementById(shID).style.display = 'none';
+        }
+      }
+    }
+  }
+  function CopyToClipboard(containerid) {
+  if (document.selection) {
+      var range = document.body.createTextRange();
+      range.moveToElementText(document.getElementById(containerid));
+      range.select().createTextRange();
+      document.execCommand("copy");
+  } else if (window.getSelection) {
+      var range = document.createRange();
+      range.selectNode(document.getElementById(containerid));
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      // alert("text copied")
+  }}
+  </script>
+  <link href="lib/slidy-2/styles/slidy.css" rel="stylesheet" />
+  <script src="lib/slidy-2/scripts/slidy.js"></script>
+  <script src="lib/clipboard-1.7.1/clipboard.min.js"></script>
+  <link href="lib/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+  <link href="lib/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+  <script src="lib/klippy-0.0.0.9500/js/klippy.min.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+   href="..\css\slidy_styles.css" />
+  <meta name="duration" content="0" />
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title"><span class="course-subtitle">Spatial Data Analysis with R</span></h1>
+  <p class="author">
+<span class="pres-title">Geoprocessing</span>
+  </p>
+</div>
+<div id="geoprocessing-methods" class="slide section level1">
+<h1>Geoprocessing Methods</h1>
+<script language="javascript" type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
+<script>
+  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p>All functions you can use with <tt>sf</tt> objects</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">methods</span>(<span class="dt">class =</span> <span class="st">&quot;sf&quot;</span>)</a></code></pre></div>
+<pre><code>##  [1] $&lt;-                   [                     [[&lt;-                 
+##  [4] aggregate             anti_join             arrange              
+##  [7] as.data.frame         cbind                 coerce               
+## [10] dbDataType            dbWriteTable          distinct             
+## [13] filter                full_join             group_by             
+## [16] group_map             group_split           identify             
+## [19] initialize            inner_join            left_join            
+## [22] merge                 mutate                plot                 
+## [25] print                 rbind                 rename               
+## [28] right_join            sample_frac           sample_n             
+## [31] select                semi_join             show                 
+## [34] slice                 slotsFromS3           st_agr               
+## [37] st_agr&lt;-              st_area               st_as_sf             
+## [40] st_bbox               st_boundary           st_buffer            
+## [43] st_cast               st_centroid           st_collection_extract
+## [46] st_convex_hull        st_coordinates        st_crop              
+## [49] st_crs                st_crs&lt;-              st_difference        
+## [52] st_geometry           st_geometry&lt;-         st_interpolate_aw    
+## [55] st_intersection       st_intersects         st_is                
+## [58] st_line_merge         st_nearest_points     st_node              
+## [61] st_normalize          st_point_on_surface   st_polygonize        
+## [64] st_precision          st_segmentize         st_set_precision     
+## [67] st_simplify           st_snap               st_sym_difference    
+## [70] st_transform          st_triangulate        st_union             
+## [73] st_voronoi            st_wrap_dateline      st_write             
+## [76] st_zm                 summarise             transmute            
+## [79] ungroup              
+## see &#39;?methods&#39; for accessing help and source code</code></pre>
+<p>We can generally divide geoprocessing into 3 categories</p>
+<div class="indented1">
+<ul>
+<li>geometric measurements (area and length)<br />
+</li>
+<li>creating new geometries</li>
+<li>tests for spatial proximity or relationships<br />
+</li>
+</ul>
+</div>
+<div class="tip">
+<p>Geoprocessing functions do their calculations with map units.</p>
+<p>If area or distance measurements are involed, <strong>use projected data</strong>.</p>
+</div>
+</div>
+<div id="geometric-measurements" class="slide section level1">
+<h1>Geometric measurements</h1>
+<p>Let’s compute the area of Yosemite. First we have to project the boundary into UTM.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">epsg_utm11n &lt;-<span class="st"> </span><span class="dv">32611</span></a>
+<a class="sourceLine" id="cb3-2" title="2">yose_bnd_utm &lt;-<span class="st"> </span><span class="kw">st_transform</span>(yose_bnd, epsg_utm11n)</a>
+<a class="sourceLine" id="cb3-3" title="3">yose_area &lt;-<span class="st"> </span><span class="kw">st_area</span>(yose_bnd_utm)</a>
+<a class="sourceLine" id="cb3-4" title="4">yose_area</a></code></pre></div>
+<pre><code>## 3019918537 [m^2]</code></pre>
+<p><tt>st_area</tt> uses the <tt>units</tt> package to help convert between units.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(units)</a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co">## View in square miles</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw">set_units</span>(yose_area, mi<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb5-5" title="5"></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co">## View in hectacre</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="kw">set_units</span>(yose_area, ha)</a></code></pre></div>
+<div class="tryit">
+<p>Compute the area of fires. Here is some code to import them.</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">firehist_gdb &lt;-<span class="st"> &quot;./data/yose_firehistory.gdb&quot;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">file.exists</span>(firehist_gdb)</a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">## View the layers in this source</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="kw">st_layers</span>(firehist_gdb)</a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co">## Import the &#39;Fire History Polys&#39; layer  (case sensitive!)</span></a>
+<a class="sourceLine" id="cb6-8" title="8">yose_firepolys_utm &lt;-<span class="st"> </span><span class="kw">st_read</span>(firehist_gdb, <span class="dt">layer=</span><span class="st">&quot;YNP_FireHistoryPolys&quot;</span>)</a></code></pre></div>
+</div>
+<p>Which was the biggest fire?</p>
+<p><span id="soln_wdmawf" class="showhidesoln" onclick="showHide(&#39;wdmawf&#39;);return false;">[Solution]</span></p>
+<div id="wdmawf" class="hint">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">fire_areas &lt;-<span class="st"> </span><span class="kw">st_area</span>(yose_firepolys_utm)</a>
+<a class="sourceLine" id="cb7-2" title="2"></a>
+<a class="sourceLine" id="cb7-3" title="3">i &lt;-<span class="st"> </span><span class="kw">which.max</span>(fire_areas)</a>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5">yose_firepolys_utm[i,]</a></code></pre></div>
+<pre><code>## Simple feature collection with 1 feature and 21 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: 246268.6 ymin: 4182145 xmax: 264049.5 ymax: 4215598
+## epsg (SRID):    26911
+## proj4string:    +proj=utm +zone=11 +datum=NAD83 +units=m +no_defs
+##          FIRE_ID LINK_ID SACS_ID FILE_ID NAME    ACRES YEAR TYPE CAUSE
+## 4251 CA-YNP-0126    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  Rim 78892.24 2013   WF    HC
+##      HECTARES AREA PERIMETER SEQ_NO DECADE  STARTDATE    OUTDATE X_COORD
+## 4251       NA   NA   1123267     NA   2010 2013-08-17 2013-10-18      NA
+##      Y_COORD ET_ID Shape_Length Shape_Area                          Shape
+## 4251      NA    NA     209505.2  318835601 MULTIPOLYGON (((247876.4 42...</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">set_units</span>(fire_areas[i], mi<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## 123.1031 [mi^2]</code></pre>
+<p>The 2013 Rim fire was the largest!</p>
+</div>
+</div>
+</div>
+<div id="compute-lengths" class="slide section level1">
+<h1>Compute Lengths</h1>
+<p>Computing distances is similar, with <tt>st_length()</tt></p>
+<p><tt>st_distance()</tt> computes the distances between features.</p>
+</div>
+<div id="creating-new-geometries" class="slide section level1">
+<h1>Creating new geometries</h1>
+<h2 id="buffer">Buffer</h2>
+<p>Let’s put a 1km buffer around each of the campsites.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Project the points of interest to UTM</span></a>
+<a class="sourceLine" id="cb11-2" title="2">yose_poi_utm &lt;-<span class="st"> </span><span class="kw">st_transform</span>(yose_poi, epsg_utm11n)</a>
+<a class="sourceLine" id="cb11-3" title="3"></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="co">## View the unique values in POITYPE</span></a>
+<a class="sourceLine" id="cb11-5" title="5">yose_poi_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_drop_geometry</span>() <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">select</span>(POITYPE) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">distinct</span>(POITYPE) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(POITYPE)</a>
+<a class="sourceLine" id="cb11-6" title="6"></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="co">## Pull out just the features which are campgrouds</span></a>
+<a class="sourceLine" id="cb11-8" title="8">yose_campgnd_utm &lt;-<span class="st"> </span>yose_poi_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(POITYPE<span class="op">==</span><span class="st">&quot;Campground&quot;</span>)</a>
+<a class="sourceLine" id="cb11-9" title="9"></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="co">## Create the 1km buffer</span></a>
+<a class="sourceLine" id="cb11-11" title="11">yose_campgnd_buff_utm &lt;-<span class="st"> </span><span class="kw">st_buffer</span>(yose_campgnd_utm, <span class="dt">dist=</span><span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb11-12" title="12"></a>
+<a class="sourceLine" id="cb11-13" title="13"><span class="co">## Plot</span></a>
+<a class="sourceLine" id="cb11-14" title="14"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(yose_bnd_utm))</a>
+<a class="sourceLine" id="cb11-15" title="15"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(yose_campgnd_buff_utm), <span class="dt">add=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##                     POITYPE
+## 1      Backcountry Campsite
+## 2                Campground
+## 3          Campground Kiosk
+## 4                  Campsite
+## 5                    Church
+## 6          Entrance Station
+## 7              Food Service
+## 8               Gas Station
+## 9                  Hospital
+## 10                  Lodging
+## 11                   Market
+## 12                   Museum
+## 13                    Other
+## 14              Parking Lot
+## 15              Picnic Area
+## 16              Post Office
+## 17 Private Residence Rental
+## 18          Public Restroom
+## 19                 Restroom
+## 20                   Stable
+## 21                    Store
+## 22                Trailhead
+## 23           Visitor Center</code></pre>
+<p><img src="06_geoprocessing_files/figure-slidy/buff_fire_polys_plot-1.png" width="768" /></p>
+</div>
+<div id="convex-hull" class="slide section level1">
+<h1>Convex Hull</h1>
+<p>Create a convex hull around campgrounds.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">yose_campgnd_chull_utm &lt;-<span class="st"> </span><span class="kw">st_convex_hull</span>(yose_campgnd_utm)</a>
+<a class="sourceLine" id="cb13-2" title="2">{<span class="kw">plot</span>(<span class="kw">st_geometry</span>(yose_bnd_utm))</a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(yose_campgnd_utm), <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">col=</span><span class="st">&quot;dimgray&quot;</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(yose_campgnd_chull_utm), <span class="dt">border=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)}</a></code></pre></div>
+<p><img src="06_geoprocessing_files/figure-slidy/chull_cg-1.png" width="768" /></p>
+</div>
+<div id="intersections" class="slide section level1">
+<h1>Intersections</h1>
+</div>
+<div id="generating-random-points" class="slide section level1">
+<h1>Generating Random Points</h1>
+<p>sample() function</p>
+<p>dplyr select random features</p>
+<p>create random points</p>
+</div>
+<div id="summary-and-next-up" class="slide section level1">
+<h1>Summary and Next-Up</h1>
+<p>Today we saw how to:</p>
+<div class="compact">
+<ul>
+<li>perform geoprocessing tasks with <tt>sf</tt></li>
+</ul>
+</div>
+<div class="infobox">
+<p>Additional Resources</p>
+<div class="indented1">
+<p>sf Vignette 3 <a href="https://r-spatial.github.io/sf/articles/sf3.html" target="_blank">Manipulating Simple Feature Geometries</a>, sf package Vignette</p>
+</div>
+</div>
+<p>Next:</p>
+<p><a href="geocoding.html">Geocoding</a></p>
+</div>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+</body>
+</html>

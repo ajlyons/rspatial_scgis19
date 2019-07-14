@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Raster Data Pt 1: Importing and Visualization" />
+  <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href='../index.html'>Course Homepage</a></span><span class='footer-right'>Forum:&nbsp<a href=' https://tinyurl.com/rspatial-scgis19 ' target='_blank'> https://tinyurl.com/rspatial-scgis19 </a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
+  <meta name="font-size-adjustment" content="2"/>
+  <title>Spatial Data Analysis with R</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACkUlEQVQ4jX2SW0jTcRTHTzNyeZlh6lqmm3POdNPC6SxSEzaqafkykOFoIxTDWpKRFV6iQMNLFyMSsQvUW0WORc2WWBmGKEGZXUyz0NrmNmfa1PYgfHsQ1v5oHjgvX875/M45vy/R8mDJ9caxrFIL5CUWJB00Q9n+7Q+l1BetUMuMTL3JpTB0QVnejd1Hu9DQ60G5eQbqB7PIvj0L2bUZ0KZzghWbs0o7Fx3Tc/B6vStm6+g0wrQvIKh2gKKyUxnNSZoO685SC1YDeL1e9Ll+Ia7WCd5pJ4hojQ8g1nViezETYBqZx93BOdwa9jAgsdUT4J6ZQqC6f4GIiLYU9/RzNWYIdU9hd/8rLjN7UGT8DbWROVVMlQsBBWas142DiIikdfbFMF0POIVm2NzM1zwLS+mvcSsnEajpBSv/8RIgucGJ1EYXEs+NwjrlWfUGMee/Y2PFJIJLrFibex8kOsahhCYnUlpnIL1kh9X9/yMKG2yIOOlAsPYnAveZsE75EEQUQLwTwy5Rsxvx9UxApKEPEYY+BiSizA623oaggkdgq4xLKwRLq7i8sy6EFlpg8wNEVwyAd3wAbZ8cPu3CazeCC/sRojYjaL8Jvm8MPWLDBm03A8CveQ9+7RBia4cYU4QfeokwzTOwc6/4OzKXHap/C5ufD0RNo0i4OAZR81dcnnD69Mp3PxBe9GRkuZdFKk7sqTcQ132EpGUMydetSLnpgOSGHVtbxpHU9AX8mkFEG55/ZrjQL1h82V6esPLVh8Sr40i940J6xzzS7s1C0m6HqHEEiTnatgT5gcPijHxltFwhjpRIQpZjBAJ2lFTBFW5TiOPT8mXx6apdcRl5OaJM1Q6hLC9ls3RPTLgok0NELCKiv02kPqt/O1MZAAAAAElFTkSuQmCC" rel="icon" type="image/x-icon" />
+  <script language="javascript" type="text/javascript">
+  function TriShowHide(shID) {
+    shIDspan = shID + "span";
+    shIDdiv = shID + "div";
+    if (document.getElementById(shIDdiv).style.display != 'block') {
+      document.getElementById(shIDdiv).style.display = 'block';
+      txtSpan = "&#9660;";
+    } else {
+      document.getElementById(shIDdiv).style.display = 'none';
+      txtSpan = "&#9654;";
+    }
+    document.getElementById(shIDspan).innerHTML = txtSpan + " ";
+  }
+  function showHide(shID) {
+    if (shID=="soln-show-all") {
+      var allAnswerCode = document.getElementsByClassName("answer-code");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'block';
+      }
+    } else if (shID=="soln-hide-all") {
+      var allAnswerCode = document.getElementsByClassName("answer-code");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'none';
+      }
+    } else if (shID=="hints-show-all") {
+      var allAnswerCode = document.getElementsByClassName("hint");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'block';
+      }
+    } else if (shID=="hints-hide-all") {
+      var allAnswerCode = document.getElementsByClassName("hint");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'none';
+      }
+    } else {
+      if (document.getElementById(shID)) {
+        if (document.getElementById(shID).style.display != 'block') {
+          document.getElementById(shID).style.display = 'block';
+        } else {
+          document.getElementById(shID).style.display = 'none';
+        }
+      }
+    }
+  }
+  function CopyToClipboard(containerid) {
+  if (document.selection) {
+      var range = document.body.createTextRange();
+      range.moveToElementText(document.getElementById(containerid));
+      range.select().createTextRange();
+      document.execCommand("copy");
+  } else if (window.getSelection) {
+      var range = document.createRange();
+      range.selectNode(document.getElementById(containerid));
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      // alert("text copied")
+  }}
+  </script>
+  <link href="lib/slidy-2/styles/slidy.css" rel="stylesheet" />
+  <script src="lib/slidy-2/scripts/slidy.js"></script>
+  <script src="lib/clipboard-1.7.1/clipboard.min.js"></script>
+  <link href="lib/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+  <link href="lib/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+  <script src="lib/klippy-0.0.0.9500/js/klippy.min.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+   href="..\css\slidy_styles.css" />
+  <meta name="duration" content="0" />
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title"><span class="course-subtitle">Spatial Data Analysis with R</span></h1>
+  <p class="author">
+<span class="pres-title">Raster Data Pt 1: Importing and Visualization</span>
+  </p>
+</div>
+<div id="raster-data-sources" class="slide section level1">
+<h1>Raster Data Sources</h1>
+<script language="javascript" type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
+<script>
+  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<h2 id="remotely-sensed-data">Remotely Sensed Data</h2>
+<div class="indented2">
+<ul>
+<li>satellite sensors</li>
+<li>airborne or UAV mounted<br />
+</li>
+<li>DEMs from radar</li>
+</ul>
+</div>
+<p><img src="images/landsat_fcc_400x400.jpg" class="indented4" /></p>
+<h2 id="derived-or-modeled-data">Derived or modeled data</h2>
+<div class="indented2">
+<ul>
+<li>DEMs from interpolation</li>
+<li>interpolated environmental surfaces</li>
+<li>cost surfaces</li>
+<li>Kernel density surface (probability of occurrence)</li>
+<li>rasterized vector data</li>
+<li>many other spatial model outputs</li>
+<li>classified images</li>
+</ul>
+</div>
+<p><img src="images/lulc_houston-galveston_2015_660x750.png" class="indented4" /></p>
+<h2 id="multi-band-rasters">Multi-Band Rasters</h2>
+<p>Rasters with multiple layers are common in multi-spectral data (e.g., Landsat). Each band saves the reflectance in a different part of the electromagnetic spectrum.</p>
+<p><img src="images/multi-band-raster_331x152.png" class="indented4" /></p>
+<p>Whether saved as separate RasterLayer objects, or a single multi-layered RasterStack or RasterBrick, up to three layers can be combined to produce colors when plotting.</p>
+<p><img src="images/multi-band-raster-composite_512x327.png" class="indented4" /></p>
+<h2 id="continuous-or-discrete">Continuous or Discrete?</h2>
+<p>Raster data structures are simple arrays of data with a header file. The spatial structure is implicit (they are always rectangular). Cell values can be either continous or discrete.</p>
+<p><strong>Continous </strong></p>
+<p><img src="images/continuous-raster_504x500.png" class="indented4" /></p>
+<p><strong>Discrete / Categorical</strong></p>
+<p><img src="images/landcover-map_524x560.png" class="indented4" /></p>
+<p>Most discrete rasters also have a ‘Raster Attribute Table’ (RAT), which stores the name of each category.</p>
+<h2 id="continuous-or-discrete-1">Continuous or Discrete?</h2>
+<div class="indented2">
+<ul>
+<li>temperature</li>
+<li>land cover</li>
+<li>land use</li>
+<li>soil type</li>
+<li>fire risk</li>
+</ul>
+</div>
+</div>
+<div id="raster-package" class="slide section level1">
+<h1><tt>raster</tt> package</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(raster)</a></code></pre></div>
+<div class="indented2">
+<ul>
+<li>read, write and manipulate gridded spatial data</li>
+<li>basic and high-level analysis functions</li>
+<li>smart processing of large files</li>
+<li>import data from the cloud</li>
+</ul>
+</div>
+<p>For details see the vignette: <em>Introduction to the ‘raster’ package</em></p>
+<h2 id="raster-data-types">Raster Data Types</h2>
+<div class="indented2">
+<p><tt>RasterLayer</tt> - a single layer raster</p>
+<p><tt>RasterStack</tt> - multi-layer raster</p>
+<p><tt>RasterBrick</tt> - multi-layer raster (from a single file on disk, faster)</p>
+</div>
+<div class="tip">
+<p>The sp package also has <tt>SpatialGrid</tt> and <tt>SpatialPixel</tt> classes. These can be easily converted to <tt>Raster*</tt> objects using the <tt>raster()</tt> or <tt>as()</tt> functions.</p>
+</div>
+<h2 id="rasters-vs.-background-tiles">Rasters vs. Background Tiles</h2>
+<p><strong>Rasters</strong> are data you can visualize and manipulate.</p>
+<p><strong>Tiles</strong> are background images you get from online providers for display purposes. They look nice, but what you see is what you get (no ability to manipulate).</p>
+</div>
+<div id="import-a-geotiff" class="slide section level1">
+<h1>Import a GeoTiff</h1>
+<p>By default, the <tt>raster</tt> package will use import functions from <tt>rgdal</tt> if it’s installed. That means it can install any file format supported by <tt>rgdal</tt>.</p>
+<div class="tip">
+<p>To see all the raster file formats supported by rgdal (and therefore raster), run <span id="soln_qizhze" class="showhidesoln" onclick="showHide(&#39;qizhze&#39;);return false;"><tt>gdalDrivers()</tt></span>. <tt>raster</tt> also has several import/export drivers of its own (see <tt>?raster</tt>).</p>
+<div id="qizhze" class="hint">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">rgdal<span class="op">::</span><span class="kw">gdalDrivers</span>()</a></code></pre></div>
+<pre><code>##                name
+## 1           AAIGrid
+## 2              ACE2
+## 3              ADRG
+## 4               AIG
+## 5            AirSAR
+## 6               ARG
+## 7               BAG
+## 8            BIGGIF
+## 9               BLX
+## 10              BMP
+## 11              BSB
+## 12               BT
+## 13              CAD
+## 14             CALS
+## 15             CEOS
+## 16            COASP
+## 17            COSAR
+## 18              CPG
+## 19          CTable2
+## 20              CTG
+## 21          DERIVED
+## 22            DIMAP
+## 23            DIPEx
+## 24             DOQ1
+## 25             DOQ2
+## 26             DTED
+## 27          E00GRID
+## 28          ECRGTOC
+## 29             EHdr
+## 30              EIR
+## 31             ELAS
+## 32             ENVI
+## 33              ERS
+## 34             ESAT
+## 35             FAST
+## 36              FIT
+## 37             FITS
+## 38          FujiBAS
+## 39           GenBin
+## 40              GFF
+## 41              GIF
+## 42              GMT
+## 43             GPKG
+## 44   GRASSASCIIGrid
+## 45             GRIB
+## 46            GS7BG
+## 47             GSAG
+## 48             GSBG
+## 49              GSC
+## 50            GTiff
+## 51              GTX
+## 52              GXF
+## 53             HDF4
+## 54        HDF4Image
+## 55             HDF5
+## 56        HDF5Image
+## 57              HF2
+## 58              HFA
+## 59             HTTP
+## 60              IDA
+## 61            ILWIS
+## 62             INGR
+## 63             IRIS
+## 64             ISCE
+## 65            ISIS2
+## 66            ISIS3
+## 67       JAXAPALSAR
+## 68             JDEM
+## 69      JP2OpenJPEG
+## 70             JPEG
+## 71         JPEG2000
+## 72              KEA
+## 73  KMLSUPEROVERLAY
+## 74              KRO
+## 75              L1B
+## 76              LAN
+## 77              LCP
+## 78         Leveller
+## 79           LOSLAS
+## 80              MAP
+## 81          MBTiles
+## 82              MEM
+## 83              MFF
+## 84             MFF2
+## 85              MRF
+## 86             MSGN
+## 87              NDF
+## 88           netCDF
+## 89         NGSGEOID
+## 90             NITF
+## 91             NTv2
+## 92          NWT_GRC
+## 93          NWT_GRD
+## 94              OZI
+## 95             PAux
+## 96           PCIDSK
+## 97         PCRaster
+## 98              PDF
+## 99              PDS
+## 100        PLMOSAIC
+## 101        PLSCENES
+## 102             PNG
+## 103             PNM
+## 104   PostGISRaster
+## 105             PRF
+## 106               R
+## 107      Rasterlite
+## 108             RIK
+## 109             RMF
+## 110         ROI_PAC
+## 111          RPFTOC
+## 112         RRASTER
+## 113             RS2
+## 114             RST
+## 115            SAFE
+## 116            SAGA
+## 117        SAR_CEOS
+## 118            SDTS
+## 119       SENTINEL2
+## 120             SGI
+## 121          SNODAS
+## 122             SRP
+## 123         SRTMHGT
+## 124        Terragen
+## 125             TIL
+## 126             TSX
+## 127         USGSDEM
+## 128           VICAR
+## 129             VRT
+## 130             WCS
+## 131            WEBP
+## 132             WMS
+## 133            WMTS
+## 134             XPM
+## 135             XYZ
+## 136            ZMap
+##                                                       long_name create
+## 1                                           Arc/Info ASCII Grid  FALSE
+## 2                                                          ACE2  FALSE
+## 3                                 ARC Digitized Raster Graphics   TRUE
+## 4                                          Arc/Info Binary Grid  FALSE
+## 5                                     AirSAR Polarimetric Image  FALSE
+## 6                                     Azavea Raster Grid format  FALSE
+## 7                                    Bathymetry Attributed Grid  FALSE
+## 8                            Graphics Interchange Format (.gif)  FALSE
+## 9                                          Magellan topo (.blx)  FALSE
+## 10                         MS Windows Device Independent Bitmap   TRUE
+## 11                                  Maptech BSB Nautical Charts  FALSE
+## 12                          VTP .bt (Binary Terrain) 1.3 Format   TRUE
+## 13                                               AutoCAD Driver  FALSE
+## 14                                                CALS (Type 1)  FALSE
+## 15                                                   CEOS Image  FALSE
+## 16                              DRDC COASP SAR Processor Raster  FALSE
+## 17                   COSAR Annotated Binary Matrix (TerraSAR-X)  FALSE
+## 18                                              Convair PolGASP  FALSE
+## 19                                     CTable2 Datum Grid Shift   TRUE
+## 20                               USGS LULC Composite Theme Grid  FALSE
+## 21                   Derived datasets using VRT pixel functions  FALSE
+## 22                                                   SPOT DIMAP  FALSE
+## 23                                                        DIPEx  FALSE
+## 24                                         USGS DOQ (Old Style)  FALSE
+## 25                                         USGS DOQ (New Style)  FALSE
+## 26                                        DTED Elevation Raster  FALSE
+## 27                                     Arc/Info Export E00 GRID  FALSE
+## 28                                              ECRG TOC format  FALSE
+## 29                                           ESRI .hdr Labelled   TRUE
+## 30                                            Erdas Imagine Raw  FALSE
+## 31                                                         ELAS   TRUE
+## 32                                           ENVI .hdr Labelled   TRUE
+## 33                                       ERMapper .ers Labelled   TRUE
+## 34                                         Envisat Image Format  FALSE
+## 35                                            EOSAT FAST Format  FALSE
+## 36                                                    FIT Image  FALSE
+## 37                              Flexible Image Transport System   TRUE
+## 38                                       Fuji BAS Scanner Image  FALSE
+## 39                               Generic Binary (.hdr Labelled)  FALSE
+## 40     Ground-based SAR Applications Testbed File Format (.gff)  FALSE
+## 41                           Graphics Interchange Format (.gif)  FALSE
+## 42                                       GMT NetCDF Grid Format  FALSE
+## 43                                                   GeoPackage   TRUE
+## 44                                             GRASS ASCII Grid  FALSE
+## 45                                        GRIdded Binary (.grb)  FALSE
+## 46                         Golden Software 7 Binary Grid (.grd)   TRUE
+## 47                            Golden Software ASCII Grid (.grd)  FALSE
+## 48                           Golden Software Binary Grid (.grd)   TRUE
+## 49                                                  GSC Geogrid  FALSE
+## 50                                                      GeoTIFF   TRUE
+## 51                                     NOAA Vertical Datum .GTX   TRUE
+## 52                                 GeoSoft Grid Exchange Format  FALSE
+## 53                           Hierarchical Data Format Release 4  FALSE
+## 54                                                 HDF4 Dataset   TRUE
+## 55                           Hierarchical Data Format Release 5  FALSE
+## 56                                                 HDF5 Dataset  FALSE
+## 57                                   HF2/HFZ heightfield raster  FALSE
+## 58                                  Erdas Imagine Images (.img)   TRUE
+## 59                                        HTTP Fetching Wrapper  FALSE
+## 60                                      Image Data and Analysis   TRUE
+## 61                                             ILWIS Raster Map   TRUE
+## 62                                            Intergraph Raster   TRUE
+## 63                                 IRIS data (.PPI, .CAPPi etc)  FALSE
+## 64                                                  ISCE raster   TRUE
+## 65                      USGS Astrogeology ISIS cube (Version 2)   TRUE
+## 66                      USGS Astrogeology ISIS cube (Version 3)   TRUE
+## 67                   JAXA PALSAR Product Reader (Level 1.1/1.5)  FALSE
+## 68                                          Japanese DEM (.mem)  FALSE
+## 69                   JPEG-2000 driver based on OpenJPEG library  FALSE
+## 70                                                    JPEG JFIF  FALSE
+## 71  JPEG-2000 part 1 (ISO/IEC 15444-1), based on Jasper library  FALSE
+## 72                                      KEA Image Format (.kea)   TRUE
+## 73                                            Kml Super Overlay  FALSE
+## 74                                                    KOLOR Raw   TRUE
+## 75                         NOAA Polar Orbiter Level 1b Data Set  FALSE
+## 76                                              Erdas .LAN/.GIS   TRUE
+## 77                            FARSITE v.4 Landscape File (.lcp)  FALSE
+## 78                                         Leveller heightfield   TRUE
+## 79                            NADCON .los/.las Datum Grid Shift  FALSE
+## 80                                             OziExplorer .MAP  FALSE
+## 81                                                      MBTiles   TRUE
+## 82                                             In Memory Raster   TRUE
+## 83                                            Vexcel MFF Raster   TRUE
+## 84                                     Vexcel MFF2 (HKV) Raster   TRUE
+## 85                                           Meta Raster Format   TRUE
+## 86                               EUMETSAT Archive native (.nat)  FALSE
+## 87                                            NLAPS Data Format  FALSE
+## 88                                   Network Common Data Format   TRUE
+## 89                                  NOAA NGS Geoid Height Grids  FALSE
+## 90                         National Imagery Transmission Format   TRUE
+## 91                                        NTv2 Datum Grid Shift   TRUE
+## 92                   Northwood Classified Grid Format .grc/.tab  FALSE
+## 93                      Northwood Numeric Grid Format .grd/.tab   TRUE
+## 94                                       OziExplorer Image File  FALSE
+## 95                                            PCI .aux Labelled   TRUE
+## 96                                         PCIDSK Database File   TRUE
+## 97                                         PCRaster Raster File   TRUE
+## 98                                               Geospatial PDF   TRUE
+## 99                                   NASA Planetary Data System  FALSE
+## 100                                     Planet Labs Mosaics API  FALSE
+## 101                                      Planet Labs Scenes API  FALSE
+## 102                                   Portable Network Graphics  FALSE
+## 103                             Portable Pixmap Format (netpbm)   TRUE
+## 104                                       PostGIS Raster driver  FALSE
+## 105                                         Racurs PHOTOMOD PRF  FALSE
+## 106                                         R Object Data Store  FALSE
+## 107                                                  Rasterlite  FALSE
+## 108                                     Swedish Grid RIK (.rik)  FALSE
+## 109                                        Raster Matrix Format   TRUE
+## 110                                              ROI_PAC raster   TRUE
+## 111                            Raster Product Format TOC format  FALSE
+## 112                                                    R Raster  FALSE
+## 113                                      RadarSat 2 XML Product  FALSE
+## 114                                           Idrisi Raster A.1   TRUE
+## 115                                 Sentinel-1 SAR SAFE Product  FALSE
+## 116                                SAGA GIS Binary Grid (.sdat)   TRUE
+## 117                                              CEOS SAR Image  FALSE
+## 118                                                 SDTS Raster  FALSE
+## 119                                                  Sentinel 2  FALSE
+## 120                                   SGI Image File Format 1.0   TRUE
+## 121                               Snow Data Assimilation System  FALSE
+## 122                         Standard Raster Product (ASRP/USRP)  FALSE
+## 123                                         SRTMHGT File Format  FALSE
+## 124                                        Terragen heightfield   TRUE
+## 125                                             EarthWatch .TIL  FALSE
+## 126                                          TerraSAR-X Product  FALSE
+## 127                          USGS Optional ASCII DEM (and CDED)  FALSE
+## 128                                             MIPL VICAR file  FALSE
+## 129                                              Virtual Raster   TRUE
+## 130                                    OGC Web Coverage Service  FALSE
+## 131                                                        WEBP  FALSE
+## 132                                         OGC Web Map Service  FALSE
+## 133                                    OGC Web Mab Tile Service  FALSE
+## 134                                           X11 PixMap Format  FALSE
+## 135                                           ASCII Gridded XYZ  FALSE
+## 136                                              ZMap Plus Grid  FALSE
+##      copy isRaster
+## 1    TRUE     TRUE
+## 2   FALSE     TRUE
+## 3   FALSE     TRUE
+## 4   FALSE     TRUE
+## 5   FALSE     TRUE
+## 6    TRUE     TRUE
+## 7   FALSE     TRUE
+## 8   FALSE     TRUE
+## 9    TRUE     TRUE
+## 10  FALSE     TRUE
+## 11  FALSE     TRUE
+## 12  FALSE     TRUE
+## 13  FALSE     TRUE
+## 14   TRUE     TRUE
+## 15  FALSE     TRUE
+## 16  FALSE     TRUE
+## 17  FALSE     TRUE
+## 18  FALSE     TRUE
+## 19  FALSE     TRUE
+## 20  FALSE     TRUE
+## 21  FALSE     TRUE
+## 22  FALSE     TRUE
+## 23  FALSE     TRUE
+## 24  FALSE     TRUE
+## 25  FALSE     TRUE
+## 26   TRUE     TRUE
+## 27  FALSE     TRUE
+## 28  FALSE     TRUE
+## 29   TRUE     TRUE
+## 30  FALSE     TRUE
+## 31  FALSE     TRUE
+## 32  FALSE     TRUE
+## 33  FALSE     TRUE
+## 34  FALSE     TRUE
+## 35  FALSE     TRUE
+## 36   TRUE     TRUE
+## 37  FALSE     TRUE
+## 38  FALSE     TRUE
+## 39  FALSE     TRUE
+## 40  FALSE     TRUE
+## 41   TRUE     TRUE
+## 42   TRUE     TRUE
+## 43   TRUE     TRUE
+## 44  FALSE     TRUE
+## 45  FALSE     TRUE
+## 46   TRUE     TRUE
+## 47   TRUE     TRUE
+## 48   TRUE     TRUE
+## 49  FALSE     TRUE
+## 50   TRUE     TRUE
+## 51  FALSE     TRUE
+## 52  FALSE     TRUE
+## 53  FALSE     TRUE
+## 54  FALSE     TRUE
+## 55  FALSE     TRUE
+## 56  FALSE     TRUE
+## 57   TRUE     TRUE
+## 58   TRUE     TRUE
+## 59  FALSE     TRUE
+## 60  FALSE     TRUE
+## 61   TRUE     TRUE
+## 62   TRUE     TRUE
+## 63  FALSE     TRUE
+## 64  FALSE     TRUE
+## 65  FALSE     TRUE
+## 66   TRUE     TRUE
+## 67  FALSE     TRUE
+## 68  FALSE     TRUE
+## 69   TRUE     TRUE
+## 70   TRUE     TRUE
+## 71   TRUE     TRUE
+## 72   TRUE     TRUE
+## 73   TRUE     TRUE
+## 74  FALSE     TRUE
+## 75  FALSE     TRUE
+## 76  FALSE     TRUE
+## 77   TRUE     TRUE
+## 78  FALSE     TRUE
+## 79  FALSE     TRUE
+## 80  FALSE     TRUE
+## 81   TRUE     TRUE
+## 82  FALSE     TRUE
+## 83   TRUE     TRUE
+## 84   TRUE     TRUE
+## 85   TRUE     TRUE
+## 86  FALSE     TRUE
+## 87  FALSE     TRUE
+## 88   TRUE     TRUE
+## 89  FALSE     TRUE
+## 90   TRUE     TRUE
+## 91  FALSE     TRUE
+## 92  FALSE     TRUE
+## 93   TRUE     TRUE
+## 94  FALSE     TRUE
+## 95  FALSE     TRUE
+## 96  FALSE     TRUE
+## 97   TRUE     TRUE
+## 98   TRUE     TRUE
+## 99  FALSE     TRUE
+## 100 FALSE     TRUE
+## 101 FALSE     TRUE
+## 102  TRUE     TRUE
+## 103 FALSE     TRUE
+## 104  TRUE     TRUE
+## 105 FALSE     TRUE
+## 106  TRUE     TRUE
+## 107  TRUE     TRUE
+## 108 FALSE     TRUE
+## 109 FALSE     TRUE
+## 110 FALSE     TRUE
+## 111 FALSE     TRUE
+## 112 FALSE     TRUE
+## 113 FALSE     TRUE
+## 114  TRUE     TRUE
+## 115 FALSE     TRUE
+## 116  TRUE     TRUE
+## 117 FALSE     TRUE
+## 118 FALSE     TRUE
+## 119 FALSE     TRUE
+## 120 FALSE     TRUE
+## 121 FALSE     TRUE
+## 122 FALSE     TRUE
+## 123  TRUE     TRUE
+## 124 FALSE     TRUE
+## 125 FALSE     TRUE
+## 126 FALSE     TRUE
+## 127  TRUE     TRUE
+## 128 FALSE     TRUE
+## 129  TRUE     TRUE
+## 130 FALSE     TRUE
+## 131  TRUE     TRUE
+## 132  TRUE     TRUE
+## 133  TRUE     TRUE
+## 134  TRUE     TRUE
+## 135  TRUE     TRUE
+## 136  TRUE     TRUE</code></pre>
+</div>
+</div>
+<h2 id="example-import-a-dem">Example: Import a DEM</h2>
+<p>Let’s import a DEM (digital elevation model) for Yosemite. These data come from the SRTM. The <tt>raster()</tt> function can be used to make a RasterLayer object from scratch, or import a raster file on disk. To import, pass the filename.</p>
+<div class="tip">
+<p>You can also import a TIF using <tt>rgdal::readGDAL()</tt>, and then convert it a <tt>Raster*</tt> object if needed with the <tt>raster()</tt> function.</p>
+<p>To import a multi-layer raster file, including RGB images, use <tt>raster::brick()</tt></p>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">srtm_fn &lt;-<span class="st"> &quot;./data/srtm_13_05.tif&quot;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">file.exists</span>(srtm_fn)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">library</span>(raster)</a>
+<a class="sourceLine" id="cb6-2" title="2">yose_area_dem &lt;-<span class="st"> </span><span class="kw">raster</span>(srtm_fn)</a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="kw">class</span>(yose_area_dem)</a></code></pre></div>
+<pre><code>## [1] &quot;RasterLayer&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;raster&quot;</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">{<span class="kw">plot</span>(yose_area_dem)</a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">plot</span>(yose_bnd, <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;black&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)}</a></code></pre></div>
+<pre><code>## Warning in plot.sf(yose_bnd, col = NA, border = &quot;black&quot;, lwd = 2, add =
+## TRUE): ignoring all but the first attribute</code></pre>
+<p><img src="07_rastser1-import-plot_files/figure-slidy/import_srtm_klippy-1.png" width="768" /></p>
+<div class="infobox">
+<p>The <tt>raster</tt> package does not support:</p>
+<div class="indented1">
+<ul>
+<li>pyramid layers<br />
+</li>
+<li>reprojection on the fly</li>
+<li>contrast stretches on the fly</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="explore-metadata" class="slide section level1">
+<h1>Explore Metadata</h1>
+<p>If you simply type the name of a raster object at the console, R will print some of the metadata.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">yose_area_dem</a></code></pre></div>
+<pre><code>## class      : RasterLayer 
+## dimensions : 6001, 6001, 36012001  (nrow, ncol, ncell)
+## resolution : 0.0008333333, 0.0008333333  (x, y)
+## extent     : -120.0004, -114.9996, 34.99958, 40.00042  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## source     : C:/Workshops/R-Spatial/rspatial_mod/outputs/rspatial_scgis19/docs/data/srtm_13_05.tif 
+## names      : srtm_13_05 
+## values     : -32768, 32767  (min, max)</code></pre>
+<p>Notice a few things about this raster:</p>
+<div class="indented1">
+<p><em>dimensions</em>: the size of the image in pixels: nrow=number of rows; ncol=number of columns, and ncells= the total number of pixels or cells</p>
+<p><em>resolution</em>: the size of each pixel on the ground (in meters in this case). Pixels don’t have to be square, but they usually are.</p>
+<p><em>extent</em>: the spatial extent of the raster. This value will be in the same coordinate units as the coordinate reference system of the raster.</p>
+<p><em>coord ref</em>: the coordinate reference system string for the raster.</p>
+</div>
+<p>We’ll see some functions you can use to explore these and other properties of Raster objects in a little bit.</p>
+<div class="tip">
+<p>You can view metadata for a file on disk before you import it into R, using <tt>GDALinfo()</tt> from the <tt>rgdal</tt> package. <span id="soln_qizhze" class="showhidesoln" onclick="showHide(&#39;tqizhze&#39;);return false;"><a href="#example">Example</a></span>.</p>
+<div id="tqizhze" class="hint">
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">rgdal<span class="op">::</span><span class="kw">GDALinfo</span>(srtm_fn)</a></code></pre></div>
+<pre><code>## Warning in rgdal::GDALinfo(srtm_fn): statistics not supported by this
+## driver</code></pre>
+<pre><code>## rows        6001 
+## columns     6001 
+## bands       1 
+## lower left origin.x        -120.0004 
+## lower left origin.y        34.99958 
+## res.x       0.0008333333 
+## res.y       0.0008333333 
+## ysign       -1 
+## oblique.x   0 
+## oblique.y   0 
+## driver      GTiff 
+## projection  +proj=longlat +datum=WGS84 +no_defs 
+## file        ./data/srtm_13_05.tif 
+## apparent band summary:
+##   GDType hasNoDataValue NoDataValue blockSize1 blockSize2
+## 1  Int16           TRUE      -32768          1       6001
+## apparent band statistics:
+##     Bmin  Bmax Bmean Bsd
+## 1 -32768 32767    NA  NA
+## Metadata:
+## AREA_OR_POINT=Area</code></pre>
+</div>
+</div>
+</div>
+<div id="cropping" class="slide section level1">
+<h1>Cropping</h1>
+<p>To crop (i.e. clip) a raster, we use the <tt>raster::crop(<em>x</em>,<em>y</em>)</tt> function, where <em>x</em> is the raster we want to crop, and <em>y</em> is an <tt>Extent</tt> object or another kind of object that has an extent (such as another <em>Raster</em> or a <em>sp</em> object). Remember they have to all be in the same CRS.</p>
+<p>Let’s crop the SRTM DEM to the park boundary.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">yose_dem_ll &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">crop</span>(yose_area_dem, yose_bnd)</a>
+<a class="sourceLine" id="cb15-2" title="2">yose_dem_ll</a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw">plot</span>(yose_dem_ll)</a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="kw">plot</span>(yose_bnd, <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;black&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## class      : RasterLayer 
+## dimensions : 829, 828, 686412  (nrow, ncol, ncell)
+## resolution : 0.0008333333, 0.0008333333  (x, y)
+## extent     : -119.8863, -119.1963, 37.49458, 38.18542  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## source     : memory
+## names      : srtm_13_05 
+## values     : 436, 3971  (min, max)</code></pre>
+<pre><code>## Warning in plot.sf(yose_bnd, add = TRUE, col = NA, border = &quot;black&quot;, lwd =
+## 2): ignoring all but the first attribute</code></pre>
+<p><img src="07_rastser1-import-plot_files/figure-slidy/crop_srtm_exec-1.png" width="768" /></p>
+<div class="tip">
+<p>You can also ‘crop’ a raster when you import it if you use <tt>readGDAL()</tt> with the <tt>offset</tt> and <tt>region</tt> arguments.</p>
+</div>
+</div>
+<div id="plotting-rasters" class="slide section level1">
+<h1>Plotting Rasters</h1>
+<h2 id="basic-plot-function">Basic Plot Function</h2>
+<p>The primary visualization functions for raster data are <tt>plot()</tt> and <tt>image()</tt>. Both have a lot of arguments to customize the plot. For example we can hide the legend that appears by default with the <tt>plot()</tt> function.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">plot</span>(yose_dem_ll, <span class="dt">legend=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="07_rastser1-import-plot_files/figure-slidy/viz_geotiff-1.png" width="768" style="display: block; margin: auto;" /></p>
+<h2 id="plotting-multi-layer-rasters">Plotting Multi-Layer Rasters</h2>
+<p>Use <tt>plotRGB()</tt> to plot a multi-band image as RGB. You can specify which bands to plot as red, green, and blue, and the <tt>stretch</tt> argument to apply a stretch for better contrast.</p>
+<h2 id="zooming-and-querying">Zooming and Querying</h2>
+<p>In general, R plots don’t support a lot of interactivity, certainly not compared to a GIS program or an interactive map in a browser (stay tuned for leaflet). However if you run the <tt>zoom()</tt> function <em>after</em> you’ve created your plot, you can click two points on the plot to zoom into that area. Pass the raster object to the <tt>zoom()</tt> function.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">plot</span>(yose_dem_ll, <span class="dt">legend=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw">zoom</span>(yose_dem_ll)</a></code></pre></div>
+<p>The <tt>click()</tt> function works a lot like the <tt>zoom()</tt> function. After you’ve created a plot, enter <tt>click(<em>x</em>)</tt> at the console (where <em>x</em> is a Raster object), then click on the plot window to see the cell value at that location. Press escape to exit click mode (you can also pass the number of sample points with argument <em>n</em>).</p>
+<div class="tryit">
+<p>Plot the San Francisco DEM, then Zoom into an area of your choice.</p>
+<p>Use <tt>click()</tt> to find the height of the highest point in Yosemite.</p>
+</div>
+<div class="challenge">
+<p>The <tt>xlim</tt> and <tt>ylim</tt> arguments for the <tt>plot()</tt> function set the range on the x and y axes. If used, each one should be a numeric vector of length two with the lower and upper limits of the axis. This is another way to ‘zoom’ into a specific area. Use <tt>xlim</tt> and <tt>ylim</tt> to create a plot of a portion of the park.</p>
+<p><span id="soln_quizhze" class="showhidesoln" onclick="showHide(&#39;quizhze&#39;);return false;"><a href="#example">Example</a></span></p>
+<div id="quizhze" class="hint">
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">plot</span>(yose_dem_ll, <span class="dt">legend=</span><span class="ot">FALSE</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">119.6997</span>,<span class="op">-</span><span class="fl">119.4995</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">37.64287</span>, <span class="fl">37.77743</span>))</a></code></pre></div>
+<p><img src="07_rastser1-import-plot_files/figure-slidy/plot_subarea-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="working-with-color" class="slide section level1">
+<h1>Working with Color</h1>
+<p>We’ve already seen a couple of arguments for <tt>plot()</tt> that control color.</p>
+<div class="indented4">
+<p><tt>col</tt> - symbol color (for polygons the fill color)</p>
+<p><tt>border</tt> - outline color (for a polygon)</p>
+</div>
+<p>Color values in R can be either a named color (see the <a href="../extras/color-palette_cheatsheet.pdf" target="_blank">Color Palette Cheatsheet</a>), or a hexadecimal RGB value. Hexadecimal values should be entered as text, including the ‘#’, e.g., <tt>“#00A949”</tt></p>
+<h2 id="custom-colors">Custom Colors</h2>
+<p>Several functions help you make custom colors using intuitive color models, like the <em>red-green-blue</em> or <em>hue-saturation-value</em> models. Custom color functions are generally vectorized, so if the arguments passed are vectors it will return a vector of color values of the same length.</p>
+<pre><code>rgb()  
+gray()  
+hsv()</code></pre>
+<div class="tryit">
+<p>How would you make 50% gray?</p>
+<p>How would you make a vector of 10 gray values, from pure black to pure white?</p>
+<p><span id="soln_bgfmxba" class="showhidesoln" onclick="showHide(&#39;bgfmxba&#39;);return false;">[Solution]</span></p>
+<div id="bgfmxba" class="hint">
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">gray</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span><span class="op">/</span><span class="dv">10</span>)</a></code></pre></div>
+<pre><code>##  [1] &quot;#000000&quot; &quot;#1A1A1A&quot; &quot;#333333&quot; &quot;#4D4D4D&quot; &quot;#666666&quot; &quot;#808080&quot; &quot;#999999&quot;
+##  [8] &quot;#B3B3B3&quot; &quot;#CCCCCC&quot; &quot;#E6E6E6&quot; &quot;#FFFFFF&quot;</code></pre>
+</div>
+</div>
+<div class="tip">
+<p>R supports transparency. Look for an <code>alpha</code> argument in color functions, or append a 0-255 alpha value at the end of a hexidecimal code. Note that not all graphic file formats preserve transparency (e.g., JPG).</p>
+</div>
+<h2 id="built-in-color-ramps">Built-in Color Ramps</h2>
+<p>Usually you can also pass a <em>vector</em> of color values, which R will use to color features separately (repeating the color values as needed). R has several built-in functions that return pleasing vectors of colors, also known as color ramps.</p>
+<pre><code>rainbow(n)  
+heat.colors(n)  
+terrain.colors(n)  
+topo.colors(n)  </code></pre>
+<p>Most of these functions take a numeric argument <tt>n</tt> for the number of color values to return.</p>
+<div class="tip">
+<p>For a non-repeating rainbow palette that ends at magenta, try:</p>
+<p><tt>rainbow(n, end=5/6)</tt></p>
+</div>
+<div class="tryit">
+<p>Plot the Yosemite DEM using a different color ramp.</p>
+<p><span id="soln_yobogi" class="showhidesoln" onclick="showHide(&#39;yobogi&#39;);return false;">[solution]</span></p>
+<div id="yobogi" class="hint">
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">plot</span>(yose_dem_ll, <span class="dt">col=</span><span class="kw">heat.colors</span>(<span class="dv">256</span>))</a></code></pre></div>
+<p><img src="07_rastser1-import-plot_files/figure-slidy/plot_heat_col-1.png" width="768" /></p>
+</div>
+</div>
+<h2 id="custom-color-ramps">Custom Color Ramps</h2>
+<p>You can make a custom color ramp using <code>colorRampPalette()</code>. For example,</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">yellow_to_red &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;#FFFF00&quot;</span>,<span class="st">&quot;#FF0000&quot;</span>))(<span class="dv">50</span>)</a></code></pre></div>
+<div class="tryit">
+<p>Make a color ramp of your own choice and use it to plot circles. See example below.</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="dv">3</span>, <span class="dt">col=</span><span class="kw">topo.colors</span>(<span class="dv">10</span>))</a></code></pre></div>
+<p><img src="07_rastser1-import-plot_files/figure-slidy/plotcols-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<h2 id="other-packages-for-colors-and-plotting">Other Packages for Colors and Plotting</h2>
+<p><a href="https://cran.r-project.org/web/packages/colorspace/" target="_blank"><tt>colorspace</tt></a> and <a href="https://cran.r-project.org/web/packages/RColorBrewer/index.html" target="_blank"><tt>RColorBrewer</tt></a> are two popular packages with additional color palettes and ramps.</p>
+<p>The <tt>rasterVis</tt> package has additional functions for plotting rasters.</p>
+</div>
+<div id="import-spatial-data-from-the-cloud" class="slide section level1">
+<h1>Import Spatial Data from the Cloud</h1>
+<p>The raster package has a function that can download a handful of spatial layers from public sources. <tt>raster::getData()</tt> can download the following datasets directly into R:</p>
+<div class="indented2">
+<ul>
+<li><strong>countries</strong> - polygons for all countries<br />
+</li>
+<li><strong>GADM</strong> - a database of global administrative boundaries (<a href="http://www.gadm.org" target="_blank">source</a>)</li>
+<li><strong>SRTM</strong> - hole-filled CGIAR-SRTM (90 m resolution)<br />
+</li>
+<li><strong>alt</strong> - altitude (elevation) aggregated from SRTM 90 m resolution data between -60 and 60 latitude.</li>
+<li><strong>worldclim</strong> - a database of global interpolated climate data</li>
+</ul>
+</div>
+<p>To specify which area you want, you either pass a country abbreviation (<em>alt</em> or <em>GADM</em>) or a latitude-longitude coordinate (<em>SRTM</em> and <em>worldclim</em>).</p>
+<div class="tip">
+<p>There’s another <tt>getData()</tt> function in another package, so always use the <tt><strong>raster::</strong>getData()</tt> prefix.</p>
+<p>To see the three-character ISO3 codes for each country, run<br />
+<tt>raster::getData(‘ISO3’)</tt>.</p>
+<p>Downloads are cached by default. If you don’t want the temporary files saved, pass <tt>download=FALSE</tt>.</p>
+</div>
+<h2 id="example">Example</h2>
+<p>Let’s download and plot the District boundaries and DEM for Zambia.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">zmb_alt &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">getData</span>(<span class="dt">name=</span><span class="st">&quot;alt&quot;</span>, <span class="dt">country=</span><span class="st">&quot;ZMB&quot;</span>, <span class="dt">mask=</span><span class="st">&quot;TRUE&quot;</span>)</a>
+<a class="sourceLine" id="cb28-2" title="2">zmb_districts &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">getData</span>(<span class="dt">name=</span><span class="st">&quot;GADM&quot;</span>, <span class="dt">country=</span><span class="st">&quot;ZMB&quot;</span>, <span class="dt">level=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="kw">class</span>(zmb_alt); <span class="kw">class</span>(zmb_districts)</a></code></pre></div>
+<pre><code>## [1] &quot;RasterLayer&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;raster&quot;</code></pre>
+<pre><code>## [1] &quot;SpatialPolygonsDataFrame&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;sp&quot;</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">plot</span>(zmb_alt, <span class="dt">main=</span><span class="st">&quot;Districts of Zambia&quot;</span>)</a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="kw">plot</span>(zmb_districts, <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;black&quot;</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="07_rastser1-import-plot_files/figure-slidy/imp_zm-1.png" width="768" style="display: block; margin: auto;" /></p>
+<div class="tryit">
+<p>Using the <tt>raster::getData()</tt> to plot the administrative boundaries of a country of your choice. See what the different values of the <tt>level</tt> argument return.</p>
+</div>
+</div>
+<div id="summary-and-next-up" class="slide section level1">
+<h1>Summary and Next-Up</h1>
+<p>Today we saw:</p>
+<div class="compact">
+<ul>
+<li>different types of raster data</li>
+<li>import a raster from disk</li>
+<li>view metadata</li>
+<li>crop a raster</li>
+<li>plot a raster</li>
+<li>work with colors</li>
+<li>download spatial data using <tt>raster::getData()</tt></li>
+</ul>
+</div>
+<div class="infobox">
+<p>Additional Resources</p>
+<div class="indented1">
+<p><a href="https://rspatial.org/raster/" target="_blank">Introduction to the ’raster’ package</a>, Robert Hijmans</p>
+</div>
+</div>
+<p>Next:</p>
+<p><a href="08_raster2-spatial-manip.html">Common Raster Manipulations</a></p>
+</div>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+</body>
+</html>
