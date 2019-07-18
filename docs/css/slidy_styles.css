@@ -231,9 +231,8 @@ div.ex-qtn {
   color: MidnightBlue;
 }
 .billboard {
-  display: none;
-  margin: 0em 0em;
-  background-color: #ffff66;
+  margin: 1em 0em;
+  background-color: #fbfe92; 
   padding: 0.5em;
   border: 4px solid Crimson;
   font-size: 200%;
