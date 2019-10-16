@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Geoprocessing" />
+  <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href='../index.html'>Course Homepage</a></span><span class='footer-right'>Forum:&nbsp<a href=' https://tinyurl.com/rspatial-scgis19 ' target='_blank'> https://tinyurl.com/rspatial-scgis19 </a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
+  <meta name="font-size-adjustment" content="2"/>
+  <title>Spatial Data Analysis with R  SCGIS Conference, 2019</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACkUlEQVQ4jX2SW0jTcRTHTzNyeZlh6lqmm3POdNPC6SxSEzaqafkykOFoIxTDWpKRFV6iQMNLFyMSsQvUW0WORc2WWBmGKEGZXUyz0NrmNmfa1PYgfHsQ1v5oHjgvX875/M45vy/R8mDJ9caxrFIL5CUWJB00Q9n+7Q+l1BetUMuMTL3JpTB0QVnejd1Hu9DQ60G5eQbqB7PIvj0L2bUZ0KZzghWbs0o7Fx3Tc/B6vStm6+g0wrQvIKh2gKKyUxnNSZoO685SC1YDeL1e9Ll+Ia7WCd5pJ4hojQ8g1nViezETYBqZx93BOdwa9jAgsdUT4J6ZQqC6f4GIiLYU9/RzNWYIdU9hd/8rLjN7UGT8DbWROVVMlQsBBWas142DiIikdfbFMF0POIVm2NzM1zwLS+mvcSsnEajpBSv/8RIgucGJ1EYXEs+NwjrlWfUGMee/Y2PFJIJLrFibex8kOsahhCYnUlpnIL1kh9X9/yMKG2yIOOlAsPYnAveZsE75EEQUQLwTwy5Rsxvx9UxApKEPEYY+BiSizA623oaggkdgq4xLKwRLq7i8sy6EFlpg8wNEVwyAd3wAbZ8cPu3CazeCC/sRojYjaL8Jvm8MPWLDBm03A8CveQ9+7RBia4cYU4QfeokwzTOwc6/4OzKXHap/C5ufD0RNo0i4OAZR81dcnnD69Mp3PxBe9GRkuZdFKk7sqTcQ132EpGUMydetSLnpgOSGHVtbxpHU9AX8mkFEG55/ZrjQL1h82V6esPLVh8Sr40i940J6xzzS7s1C0m6HqHEEiTnatgT5gcPijHxltFwhjpRIQpZjBAJ2lFTBFW5TiOPT8mXx6apdcRl5OaJM1Q6hLC9ls3RPTLgok0NELCKiv02kPqt/O1MZAAAAAElFTkSuQmCC" rel="icon" type="image/x-icon" />
+  <script language="javascript" type="text/javascript">
+  function TriShowHide(shID) {
+    shIDspan = shID + "span";
+    shIDdiv = shID + "div";
+    if (document.getElementById(shIDdiv).style.display != 'block') {
+      document.getElementById(shIDdiv).style.display = 'block';
+      txtSpan = "&#9660;";
+    } else {
+      document.getElementById(shIDdiv).style.display = 'none';
+      txtSpan = "&#9654;";
+    }
+    document.getElementById(shIDspan).innerHTML = txtSpan + " ";
+  }
+  function showHide(shID) {
+    if (shID=="soln-show-all") {
+      var allAnswerCode = document.getElementsByClassName("answer-code");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'block';
+      }
+    } else if (shID=="soln-hide-all") {
+      var allAnswerCode = document.getElementsByClassName("answer-code");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'none';
+      }
+    } else if (shID=="hints-show-all") {
+      var allAnswerCode = document.getElementsByClassName("hint");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'block';
+      }
+    } else if (shID=="hints-hide-all") {
+      var allAnswerCode = document.getElementsByClassName("hint");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'none';
+      }
+    } else {
+      if (document.getElementById(shID)) {
+        if (document.getElementById(shID).style.display != 'block') {
+          document.getElementById(shID).style.display = 'block';
+        } else {
+          document.getElementById(shID).style.display = 'none';
+        }
+      }
+    }
+  }
+  function CopyToClipboard(containerid) {
+  if (document.selection) {
+      var range = document.body.createTextRange();
+      range.moveToElementText(document.getElementById(containerid));
+      range.select().createTextRange();
+      document.execCommand("copy");
+  } else if (window.getSelection) {
+      var range = document.createRange();
+      range.selectNode(document.getElementById(containerid));
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      // alert("text copied")
+  }}
+  </script>
+  <link href="lib/slidy-2/styles/slidy.css" rel="stylesheet" />
+  <script src="lib/slidy-2/scripts/slidy.js"></script>
+  <script src="lib/clipboard-1.7.1/clipboard.min.js"></script>
+  <link href="lib/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+  <link href="lib/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+  <script src="lib/klippy-0.0.0.9500/js/klippy.min.js"></script>
+  <script src="lib/kePrint-0.0.1/kePrint.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+   href="..\css\slidy_styles.css" />
+  <meta name="duration" content="0" />
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title"><span class="course-title">Spatial Data Analysis with R </span><br/><span class="course-subtitle">SCGIS Conference, 2019</span></h1>
+  <p class="author">
+Geoprocessing <br/><img src='images/geoprocessing256_498x166.png'/>
+  </p>
+</div>
+<div id="geoprocessing" class="slide section level1">
+<h1>Geoprocessing</h1>
+<script language="javascript" type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
+<script>
+  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p>Generally speaking, geoprocessing functions are functions that analyze or alter the <strong>geometry</strong> of the data.</p>
+<p>We can generally divide geoprocessing into 3 categories:</p>
+<!--- See https://edzer.github.io/UseR2017/ --->
+<div class="indented1">
+<ul>
+<li>geometric measurements (area and length)<br />
+</li>
+<li>creating new geometries</li>
+<li>tests for spatial proximity or relationships (covered under spatial queries)</li>
+</ul>
+</div>
+<div class="tip">
+<p>Geoprocessing functions do their calculations with <strong>map units</strong>.</p>
+<p>If area or distance measurements are involved, <strong>use projected data</strong>.</p>
+</div>
+</div>
+<div id="geometric-measurements" class="slide section level1">
+<h1>Geometric Measurements</h1>
+<table class="tbl_compact">
+<thead>
+<tr>
+<th style="text-align:left;">
+Function
+</th>
+<th style="text-align:left;">
+Computes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_area()
+</td>
+<td style="text-align:left;">
+area of polygons
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_length()
+</td>
+<td style="text-align:left;">
+length / perimeter
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_distance()
+</td>
+<td style="text-align:left;">
+distance between features
+</td>
+</tr>
+</tbody>
+</table>
+<div class="infobox">
+<p>Measurement functions from <strong>sf</strong> compute length and area in <strong>map units</strong>, but the units are saved as part of the result. This makes it easy to convert to using <tt><strong>set_units()</strong></tt> function from <strong>units</strong> package.</p>
+</div>
+<!--- TryIt --->
+<h3 id="example-compute-the-area-of-yosemite">Example: Compute the area of Yosemite</h3>
+<p>To get accurate results, we should project the boundary into UTM:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co">## Define a convenience variable for UTM Zone 11</span></a>
+<a class="sourceLine" id="cb1-2" title="2">epsg_utm11n_nad83 &lt;-<span class="st"> </span><span class="dv">26911</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co">## Import the yosemite border</span></a>
+<a class="sourceLine" id="cb1-5" title="5">yose_bnd_utm &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="dt">dsn=</span><span class="st">&quot;./data&quot;</span>, <span class="dt">layer=</span><span class="st">&quot;yose_boundary&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="st">  </span><span class="kw">st_transform</span>(epsg_utm11n_nad83)</a></code></pre></div>
+<pre><code>## Reading layer `yose_boundary&#39; from data source `C:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_scgis19\docs\data&#39; using driver `ESRI Shapefile&#39;
+## Simple feature collection with 1 feature and 11 fields
+## geometry type:  POLYGON
+## dimension:      XY
+## bbox:           xmin: -119.8864 ymin: 37.4947 xmax: -119.1964 ymax: 38.18515
+## epsg (SRID):    4269
+## proj4string:    +proj=longlat +datum=NAD83 +no_defs</code></pre>
+<p>Next, find the area:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">yose_area &lt;-<span class="st"> </span>yose_bnd_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_area</span>()</a>
+<a class="sourceLine" id="cb3-2" title="2">yose_area</a></code></pre></div>
+<pre><code>## 3019918537 [m^2]</code></pre>
+<p>Large values of meters-squared can be hard to interpret. Let’s convert the area hectares and square miles using <tt>set_units()</tt> from the <tt>units</tt> package.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(units)</a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co">## View in hectacres</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw">set_units</span>(yose_area, ha)</a>
+<a class="sourceLine" id="cb5-5" title="5"></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co">## View in square miles</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="kw">set_units</span>(yose_area, mi<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## 301991.9 [ha]
+## 1165.997 [mi^2]</code></pre>
+<div class="tryit">
+<p>Import the burned area layer from historical fires, and compute the area of each fires (see code below to import them). Which was the biggest fire?</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">firehist_gdb &lt;-<span class="st"> &quot;./data/yose_firehistory.gdb&quot;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">file.exists</span>(firehist_gdb)</a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co">## View the layers in this source</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="kw">st_layers</span>(firehist_gdb)</a>
+<a class="sourceLine" id="cb7-6" title="6"></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co">## Import the &#39;Fire History Polys&#39; layer  (case sensitive!)</span></a>
+<a class="sourceLine" id="cb7-8" title="8">yose_firepolys_utm &lt;-<span class="st"> </span><span class="kw">st_read</span>(firehist_gdb, <span class="dt">layer=</span><span class="st">&quot;YNP_FireHistoryPolys&quot;</span>)</a></code></pre></div>
+</div>
+<p>[<span id="soln_qwlecp" class="showhidesoln" onclick="showHide(&#39;qwlecp&#39;);return false;">Hint</span>] [<span id="soln_wdmawf" class="showhidesoln" onclick="showHide(&#39;wdmawf&#39;);return false;">Solution</span>]</p>
+<div id="qwlecp" class="hint">
+<p>You can use <tt>which.max()</tt> to find the largest element of a vector.</p>
+</div>
+<!--- soln_qwlecp --->
+<div id="wdmawf" class="hint">
+<div class="sourceCode" id="cb8"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co">## Compute the area of each polygon</span></a>
+<a class="sourceLine" id="cb8-2" title="2">fire_areas &lt;-<span class="st"> </span><span class="kw">st_area</span>(yose_firepolys_utm)</a>
+<a class="sourceLine" id="cb8-3" title="3"></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">## Find the index of the largest value</span></a>
+<a class="sourceLine" id="cb8-5" title="5">i &lt;-<span class="st"> </span><span class="kw">which.max</span>(fire_areas)</a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">## Take a look at the row</span></a>
+<a class="sourceLine" id="cb8-8" title="8">yose_firepolys_utm[i,]</a>
+<a class="sourceLine" id="cb8-9" title="9"></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co">## Computet the size in miles squared</span></a>
+<a class="sourceLine" id="cb8-11" title="11">units<span class="op">::</span><span class="kw">set_units</span>(fire_areas[i], mi<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## Simple feature collection with 1 feature and 21 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: 246268.6 ymin: 4182145 xmax: 264049.5 ymax: 4215598
+## epsg (SRID):    26911
+## proj4string:    +proj=utm +zone=11 +datum=NAD83 +units=m +no_defs
+##          FIRE_ID LINK_ID SACS_ID FILE_ID NAME    ACRES YEAR TYPE CAUSE
+## 4251 CA-YNP-0126    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  Rim 78892.24 2013   WF    HC
+##      HECTARES AREA PERIMETER SEQ_NO DECADE  STARTDATE    OUTDATE X_COORD
+## 4251       NA   NA   1123267     NA   2010 2013-08-17 2013-10-18      NA
+##      Y_COORD ET_ID Shape_Length Shape_Area                          Shape
+## 4251      NA    NA     209505.2  318835601 MULTIPOLYGON (((247876.4 42...
+## 123.1031 [mi^2]</code></pre>
+<p>⇒ the <strong>2013 Rim fire</strong> was the largest!</p>
+</div>
+</div>
+</div>
+<div id="compute-lengths" class="slide section level1">
+<h1>Compute Lengths</h1>
+<p>Computing lengths and permeters is done similarly with <tt>st_length()</tt>.</p>
+<h3 id="example-how-many-miles-of-primary-roads-are-there">Example: How many miles of primary roads are there?</h3>
+<p>First import the roads and inspect the attribute table.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co">## Import the roads</span></a>
+<a class="sourceLine" id="cb10-2" title="2">gdb_fn &lt;-<span class="st"> &quot;./data/yose_roads.gdb&quot;</span></a>
+<a class="sourceLine" id="cb10-3" title="3">yose_roads &lt;-<span class="st"> </span><span class="kw">st_read</span>(gdb_fn, <span class="st">&quot;Yosemite_Roads&quot;</span>)</a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="kw">glimpse</span>(yose_roads)</a></code></pre></div>
+<PRE class="fansi fansi-output"><CODE>## Reading layer `Yosemite_Roads' from data source `C:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_scgis19\docs\data\yose_roads.gdb' using driver `OpenFileGDB'
+## Simple feature collection with 823 features and 40 fields
+## geometry type:  MULTILINESTRING
+## dimension:      XY
+## bbox:           xmin: 234658.1 ymin: 4139484 xmax: 324852.6 ymax: 4250252
+## epsg (SRID):    26911
+## proj4string:    +proj=utm +zone=11 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+## Observations: 823
+## Variables: 41
+## $ RDNAME         <span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> Northside Drive, Northside Drive, Northside Dri...
+## $ RDALTNAME      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ MAPLABEL       </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ RDSTATUS       </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> Existing, Existing, Existing, Existing, Existin...
+## $ RDCLASS        </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> Primary, Primary, Primary, Primary, Primary, Pr...
+## $ RDSURFACE      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> Asphalt, Asphalt, Asphalt, Asphalt, Asphalt, As...
+## $ RDONEWAY       </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ RDLANES        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ RDHICLEAR      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> No, No, No, No, No, No, No, No, No, No, No, No,...
+## $ RTENUMBER      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ SEASONAL       </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ SEASDESC       </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ RDMAINTAINER   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ ISEXTANT       </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ PUBLICDISPLAY  </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> Public Map Display, Public Map Display, Public ...
+## $ DATAACCESS     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> Unrestricted, Unrestricted, Unrestricted, Unres...
+## $ UNITCODE       </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> YOSE, YOSE, YOSE, YOSE, YOSE, YOSE, YOSE, YOSE,...
+## $ UNITNAME       </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> Yosemite National Park, Yosemite National Park,...
+## $ GROUPCODE      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ GROUPNAME      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ REGIONCODE     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> PWR, PWR, PWR, PWR, PWR, PWR, PWR, PWR, PWR, PW...
+## $ CREATEDATE     </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...
+## $ CREATEUSER     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ EDITDATE       </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...
+## $ EDITUSER       </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ MAPMETHOD      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ MAPSOURCE      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ SOURCEDATE     </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...
+## $ XYACCURACY     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ ROUTEID        </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ FACLOCID       </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ FACASSETID     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ FEATUREID      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ GEOMETRYID     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ NOTES          </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> "In Park = Y, Fire Road = No", "In Park = Y, Fi...
+## $ YOSE_Surface   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> Paved, Paved, Paved, Paved, Paved, Paved, Paved...
+## $ YOSE_FIRE_ROAD </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> No, No, No, No, No, No, No, No, No, No, No, No,...
+## $ YOSE_INPARK    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes, Ye...
+## $ YOSE_Type      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> Primary Road, Primary Road, Primary Road, Prima...
+## $ Shape_Length   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> 493.53512, 67.90781, 33.35863, 258.00073, 117.9...
+## $ Shape          </span><span style='color: #949494;font-style: italic;'>&lt;MULTILINESTRING [m]&gt;</span><span> MULTILINESTRING ((270865.2 ...,...
+</span></CODE></PRE>
+<p>Next, write an expression that returns the total length of all primary roads.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co">## Load the units package so we can convert meters to miles</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">library</span>(units)</a>
+<a class="sourceLine" id="cb11-3" title="3"></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="co">## Use a mix of functions from dplyr, sf, base R, and units </span></a>
+<a class="sourceLine" id="cb11-5" title="5">yose_roads <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(RDCLASS <span class="op">==</span><span class="st"> &quot;Primary&quot;</span>) <span class="op">%&gt;%</span><span class="st">   </span><span class="co">## grab just the primary roads</span></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="st">  </span>sf<span class="op">::</span><span class="kw">st_length</span>() <span class="op">%&gt;%</span><span class="st">                       </span><span class="co">## compute length of each segment (as numeric vector)</span></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="st">  </span><span class="kw">sum</span>() <span class="op">%&gt;%</span><span class="st">                                 </span><span class="co">## take the sum</span></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="st">  </span>units<span class="op">::</span><span class="kw">set_units</span>(<span class="st">&quot;miles&quot;</span>)                 <span class="co">## convert to miles</span></a></code></pre></div>
+<pre><code>## 375.5348 [miles]</code></pre>
+<div class="tryit">
+<p>How many miles of Secondary roads are there?</p>
+<p>[<span id="soln_ktldyu" class="showhidesoln" onclick="showHide(&#39;ktldyu&#39;);return false;">Solution</span>]</p>
+<div id="ktldyu" class="hint">
+<div class="sourceCode" id="cb13"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">yose_roads <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(RDCLASS <span class="op">==</span><span class="st"> &quot;Secondary&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="st">  </span><span class="kw">st_length</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">set_units</span>(<span class="st">&quot;miles&quot;</span>)</a></code></pre></div>
+<pre><code>## 191.8279 [miles]</code></pre>
+</div>
+<!--- soln_ktldyu --->
+</div>
+<!--- TryIt --->
+<div class="tip">
+<p>To add geometric measurements to the attribute table, use <tt><strong>dplyr::mutate()</strong></tt></p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co">## Add road length to the attribute table</span></a>
+<a class="sourceLine" id="cb15-2" title="2">yose_roads &lt;-<span class="st"> </span>yose_roads <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">road_length =</span> <span class="kw">st_length</span>(yose_roads))</a></code></pre></div>
+</div>
+</div>
+<!--- tip --->
+<p>Calculating distances between features and finding nearest neighbors will be covered in the Spatial Queries session.</p>
+</div>
+<div id="creating-new-geometries" class="slide section level1">
+<h1>Creating New Geometries</h1>
+<h2 id="manipulating-geometries">Manipulating Geometries</h2>
+<p><strong>sf</strong> has a number of functions that will create new geometries based on existing ones:</p>
+<table class="tbl_compact">
+<thead>
+<tr>
+<th style="text-align:left;">
+Function
+</th>
+<th style="text-align:left;">
+Computes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_buffer()
+</td>
+<td style="text-align:left;">
+compute a buffer around this geometry/each geometry
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_centroid()
+</td>
+<td style="text-align:left;">
+gives centroid of geometry
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_convex_hull()
+</td>
+<td style="text-align:left;">
+creates convex hull of set of points
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_line_merge()
+</td>
+<td style="text-align:left;">
+merges lines
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_segmentize()
+</td>
+<td style="text-align:left;">
+adds points to straight lines
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_voronoi()
+</td>
+<td style="text-align:left;">
+creates voronoi tesselation
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_triangulate()
+</td>
+<td style="text-align:left;">
+triangulates set of points (not constrained)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_polygonize()
+</td>
+<td style="text-align:left;">
+creates polygon from lines that form a closed ring
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_simplify()
+</td>
+<td style="text-align:left;">
+simplifies lines by removing vertices
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_split()
+</td>
+<td style="text-align:left;">
+split a polygon given line geometry
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_boundary()
+</td>
+<td style="text-align:left;">
+return the boundary of a geometry
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example-find-centroids-of-watersheds" class="slide section level1">
+<h1>Example: Find centroids of watersheds</h1>
+<p>First, import the watersheds:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co">## Import watersheds</span></a>
+<a class="sourceLine" id="cb16-2" title="2">gpkg_watershd_fn &lt;-<span class="st"> &quot;./data/yose_watersheds.gpkg&quot;</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw">file.exists</span>(gpkg_watershd_fn)</a>
+<a class="sourceLine" id="cb16-4" title="4">yose_watersheds &lt;-<span class="st"> </span><span class="kw">st_read</span>(gpkg_watershd_fn, <span class="dt">layer=</span><span class="st">&quot;calw221&quot;</span>)</a>
+<a class="sourceLine" id="cb16-5" title="5"></a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="co">## Plot it</span></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(yose_watersheds), <span class="dt">axes=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="09_geoprocessing_files/figure-slidy/watershed_imp_klippy-1.png" width="768" /></p>
+<p>Next, compute the centroids:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">yose_watersheds_ctr &lt;-<span class="st"> </span>yose_watersheds <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_centroid</span>()</a>
+<a class="sourceLine" id="cb17-2" title="2"></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="co">## Plot it</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="kw">tm_shape</span>(yose_watersheds) <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="st">  </span><span class="kw">tm_shape</span>(yose_watersheds_ctr) <span class="op">+</span><span class="st"> </span><span class="kw">tm_symbols</span>(<span class="dt">size=</span><span class="fl">0.3</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="09_geoprocessing_files/figure-slidy/watershed_ctr_klippy-1.png" width="768" /></p>
+</div>
+<div id="example-buffer-the-campgrounds" class="slide section level1">
+<h1>Example: Buffer the Campgrounds</h1>
+<p>Let’s put a 1km buffer around each of the campgrounds.</p>
+<p>First import the campgrounds (which are part of the <em>yose_poi</em> Shapefile):</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co">## Import and project the campgrounds</span></a>
+<a class="sourceLine" id="cb18-2" title="2">yose_campgrnds_utm &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="dt">dsn=</span><span class="st">&quot;./data&quot;</span>, <span class="dt">layer=</span><span class="st">&quot;yose_poi&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(POITYPE <span class="op">==</span><span class="st"> &#39;Campground&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(POINAME) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="st">  </span><span class="kw">st_transform</span>(epsg_utm11n_nad83)</a></code></pre></div>
+<p>Next, buffer them (remember the buffer distance should be in map units):</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co">## Create the 1km buffer</span></a>
+<a class="sourceLine" id="cb19-2" title="2">yose_campgrnds_buff &lt;-<span class="st"> </span><span class="kw">st_buffer</span>(yose_campgrnds_utm, <span class="dt">dist=</span><span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb19-3" title="3"></a>
+<a class="sourceLine" id="cb19-4" title="4"><span class="co">## Plot</span></a>
+<a class="sourceLine" id="cb19-5" title="5"><span class="kw">tm_shape</span>(yose_bnd_utm) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-6" title="6"><span class="st">  </span><span class="kw">tm_borders</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-7" title="7"><span class="kw">tm_shape</span>(yose_campgrnds_buff) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-8" title="8"><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-9" title="9"><span class="kw">tm_layout</span>(<span class="dt">title=</span><span class="st">&quot;1km buffer around campgrounds&quot;</span>, </a>
+<a class="sourceLine" id="cb19-10" title="10">          <span class="dt">title.bg.color=</span><span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-11" title="11"><span class="kw">tm_scale_bar</span>(<span class="dt">position =</span> <span class="kw">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</a></code></pre></div>
+<p><img src="09_geoprocessing_files/figure-slidy/buff_campgrounds_klippy-1.png" width="768" /></p>
+<div class="tip">
+<p>To create an interior buffer, make the buffer distance negative.</p>
+</div>
+<!--- tip --->
+</div>
+<div id="logical-operators-that-generate-new-geometry" class="slide section level1">
+<h1>Logical operators that generate new geometry</h1>
+<p>Other functions take two input layers and combine them in different ways.</p>
+<table class="tbl_compact">
+<thead>
+<tr>
+<th style="text-align:left;">
+Function
+</th>
+<th style="text-align:left;">
+Computes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_union()
+</td>
+<td style="text-align:left;">
+union of several geometries
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_intersection()
+</td>
+<td style="text-align:left;">
+intersection of pairs of geometries
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_difference()
+</td>
+<td style="text-align:left;">
+difference between pairs of geometries
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+st_sym_difference()
+</td>
+<td style="text-align:left;">
+symmetric difference (xor)
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-union">Example: Union</h3>
+<p>Union all the burn scars for 1980s. What was the total area burned?</p>
+<p>First we pull out all the fires for the 1980s:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">yose_fires_80s &lt;-<span class="st"> </span>yose_firepolys_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(YEAR <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1980</span> <span class="op">&amp;</span><span class="st"> </span>YEAR <span class="op">&lt;=</span><span class="dv">1989</span>) </a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="kw">nrow</span>(yose_fires_80s)</a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="kw">plot</span>(yose_bnd_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb20-4" title="4"><span class="kw">plot</span>(yose_fires_80s <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;gray50&quot;</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## [1] 767</code></pre>
+<p><img src="09_geoprocessing_files/figure-slidy/fire_80s_klippy-1.png" width="768" /></p>
+<p>Next we union the polygons and compute the area.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">yose_fires_80s_union &lt;-<span class="st"> </span>yose_fires_80s <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_union</span>()</a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw">plot</span>(yose_fires_80s_union <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">col=</span><span class="st">&quot;gray80&quot;</span>, <span class="dt">border=</span><span class="st">&quot;gray60&quot;</span>)</a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="kw">plot</span>(yose_bnd_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;red&quot;</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb22-4" title="4">yose_fires_80s_union <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_area</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">set_units</span>(mi2)</a></code></pre></div>
+<pre><code>## 87.66586 [mi2]</code></pre>
+<p><img src="09_geoprocessing_files/figure-slidy/fire_80s_union_klippy-1.png" width="768" /></p>
+<div class="tryit">
+<p>Find the total area burned during the 1990s.</p>
+<p>[<span id="soln_eiwdnf" class="showhidesoln" onclick="showHide(&#39;eiwdnf&#39;);return false;">Solution</span>]</p>
+<div id="eiwdnf" class="hint">
+<div class="sourceCode" id="cb24"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">yose_firepolys_utm <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="st">  </span><span class="kw">filter</span>(YEAR <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1990</span> <span class="op">&amp;</span><span class="st"> </span>YEAR <span class="op">&lt;=</span><span class="dv">1999</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="st">  </span><span class="kw">st_union</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-4" title="4"><span class="st">  </span><span class="kw">st_area</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-5" title="5"><span class="st">  </span><span class="kw">set_units</span>(mi2)</a></code></pre></div>
+<pre><code>## 194.4498 [mi2]</code></pre>
+</div>
+<!--- soln_eiwdnf --->
+</div>
+<!--- TryIt --->
+<div class="infobox">
+<p>Sometimes you may get a typology error caused by a self-intersecting polygon or something similar. You can repair some types of typology errors with <tt><strong>st_make_valid()</strong></tt> from the <strong>lwgeom</strong> package.</p>
+<p>Run the following code and you will probably get an error message because one of the fire polygons for the 2000s has a self-intersecton. Un-comment the the <tt>st_make_valid()</tt> line and try again.</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb26"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co">## Find the total area burned during the 2000s</span></a>
+<a class="sourceLine" id="cb26-2" title="2">yose_firepolys_utm <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="st">  </span><span class="kw">filter</span>(YEAR <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2000</span> <span class="op">&amp;</span><span class="st"> </span>YEAR <span class="op">&lt;=</span><span class="dv">2009</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="st">  </span><span class="co"># lwgeom::st_make_valid() %&gt;% </span></a>
+<a class="sourceLine" id="cb26-5" title="5"><span class="st">  </span><span class="kw">st_union</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-6" title="6"><span class="st">  </span><span class="kw">st_area</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-7" title="7"><span class="st">  </span><span class="kw">set_units</span>(mi2)</a></code></pre></div>
+</div>
+</div>
+<!--- info-box --->
+</div>
+<div id="dissolve-boundaries-based-on-attribute-fields" class="slide section level1">
+<h1>Dissolve Boundaries Based on Attribute Fields</h1>
+<p>Grouping rows based on a common value of an attribute, and then computing one or more summary statistics for each group of rows, is extremely common. We a regular data frame, we can use <tt><strong>group_by()</strong></tt> and <tt><strong>summarise()</strong></tt> from <strong>dplyr</strong>.</p>
+<p>We illustrate this with the attribute table from watersheds layer. This table has a column “HU” and “HUNAME” which are the id number and name of larger watersheds.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">watersheds_df &lt;-<span class="st"> </span>yose_watersheds <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_drop_geometry</span>()</a>
+<a class="sourceLine" id="cb27-2" title="2">hu_df &lt;-<span class="st"> </span>watersheds_df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(HU) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">HUNAME =</span> <span class="kw">first</span>(HUNAME), </a>
+<a class="sourceLine" id="cb27-5" title="5">            <span class="dt">NUM_WATERSHEDS =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb27-6" title="6">            <span class="dt">AVG_ACRES =</span> <span class="kw">mean</span>(ACRES))</a>
+<a class="sourceLine" id="cb27-7" title="7"><span class="kw">glimpse</span>(hu_df)</a></code></pre></div>
+<PRE class="fansi fansi-output"><CODE>## Observations: 6
+## Variables: 4
+## $ HU             <span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> 1, 30, 31, 36, 37, 40
+## $ HUNAME         </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> MONO, EAST WALKER RIVER, WEST WALKER RIVER, TUO...
+## $ NUM_WATERSHEDS </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> 7, 5, 2, 60, 47, 6
+## $ AVG_ACRES      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> 9311.916, 9385.448, 6426.835, 8128.559, 8399.11...
+</span></CODE></PRE>
+<p>The exact same dplyr functions can be used with sf dataframes. The result is another sf object where the groups of features have been unioned together.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">hu_sf &lt;-<span class="st"> </span>yose_watersheds <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(HU) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">HUNAME =</span> <span class="kw">first</span>(HUNAME), </a>
+<a class="sourceLine" id="cb28-4" title="4">            <span class="dt">NUM_WATERSHEDS =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb28-5" title="5">            <span class="dt">AVG_ACRES =</span> <span class="kw">mean</span>(ACRES))</a>
+<a class="sourceLine" id="cb28-6" title="6">hu_sf</a>
+<a class="sourceLine" id="cb28-7" title="7"></a>
+<a class="sourceLine" id="cb28-8" title="8"><span class="co">## Plot</span></a>
+<a class="sourceLine" id="cb28-9" title="9"><span class="kw">tm_shape</span>(hu_sf) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb28-10" title="10"><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;HUNAME&quot;</span>, <span class="dt">title=</span><span class="st">&quot;HU Watershed&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb28-11" title="11"><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">legend.outside =</span> T)</a></code></pre></div>
+<pre><code>## Simple feature collection with 6 features and 4 fields
+## geometry type:  POLYGON
+## dimension:      XY
+## bbox:           xmin: 1383.82 ymin: -61442.93 xmax: 81596.71 ymax: 26405.66
+## epsg (SRID):    NA
+## proj4string:    +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+## # A tibble: 6 x 5
+##      HU HUNAME   NUM_WATERSHEDS AVG_ACRES                              geom
+##   &lt;int&gt; &lt;fct&gt;             &lt;int&gt;     &lt;dbl&gt;                     &lt;POLYGON [m]&gt;
+## 1     1 MONO                  7     9312. ((70700.98 -24430.75, 70666.71 -~
+## 2    30 EAST WA~              5     9385. ((66834.96 17741.56, 66825.24 17~
+## 3    31 WEST WA~              2     6427. ((41178.45 21036.4, 41216.82 210~
+## 4    36 TUOLUMN~             60     8129. ((68820.02 -21749.66, 68896.44 -~
+## 5    37 MERCED ~             47     8399. ((48429.44 -54808.23, 48423.19 -~
+## 6    40 SAN JOA~              6     8911. ((55601.21 -53432.85, 55668.08 -~</code></pre>
+<p><img src="09_geoprocessing_files/figure-slidy/watershed_summarise_union_klippy-1.png" width="768" /></p>
+</div>
+<div id="example-buffer-clip-the-roads" class="slide section level1">
+<h1>Example: Buffer &amp; Clip the Roads</h1>
+<p>In this example, we’ll create a 500m buffer around the roads within the park (representing a disturbance zone for sensitive species, or drive transect detection area). Then we’ll compute the total area of the buffered area. This task will require us to <strong>buffer</strong>, <strong>intersect</strong>, and <strong>union</strong>.</p>
+<p>First, create the buffer:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co">## Create the buffer</span></a>
+<a class="sourceLine" id="cb30-2" title="2">yose_roads_buff &lt;-<span class="st"> </span>yose_roads <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_buffer</span>(<span class="dt">dist=</span><span class="dv">500</span>)</a>
+<a class="sourceLine" id="cb30-3" title="3"></a>
+<a class="sourceLine" id="cb30-4" title="4"><span class="co">## Plot the results</span></a>
+<a class="sourceLine" id="cb30-5" title="5"><span class="kw">tm_shape</span>(yose_roads_buff) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb30-6" title="6"><span class="kw">tm_shape</span>(yose_bnd_utm) <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>(<span class="dt">lwd=</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="09_geoprocessing_files/figure-slidy/buff_roads_klippy-1.png" width="768" /></p>
+<p>There are two problems here:</p>
+<ol style="list-style-type: lower-roman">
+<li>the roads extend <strong>outside the park</strong></li>
+<li>the buffered line segments <strong>overlap each other</strong> (so we can’t add up the areas)</li>
+</ol>
+<p>We can fix these by taking the <strong>intersection</strong> of the road buffer with the park boundary, and <strong>unioning</strong> the individual polygons together.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co">## Clip to park boundary</span></a>
+<a class="sourceLine" id="cb31-2" title="2">yose_roads_inpark_buff &lt;-<span class="st"> </span>yose_roads_buff <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb31-3" title="3"><span class="st">  </span><span class="kw">st_intersection</span>(yose_bnd_utm) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-4" title="4"><span class="st">  </span><span class="kw">st_union</span>()</a>
+<a class="sourceLine" id="cb31-5" title="5"></a>
+<a class="sourceLine" id="cb31-6" title="6"><span class="co">## Plot the results</span></a>
+<a class="sourceLine" id="cb31-7" title="7"><span class="kw">tm_shape</span>(yose_bnd_utm) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-8" title="8"><span class="st">  </span><span class="kw">tm_borders</span>(<span class="dt">lwd=</span><span class="dv">2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb31-9" title="9"><span class="kw">tm_shape</span>(yose_roads_inpark_buff) <span class="op">+</span></a>
+<a class="sourceLine" id="cb31-10" title="10"><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="09_geoprocessing_files/figure-slidy/buff_roads_clip_klippy-1.png" width="768" /></p>
+<p>What is the total area of the buffer?</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">road_area &lt;-<span class="st"> </span>yose_roads_inpark_buff <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="st">  </span><span class="kw">st_area</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-3" title="3"><span class="st">  </span><span class="kw">sum</span>()</a>
+<a class="sourceLine" id="cb32-4" title="4">road_area <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">set_units</span>(ha)</a></code></pre></div>
+<pre><code>## 23879.94 [ha]</code></pre>
+<div class="tryit">
+<p>How big is the buffered roads as a percentage of the total park area?</p>
+<p>[<span id="soln_qcdvno" class="showhidesoln" onclick="showHide(&#39;qcdvno&#39;);return false;">Solution</span>]</p>
+<div id="qcdvno" class="hint">
+<div class="sourceCode" id="cb34"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">road_area <span class="op">/</span><span class="st"> </span>(yose_bnd_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_area</span>())</a></code></pre></div>
+<pre><code>## 0.07907479 [1]</code></pre>
+<p>⇒ Almost 8%</p>
+</div>
+<!--- soln_qcdvno --->
+</div>
+<!--- TryIt --->
+</div>
+<div id="example-voronoi-tesselation" class="slide section level1">
+<h1>Example: Voronoi tesselation</h1>
+<p>For a given a set of points, Voronoi tesselation computes a network of polygons, such that each polygon contains exactly one point and everywhere within a polygon is closest to the enclosed point.</p>
+<p><img src="images/voronoi-diagram_220x220.png" /></p>
+<p>Let’s build Voronoi polygons for the campgrounds. These polygons could be thought of as the ‘catchment area’ of each campgrounds, if campgrounds were like magnets trying to attract campers.</p>
+<p>We can create a Voronoi tessellation using <tt><strong>st_voronoi()</strong></tt>. Note <tt>st_voronoi()</tt> expects a single multipart point feature, which you can create from a point layer using <tt><strong>st_union()</strong></tt>.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="co">## Compute Voronoi polygons</span></a>
+<a class="sourceLine" id="cb36-2" title="2">v &lt;-<span class="st"> </span><span class="kw">st_voronoi</span>(<span class="kw">st_union</span>(yose_campgrnds_utm))</a>
+<a class="sourceLine" id="cb36-3" title="3"></a>
+<a class="sourceLine" id="cb36-4" title="4"><span class="co">## Construct polygon sf</span></a>
+<a class="sourceLine" id="cb36-5" title="5">v_sf &lt;-<span class="st">  </span><span class="kw">st_sf</span>(v) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_cast</span>()</a>
+<a class="sourceLine" id="cb36-6" title="6"></a>
+<a class="sourceLine" id="cb36-7" title="7"><span class="co">## Plot</span></a>
+<a class="sourceLine" id="cb36-8" title="8"><span class="kw">plot</span>(v_sf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>() , <span class="dt">col =</span> <span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;gray70&quot;</span>)</a>
+<a class="sourceLine" id="cb36-9" title="9"><span class="kw">plot</span>(yose_bnd_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;darkblue&quot;</span>)</a>
+<a class="sourceLine" id="cb36-10" title="10"><span class="kw">plot</span>(yose_campgrnds_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">col=</span><span class="st">&quot;darkgreen&quot;</span>, <span class="dt">cex=</span><span class="dv">1</span>, <span class="dt">pch=</span><span class="dv">17</span>, <span class="dt">add=</span>T)</a></code></pre></div>
+<p><img src="09_geoprocessing_files/figure-slidy/voronoi_polys_klippy-1.png" width="768" /></p>
+<div class="tryit">
+<p>Modify the above so the Voronoi polygons are clipped to the park boundary.</p>
+<p>[<span id="soln_kfzqvh" class="showhidesoln" onclick="showHide(&#39;kfzqvh&#39;);return false;">Solution</span>]</p>
+<div id="kfzqvh" class="hint">
+<div class="sourceCode" id="cb37"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="co">## Clip to the park boundary</span></a>
+<a class="sourceLine" id="cb37-2" title="2">v_clipped &lt;-<span class="st"> </span>v_sf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_intersection</span>(yose_bnd_utm)</a>
+<a class="sourceLine" id="cb37-3" title="3"></a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="kw">plot</span>(v_clipped <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>() , <span class="dt">col =</span> <span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;gray70&quot;</span>)</a>
+<a class="sourceLine" id="cb37-5" title="5"><span class="kw">plot</span>(yose_bnd_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;darkblue&quot;</span>)</a>
+<a class="sourceLine" id="cb37-6" title="6"><span class="kw">plot</span>(yose_campgrnds_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">col=</span><span class="st">&quot;darkgreen&quot;</span>, <span class="dt">cex=</span><span class="dv">1</span>, <span class="dt">pch=</span><span class="dv">17</span>, <span class="dt">add=</span>T)</a></code></pre></div>
+<p><img src="09_geoprocessing_files/figure-slidy/voronoi_clipped_klippy-1.png" width="768" /></p>
+</div>
+<!--- soln_kfzqvh --->
+</div>
+<!--- TryIt --->
+<div class="challenge">
+<p>Create Voronoi polygons for the cell tower infrastructure</p>
+</div>
+<!--- challenge --->
+</div>
+<div id="summary" class="slide section level1">
+<h1>Summary</h1>
+<p>Today we saw how to:</p>
+<div class="compact">
+<ul>
+<li>perform common geoprocessing tasks with <tt>sf</tt>, including:</li>
+</ul>
+<div class="indented1">
+<ul>
+<li>making geometric measurements such as length and area<br />
+</li>
+<li>create new geometries based on existing ones, such as centroids and buffers<br />
+</li>
+<li>use logical operators like union and intersection that combine two or more inputs</li>
+<li>dissolve boundaries based on a common attribute value</li>
+</ul>
+</div>
+<ul>
+<li>convert results using the <strong>units</strong> package</li>
+<li>combine geoprocessing functions for specific tasks</li>
+</ul>
+</div>
+<div class="infobox">
+<p>Additional Resources</p>
+<div class="indented1">
+<p>sf Vignette 3 - <a href="https://r-spatial.github.io/sf/articles/sf3.html" target="_blank">Manipulating Simple Feature Geometries</a>. sf package Vignette</p>
+</div>
+</div>
+<p>
+<strong>Next: </strong> <a href="10_spatial-queries.html">Spatial Queries</a>
+</p>
+</div>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+</body>
+</html>

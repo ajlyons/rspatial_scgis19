@@ -9,7 +9,7 @@
   <meta name="author" content="Working with Packages" />
   <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href='../index.html'>Course Homepage</a></span><span class='footer-right'>Forum:&nbsp<a href=' https://tinyurl.com/rspatial-scgis19 ' target='_blank'> https://tinyurl.com/rspatial-scgis19 </a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
   <meta name="font-size-adjustment" content="2"/>
-  <title>Spatial Data Analysis with R</title>
+  <title>Spatial Data Analysis with R   SCGIS Conference, 2019</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -146,9 +146,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title"><span class="course-subtitle">Spatial Data Analysis with R</span></h1>
+  <h1 class="title"><span class="course-title">Spatial Data Analysis with R </span> <br/><span class="course-subtitle">SCGIS Conference, 2019</span></h1>
   <p class="author">
-<span class="pres-title">Working with Packages</span>
+Working with Packages<br/><img src='images/packages_200x202.png'/>
   </p>
 </div>
 <div id="finding-packages" class="slide section level1">
@@ -216,11 +216,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">require</span>(raster)</a></code></pre></div>
 <div class="tip">
 <p><strong>Unload a package</strong>:</p>
+<div class="indented1 indented1r">
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">detach</span>(<span class="st">&quot;package:raster&quot;</span>)</a></code></pre></div>
+</div>
 <p><strong>Update a package</strong>:</p>
+<div class="indented1 indented1r">
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">update.packages</span>(<span class="dt">oldPkgs=</span><span class="st">&quot;raster&quot;</span>)  <span class="co">## update a single package</span></a>
 <a class="sourceLine" id="cb8-2" title="2"></a>
 <a class="sourceLine" id="cb8-3" title="3"><span class="kw">update.packages</span>()    <span class="co">## update ALL installed packages</span></a></code></pre></div>
+</div>
 </div>
 </div>
 <div id="whats-in-a-package" class="slide section level1">
@@ -306,14 +310,16 @@ demo(webmap)
 <div class="tryit">
 <p>View the datasets that come with the ‘sp’ package.</p>
 <div class="indented1 indented1r">
-<div class="sourceCode" id="cb9"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">data</span>(<span class="dt">package=</span><span class="st">&quot;sp&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co">## Voew datasets in the sp package</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">data</span>(<span class="dt">package=</span><span class="st">&quot;sp&quot;</span>)</a></code></pre></div>
 </div>
 <p>How about the <tt>maps</tt> package?</p>
 </div>
 <div class="tip">
 <p>To see a list of datasets in all packages currently loaded, run <tt>data()</tt> without an argument.</p>
 <div class="indented1 indented1r">
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">data</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co">## View datasets in ALL packages currently loaded</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw">data</span>()</a></code></pre></div>
 </div>
 <p>To see <em>all</em> datasets in <em>all</em> installed packages, run</p>
 <div class="indented1 indented1r">
@@ -332,8 +338,8 @@ demo(webmap)
 <p>When you use the <tt><em>package_name</em>::<em>function_name</em></tt> syntax, you don’t actually have to first load the package with <tt>library()</tt>.</p>
 </div>
 </div>
-<div id="summary-and-next-up" class="slide section level1">
-<h1>Summary and Next-Up</h1>
+<div id="summary" class="slide section level1">
+<h1>Summary</h1>
 <p>Today we saw:</p>
 <div class="compact">
 <ul>
@@ -345,8 +351,9 @@ demo(webmap)
 <li>use the <tt>::</tt> operator to avoid problems with duplicate function names</li>
 </ul>
 </div>
-<p>Next:</p>
-<p><a href="04_import-plot-geospatial.html">Importing and Plotting Geospatial Data</a></p>
+<p>
+<strong>Next: </strong> <a href="04_importing-vector.html">Importing and Basic Plotting of Vector Data</a>
+</p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

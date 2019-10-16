@@ -38,6 +38,10 @@ geocode_one <- function (address, token, postal = TRUE){
 
   # url
   url <- URLencode(paste0(gserver, "?addresses=", pref, address, suff, "&token=", token, ifelse(postal, "&f=json", "&f=json&category=Address")))
+  
+  # Update Aug-2019. Need to also percent-encode [ and ] or WGS returns error 400
+  url <- gsub("\\[", "%5B", url)
+  url <- gsub("\\]", "%5D", url)
 
   # submit
   rawdata <- GET(url)

@@ -9,7 +9,7 @@
   <meta name="author" content="Geocoding" />
   <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href='../index.html'>Course Homepage</a></span><span class='footer-right'>Forum:&nbsp<a href=' https://tinyurl.com/rspatial-scgis19 ' target='_blank'> https://tinyurl.com/rspatial-scgis19 </a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
   <meta name="font-size-adjustment" content="2"/>
-  <title>Spatial Data Analysis with R</title>
+  <title>Spatial Data Analysis with R  SCGIS Conference, 2019</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -135,6 +135,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </script>
   <link href="lib/slidy-2/styles/slidy.css" rel="stylesheet" />
   <script src="lib/slidy-2/scripts/slidy.js"></script>
+  <script src="lib/clipboard-1.7.1/clipboard.min.js"></script>
+  <link href="lib/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+  <link href="lib/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+  <script src="lib/klippy-0.0.0.9500/js/klippy.min.js"></script>
   <script src="lib/kePrint-0.0.1/kePrint.js"></script>
   <link rel="stylesheet" type="text/css" media="screen, projection, print"
    href="..\css\slidy_styles.css" />
@@ -142,14 +146,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title"><span class="course-subtitle">Spatial Data Analysis with R</span></h1>
+  <h1 class="title"><span class="course-title">Spatial Data Analysis with R </span><br/><span class="course-subtitle">SCGIS Conference, 2019</span></h1>
   <p class="author">
-<span class="pres-title">Geocoding</span>
+Geocoding <br/><img src='images/geocoding_482x200.png'/>
   </p>
 </div>
 <div id="geocoding" class="slide section level1">
 <h1>Geocoding</h1>
 <script type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
+<script>
+  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
 <p>Geocoding is the process of turning an address or place name into latitude-longitude coordinates.</p>
 <p><img src="images/geocoding_500x422.png" class="indented4" /></p>
 <h2 id="things-you-can-geocode">Things You Can Geocode</h2>
@@ -195,67 +202,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="geocoding-services" class="slide section level1">
 <h1>Geocoding Services</h1>
-<h2 id="browser-based">Browser Based</h2>
+<h2 id="web-apps-via-browser">Web Apps (via browser)</h2>
 <div class="indented2">
 <ul>
-<li><p><a href="http://maps.google.com" target="_blank">Google Maps</a></p></li>
-<li><p><a href="https://geocoding.geo.census.gov/" target="_blank">US Census Geocoding Tool</a></p></li>
-<li><p><a href="http://www.arcgis.com" target="_blank">ArcGIS Online</a></p></li>
+<li><a href="http://maps.google.com" target="_blank">Google Maps</a></li>
+<li><a href="https://geocoding.geo.census.gov/" target="_blank">US Census Geocoding Tool</a></li>
+<li><a href="http://www.arcgis.com" target="_blank">ArcGIS Online</a></li>
 </ul>
 </div>
 <h2 id="apis---free-public">APIs - Free / Public</h2>
 <div class="indented2">
 <ul>
-<li><p><a href="https://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">Open Street Map Nominatim</a></p></li>
-<li><p><a href="https://developer.mapquest.com/documentation/open/nominatim-search/" target="_blank">Mapquest Open</a></p></li>
-<li><p><a href="https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf" target="_blank">US Census Geocoding API</a></p></li>
+<li><a href="https://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">Open Street Map Nominatim</a></li>
+<li><a href="https://developer.mapquest.com/documentation/open/nominatim-search/" target="_blank">Mapquest Open</a></li>
+<li><a href="https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf" target="_blank">US Census Geocoding API</a></li>
 </ul>
 </div>
 <h2 id="apis---commercial-and-freemium">APIs - Commercial and Freemium</h2>
 <div class="indented2">
 <ul>
-<li><p><a href="https://developers.google.com/maps/documentation/geocoding/start" target="_blank">Google Maps Geocode API</a></p></li>
-<li><p><a href="https://developers.arcgis.com/rest/geocode/" target="_blank">ESRI World Geocoding Service API</a></p></li>
+<li><a href="https://developers.google.com/maps/documentation/geocoding/start" target="_blank">Google Maps Geocode API</a></li>
+<li><a href="https://developers.arcgis.com/rest/geocode/" target="_blank">ESRI World Geocoding Service API</a></li>
 </ul>
 </div>
 <p><a href="https://docs.google.com/spreadsheets/d/1I2rEVX2CN8AqkhpzUTuNwNvJy8il1exccrsd4OGwDCU/edit#gid=0" target="_blank">Many others here</a>!</p>
-<p>Free services generally limit # addresses per search, # queries per second, and/or # queries per day</p>
-<p>Paid and freemium API services usually require getting a key, agreeing to the Terms of Service, and linking it to a billing account (credit card)</p>
-<h2 id="recommendations">Recommendations</h2>
-<p>One-time need plus modest number of address queries?<br />
-Use a browser interface</p>
+<div class="info">
+<p>Free services often limit the <strong>num addresses per search</strong>, <strong>num queries per second</strong>, and/or <strong>number queries per day</strong>.</p>
+<p>Paid and freemium API services usually require getting an API key, agreeing to a Terms of Service agreement, and potentially linking it to a billing account (credit card).</p>
+</div>
+<div class="tip">
+<p><strong>Which geocoding tool should I use?</strong></p>
+<p>One-time need + modest number of address queries? → use a web app.</p>
 <p>If you need an API, look at:</p>
 <ol style="list-style-type: decimal">
 <li>ESRI WGS (if you have access)</li>
-<li>OSM Nominatim (if there’s good results for your area)</li>
+<li>OSM Nominatim (if there are good results for your area)</li>
 <li>Google Geocode API</li>
 </ol>
 </div>
-<div id="getting-a-google-maps-api-key" class="slide section level1">
-<h1>Getting a Google Maps API Key</h1>
-<p><strong>Billing Enabled required!</strong> As of mid-2018, Google requires you to link your API key to a billing account (e.g., connected to a credit card). According to them, this helps ensure actual people are getting keys, and provides them a way to bill customers who use Google API services heavily.</p>
-<p>The documentation states you will automatically get $200/month worth of API services (enough for about 40,000 Gecode queries, minus other services you use). You may also get a $300 credit for the first year.</p>
-<p>This highlights the importance of <strong>protecting your API key</strong> (see below).</p>
-<h2 id="getting-your-api-key">Getting Your API Key</h2>
-<p>Instructions adapted from <em><a href="https://developers.google.com/maps/documentation/geocoding/get-api-key" target="_blank">Getting a Geocoding API Key</a></em></p>
-<ol style="list-style-type: decimal">
-<li><p>Log into Google with the account you want to use</p></li>
-<li><p>Go to the <a href="https://console.cloud.google.com/google/maps-apis" target="_blank">Google Cloud Platform Console</a></p></li>
-<li><p>From the Project drop-down menu, select or create the project for which you want to add an API key.</p></li>
-<li><p>From the Navigation Menu, select <em>API and Services</em> &gt;&gt; <em>Library</em>. Search for “Geocoding API” and enable it for the project.</p></li>
-<li><p>From the Navigation menu, select <em>APIs &amp; Services</em> &gt;&gt; <em>Credentials</em>.</p></li>
-<li><p>On the Credentials page, click <em>Create credentials</em> &gt;&gt; <em>API ke</em>y. Your key is created and displayed immediately.</p></li>
-<li><p>On the same page, click <em>Restrictions</em> &gt;&gt; <em>API Restrictions</em>. Restrict your API to just Geocoding API. Now if someone steals it, at least they can only use it for geocoding. Of course if you want to use the same key for downloading background tiles or other services, enable those APIs as well.</p></li>
-</ol>
-<p>For additional info, see the <a href="https://developers.google.com/maps/documentation/geocoding/start" target="_blank">Google Geocoding API Documentation</a></p>
 </div>
 <div id="protecting-your-api-key" class="slide section level1">
 <h1>Protecting your API Key</h1>
-<p>API keys are like passwords that provide access to services that you could be billed for. However unlike passwords, API keys are often transmitted unencrypted from web pages and scripts like R or Python. Careless developers will even hardcode their API key in their HTML code or R script, making it very easy to discover.</p>
+<p>API keys are like passwords that provide access to services that you could be billed for.</p>
+<p>However unlike passwords, API keys are often transmitted <em>unencrypted</em> from web pages or scripts like R or Python. Careless developers will even hardcode their API key in their HTML code or R script, making it very easy to discover.</p>
 <p>There are two things you can do to protect your API key.</p>
-<h2 id="restrict-its-use-and-period-of-validity">1. Restrict its Use and Period of Validity</h2>
-<p>When you create a Google API key, you can limit it to specific APIs (e.g., only good for downloading background tiles), and/or application (e.g. only works from a specific website with a specific IP address).</p>
-<p>Some services (e.g., ESRI Geocoding Service, see below) also impose expiration dates on API keys.</p>
+<h2 id="restrict-its-use-andor-period-of-validity">1. Restrict its Use and/or Period of Validity</h2>
+<p>Some cloud platforms (e.g., Google) allow you to <strong>limit an API key to specific services</strong> (e.g., just downloading background tiles, or just geocoding).</p>
+<p>Some services allow you to limit the the API key to specific application(s) (i.e., only calls from <strong>specific IP addresses</strong> or domain names will be processed).</p>
+<p>Some services (e.g., ESRI Geocoding Service) allow you to <strong>specify an expiration date</strong> on API keys.</p>
 <h2 id="dont-put-the-api-key-in-code">2. Don’t Put the API Key in Code</h2>
 <p>Although it’s very convenient to simply paste your API in your code, anyone who sees your script will be able to see and potentially use your key.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co">## Don&#39;t do this!!</span></a>
@@ -266,13 +260,284 @@ Use a browser interface</p>
 <img src="images/api_text-file.png" />
 </div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">api_fn &lt;-<span class="st"> &quot;~/my-google-geocode-api.txt&quot;</span>  <span class="co">## File located in &#39;home&#39; folder (My Documents)</span></a>
-<a class="sourceLine" id="cb2-2" title="2">f &lt;-<span class="st"> </span><span class="kw">file</span>(api_fn, <span class="dt">open =</span> <span class="st">&quot;rt&quot;</span>)   <span class="co">## create a (file) connection object</span></a>
-<a class="sourceLine" id="cb2-3" title="3">mykey_google &lt;-<span class="st"> </span><span class="kw">readLines</span>(f, <span class="dt">n=</span><span class="dv">1</span>)       <span class="co">## n=1 read first line only </span></a>
+<a class="sourceLine" id="cb2-2" title="2">f &lt;-<span class="st"> </span><span class="kw">file</span>(api_fn, <span class="dt">open =</span> <span class="st">&quot;rt&quot;</span>)           <span class="co">## create a (file) connection object</span></a>
+<a class="sourceLine" id="cb2-3" title="3">mykey_google &lt;-<span class="st"> </span><span class="kw">readLines</span>(f, <span class="dt">n=</span><span class="dv">1</span>)        <span class="co">## n=1 read first line only </span></a>
 <a class="sourceLine" id="cb2-4" title="4"><span class="kw">close</span>(f)</a>
 <a class="sourceLine" id="cb2-5" title="5">mykey_google</a></code></pre></div>
 <pre><code>## [1] &quot;R5p7S006$7K#v3V7UYncAq^lUVxBN7@-`c5p@Cg&#39;#jFG:3V/*G&#39;9fYk*ktj~?1*zz,B.YcD?rx8ABZz80&quot;</code></pre>
+<div class="tryit">
 <p>You can also save your API key as a *.RData file with the <tt>save()</tt> function, the same way you would save any R object, and bring it back into R with <tt>load()</tt>.</p>
-<p>For additional tips, see also: <a href="https://developers.google.com/maps/api-key-best-practices" target="_blank">API Key Best Practices</a>.</p>
+<p>For additional security, save the file with your API keys in an <strong>encrypted folder or drive</strong>.</p>
+<p>For additional tips, see also: <a href="https://developers.google.com/maps/api-key-best-practices" target="_blank">Google API Key Best Practices</a>.</p>
+</div>
+</div>
+<div id="esri-world-geocoding-service" class="slide section level1">
+<h1>ESRI World Geocoding Service</h1>
+<p>If you have a Developer or an Organizational account with ESRI, you can use their Geocding API in R.</p>
+<div class="tip">
+<p>You can sign up for an account in the <a href="https://developers.arcgis.com/sign-up" target="_blank">ArcGIS Developer Program</a> for free. A free account will give you <a href="https://developers.arcgis.com/pricing/credits/" target="_blank">50 credits per month</a>. One geocode query consumes 0.04 credits, so that’s enough for ~1250 geocode queries / month.</p>
+</div>
+<h2 id="step-1.-get-a-token">Step 1. Get a Token</h2>
+<p>ESRI calls an API key <em>tokens</em>. To get a token, you need to first create a Project.</p>
+<h3 id="option-1-use-a-temporary-access-token">Option 1: Use a Temporary access token</h3>
+<p>When you log into the Dashboard, you may see a temporary access token. If so, check the expiration time and if its still valid you can use it.</p>
+<h3 id="option-2-create-a-token-associated-with-a-project">Option 2: Create a Token Associated with a Project</h3>
+<p>After you log-in into the <a href="https://developers.arcgis.com/dashboard/" target="_blank">Dashboard</a>, click on ‘Applications’ then ‘New Application’. Fill in the short form that appears. ESRI requires you to enter at least one tag.</p>
+<p>When your project is created, you’ll see your Client ID and Client Secret (long strings). Copy those. You’ll also get a Temporary Token, valid for about two hours. If two hours is long enough for you to do your work, you’re good to go and can skip the next step.</p>
+<div class="info">
+<p>For detailed instructions, see ESRI’s <a href="https://developers.arcgis.com/rest/geocode/api-reference/geocoding-authenticate-a-request.htm" target="_blank">API documentation</a></p>
+</div>
+<p><strong>Generate a New Token for your Project</strong></p>
+<p>If you need a token that is valid for more than two hours (the maximum is two weeks), copy-paste the following URL into notepad, then insert your Client ID and Client Scret strings into the placeholders.</p>
+<p>
+<textarea name="token_url_template-dashes" rows="4" cols="100">
+&#104;ttps://www.arcgis.com/sharing/oauth2/token?client_id=your-client-id-here&grant_type=client_credentials&client_secret=your-client-secret-here&f=pjson&expiration=num-minutes-to-expire
+</textarea>
+</p>
+<p>Replace <em>your-client-id-here</em> and <em>your-client-secret-here</em> with your ‘Client ID’ and ‘Client Secret’ string. Replace <em>num-minutes-to-expire</em> with the number of minutes before the token should expire. Note the maximum is 20160 (two weeks).</p>
+<p>After you’ve edited the URL, copy it into your browser’s address bar and hit Enter. After a few seconds you’ll see a JSON object appear with your new token. It will look something like:</p>
+<p>
+<textarea name="token_url_json" rows="4" cols="100">
+{
+  "access_token": "nk1tIwBnYv3n9mrxE40Fy_lsN28sinvzQD-NyKuYNptMaLK99klZFXjTjzGn7OBc2FZSL6kRxPogwVL5RSzb6MB-Igto7jmIbfg7T3y6v8rQ..",
+  "expires_in": 1209600
+}
+</textarea>
+</p>
+<p>The token is the long string between the quotes. Copy-paste it to your script, or better yet follow best practices and save it in an external file and read it into R programmatically (<a href="#(4)">see above</a>) .</p>
+<h2 id="step-2.-load-your-token-into-r">Step 2. Load your token into R</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># For the purposes of the workshop, you can also just paste your token in.</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co">#my_esri_token &lt;- &quot;nk1tIwBnYv3n9m...xxx...VL5RSzb6MB-Igto7&quot;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co"># The best way to load a token into R is to save it in a text file and read it in. </span></a>
+<a class="sourceLine" id="cb4-5" title="5">token_fn &lt;-<span class="st"> &quot;~/My Keys/esri-token.txt&quot;</span>  <span class="co"># text file where the token is by itself </span></a>
+<a class="sourceLine" id="cb4-6" title="6">                                        <span class="co">#on the first line</span></a>
+<a class="sourceLine" id="cb4-7" title="7">f &lt;-<span class="st"> </span><span class="kw">file</span>(token_fn, <span class="dt">open =</span> <span class="st">&quot;rt&quot;</span>)</a>
+<a class="sourceLine" id="cb4-8" title="8">my_esri_token &lt;-<span class="st"> </span><span class="kw">readLines</span>(f, <span class="dt">n=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="kw">close</span>(f)</a></code></pre></div>
+<h2 id="step-3.-load-esri-geocoding-functions">Step 3. Load ESRI Geocoding Functions</h2>
+<p>There isn’t a R package for using the ESRI Geocoding Service, but thanks to <a href="https://github.com/cengel/ArcGIS_geocoding" target="_blank">Claudia Engel</a> and others there’s a script with two functions for geocoding with ESRI. To load these functions into R, source the script:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">source</span>(<span class="st">&#39;./scripts/geocode_esri.R&#39;</span>)  <span class="co">## change path to the scripts folder you downloaded</span></a></code></pre></div>
+<p>You should now have two additional functions you can use, <tt>geocode_one()</tt> and <tt>geocode_many()</tt>.</p>
+</div>
+<div id="geocode-a-single-address" class="slide section level1">
+<h1>Geocode a Single Address</h1>
+<p>Like other geocoders, ESRI WGS can take place name or an address.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">geocode_one</span>(<span class="st">&quot;Millennium Tower, San Francisco, CA&quot;</span>, my_esri_token, <span class="dt">postal=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##        lon      lat score locName status  matchAddr side addressType
+## 1 -122.413 37.78679 89.66   World      M Millennium    L         POI</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">geocode_one</span>(<span class="st">&quot;547 Emerson St, Palo Alto, CA 94301&quot;</span>, my_esri_token, <span class="dt">postal=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##         lon      lat score locName status
+## 1 -122.1619 37.44418   100   World      M
+##                                      matchAddr side  addressType
+## 1 547 Emerson St, Palo Alto, California, 94301    R PointAddress</code></pre>
+</div>
+<div id="batch-geocode-multiple-addresses" class="slide section level1">
+<h1>Batch Geocode Multiple Addresses</h1>
+<p>Let’s look at the arguments of the <tt>geocode_many()</tt> function.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">args</span>(geocode_many)</a></code></pre></div>
+<pre><code>## function (id, street, city, state, zip, token) 
+## NULL</code></pre>
+<div class="info">
+<p><strong><tt>geocode_many()</tt> usage</strong></p>
+<div class="indented1">
+<ul>
+<li><tt>geocode_many(id, street, city, state, zip, token)</tt></li>
+<li><tt>id</tt> should be a numeric vector with unique values. This will be returned in the ouptut as column ‘ID’ so you can merge the lat and lon columns into the original data frame.</li>
+<li>Unlike <tt>geocode_one()</tt>, the addresses must be split up into <tt>street</tt>, <tt>city</tt>, <tt>state</tt>, and <tt>zip</tt>. This is how ESRI requires the data and makes the process more efficient (i.e., they don’t have to try to unpack an address string).</li>
+<li>Only 1,000 addresses can be geocoded at a time. If you have more than that, you have to break it up into chunks.</li>
+</ul>
+</div>
+</div>
+<h2 id="example-geocode-san-francisco-libraries">Example: Geocode San Francisco Libraries</h2>
+<p><em>sf_libraries.csv</em> contains the addresses of public libraries in San Francisco.</p>
+<p><strong>Step 1. Load the csv file</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">csv_fn &lt;-<span class="st"> &quot;./data/sf_libraries.csv&quot;</span>; <span class="kw">file.exists</span>(csv_fn)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">sflib_df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(csv_fn, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="kw">str</span>(sflib_df)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    28 obs. of  6 variables:
+##  $ branch   : chr  &quot;ANZA&quot; &quot;BAYVIEW / LINDA BROOKS-BURTON&quot; &quot;BERNAL HEIGHTS&quot; &quot;CHINATOWN / HIM MARK LAI&quot; ...
+##  $ phone.num: chr  &quot; (415) 355-5717&quot; &quot; (415) 355-5757&quot; &quot; (415) 355-2810&quot; &quot; (415) 355-2888&quot; ...
+##  $ address  : chr  &quot; 550 37th Ave.&quot; &quot; 5075 Third St.&quot; &quot; 500 Cortland Ave.&quot; &quot; 1135 Powell St.&quot; ...
+##  $ city     : chr  &quot; San Francisco&quot; &quot; San Francisco&quot; &quot; San Francisco&quot; &quot; San Francisco&quot; ...
+##  $ state    : chr  &quot; CA&quot; &quot; CA&quot; &quot; CA&quot; &quot; CA&quot; ...
+##  $ zip      : int  94121 94124 94110 94108 94114 94112 94131 94123 94112 94102 ...</code></pre>
+<p><strong>Step 2: Inspect the columns</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">head</span>(sflib_df)</a></code></pre></div>
+<pre><code>##                                 branch       phone.num
+## 1                                 ANZA  (415) 355-5717
+## 2        BAYVIEW / LINDA BROOKS-BURTON  (415) 355-5757
+## 3                       BERNAL HEIGHTS  (415) 355-2810
+## 4             CHINATOWN / HIM MARK LAI  (415) 355-2888
+## 5 EUREKA VALLEY / HARVEY MILK MEMORIAL  (415) 355-5616
+## 6                            EXCELSIOR  (415) 355-2868
+##                address           city state   zip
+## 1        550 37th Ave.  San Francisco    CA 94121
+## 2       5075 Third St.  San Francisco    CA 94124
+## 3    500 Cortland Ave.  San Francisco    CA 94110
+## 4      1135 Powell St.  San Francisco    CA 94108
+## 5  1 Jose Sarria Court  San Francisco    CA 94114
+## 6     4400 Mission St.  San Francisco    CA 94112</code></pre>
+<p>The address, city, and zip columns look pretty good, but the data frame doesn’t have an ‘ID’ column which <tt>geocode_many()</tt> requires. Let’s add that now.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">sflib_df<span class="op">$</span>ID &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(sflib_df)</a></code></pre></div>
+<div class="tip">
+<p>Note how we made the column name <tt>ID</tt> capitalized. That’s because the ID column in the results is capitalized. This will make it easier to merge the new columns with the original.</p>
+</div>
+<p>Now we’re ready to geocode:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">sflib_gc_esri &lt;-<span class="st"> </span><span class="kw">geocode_many</span>(sflib_df<span class="op">$</span>ID, sflib_df<span class="op">$</span>address, sflib_df<span class="op">$</span>city, sflib_df<span class="op">$</span>state, sflib_df<span class="op">$</span>zip, my_esri_token)</a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw">head</span>(sflib_gc_esri)</a></code></pre></div>
+<pre><code>##   ID       lon      lat score locName status
+## 1  2 -122.3914 37.73254   100   World      M
+## 2  4 -122.4098 37.79525   100   World      M
+## 3  1 -122.4975 37.77852   100   World      M
+## 4  3 -122.4160 37.73899   100   World      M
+## 5 19 -122.4511 37.77040   100   World      M
+## 6  9 -122.4562 37.72394   100   World      M
+##                                            matchAddr side  addressType
+## 1      5075 3rd St, San Francisco, California, 94124    R PointAddress
+## 2   1135 Powell St, San Francisco, California, 94108    L PointAddress
+## 3     550 37th Ave, San Francisco, California, 94121    R PointAddress
+## 4 500 Cortland Ave, San Francisco, California, 94110    L PointAddress
+## 5     1833 Page St, San Francisco, California, 94117    R PointAddress
+## 6   1298 Ocean Ave, San Francisco, California, 94112    R PointAddress</code></pre>
+<p>That looks pretty good. Let’s merge the new columns back into the original. This is easy because both the results and the original data frame have a numeric column ID that we can use to match the records.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">sflib_loc_df &lt;-<span class="st"> </span><span class="kw">merge</span>(sflib_df, sflib_gc_esri, <span class="dt">by =</span> <span class="st">&quot;ID&quot;</span>, <span class="dt">all.x =</span> T)</a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="kw">head</span>(sflib_loc_df)</a></code></pre></div>
+<pre><code>##   ID                               branch       phone.num
+## 1  1                                 ANZA  (415) 355-5717
+## 2  2        BAYVIEW / LINDA BROOKS-BURTON  (415) 355-5757
+## 3  3                       BERNAL HEIGHTS  (415) 355-2810
+## 4  4             CHINATOWN / HIM MARK LAI  (415) 355-2888
+## 5  5 EUREKA VALLEY / HARVEY MILK MEMORIAL  (415) 355-5616
+## 6  6                            EXCELSIOR  (415) 355-2868
+##                address           city state   zip       lon      lat score
+## 1        550 37th Ave.  San Francisco    CA 94121 -122.4975 37.77852   100
+## 2       5075 Third St.  San Francisco    CA 94124 -122.3914 37.73254   100
+## 3    500 Cortland Ave.  San Francisco    CA 94110 -122.4160 37.73899   100
+## 4      1135 Powell St.  San Francisco    CA 94108 -122.4098 37.79525   100
+## 5  1 Jose Sarria Court  San Francisco    CA 94114 -122.4318 37.76423   100
+## 6     4400 Mission St.  San Francisco    CA 94112 -122.4331 37.72697   100
+##   locName status                                          matchAddr side
+## 1   World      M     550 37th Ave, San Francisco, California, 94121    R
+## 2   World      M      5075 3rd St, San Francisco, California, 94124    R
+## 3   World      M 500 Cortland Ave, San Francisco, California, 94110    L
+## 4   World      M   1135 Powell St, San Francisco, California, 94108    L
+## 5   World      M 1 Jose Sarria Ct, San Francisco, California, 94114    R
+## 6   World      M  4400 Mission St, San Francisco, California, 94112    L
+##     addressType
+## 1  PointAddress
+## 2  PointAddress
+## 3  PointAddress
+## 4  PointAddress
+## 5 StreetAddress
+## 6  PointAddress</code></pre>
+<p>To plot these, we can turn it into a <tt>SpatialPointsDataFrame</tt>.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">coord_cols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)</a>
+<a class="sourceLine" id="cb23-2" title="2">attribute_tbl_cols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;branch&quot;</span>, <span class="st">&quot;phone.num&quot;</span>, <span class="st">&quot;address&quot;</span>, <span class="st">&quot;city&quot;</span>, <span class="st">&quot;state&quot;</span>, <span class="st">&quot;zip&quot;</span>, <span class="st">&quot;matchAddr&quot;</span>)</a>
+<a class="sourceLine" id="cb23-3" title="3">sflib_spdf &lt;-<span class="st"> </span><span class="kw">SpatialPointsDataFrame</span>(<span class="dt">coords =</span> sflib_loc_df[, coord_cols],</a>
+<a class="sourceLine" id="cb23-4" title="4">                                     <span class="dt">data  =</span> sflib_loc_df[, attribute_tbl_cols],</a>
+<a class="sourceLine" id="cb23-5" title="5">                                     <span class="dt">proj4string =</span> <span class="kw">CRS</span>(<span class="st">&quot;+init=epsg:4326&quot;</span>))</a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="kw">plot</span>(sfnb_ll, <span class="dt">axes=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="kw">plot</span>(sflib_spdf, <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="geocoding_files/figure-slidy/plot_sflib_gc_spdf-1.png" width="768" style="display: block; margin: auto;" /></p>
+<div class="tryit">
+<ol style="list-style-type: decimal">
+<li><p>Sign up for a free <a href="https://developers.arcgis.com/sign-up" target="_blank">ArcGIS Developer account</a> if you don’t already have one. Copy your temporary token.</p></li>
+<li><p>Import the <em>ucce-county-offices.csv</em> file which contains addresses of the county office for UC Cooperative Extension.</p></li>
+<li><p>Geocode the addresses and plot the results.</p></li>
+</ol>
+<p>[<span id="soln_eezvmw" class="showhidesoln" onclick="showHide(&#39;eezvmw&#39;);return false;">Solution</span>]</p>
+<div id="eezvmw" class="hint">
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co">## Load csv</span></a>
+<a class="sourceLine" id="cb24-2" title="2">csv_fn &lt;-<span class="st"> &quot;./data/ucce-county-offices.csv&quot;</span>; <span class="kw">file.exists</span>(csv_fn)</a>
+<a class="sourceLine" id="cb24-3" title="3">ucce_df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(csv_fn, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb24-4" title="4"><span class="kw">head</span>(ucce_df)</a></code></pre></div>
+<pre><code>##              office                              address          city
+## 1      Alameda UCCE               224 West Winton Avenue       Hayward
+## 2       Amador UCCE                 12200-B Airport Road       Jackson
+## 3        Butte UCCE                2279-B Del Oro Avenue      Oroville
+## 4    Calaveras UCCE 891 Mountain Ranch Rd., County Annex   San Andreas
+## 5       Colusa UCCE                100 Sunrise Blvd., #E        Colusa
+## 6 Contra Costa UCCE                75 Santa Barbara Road Pleasant Hill
+##   state   zip ID
+## 1    CA 94544  1
+## 2    CA 95642  2
+## 3    CA 95965  3
+## 4    CA 95249  4
+## 5    CA 95932  5
+## 6    CA 94523  6</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co">## Add ID column to the data frame</span></a>
+<a class="sourceLine" id="cb26-2" title="2">ucce_df<span class="op">$</span>ID &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(ucce_df)</a>
+<a class="sourceLine" id="cb26-3" title="3"></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="co">## Run the geocoder</span></a>
+<a class="sourceLine" id="cb26-5" title="5">ucce_gc_esri &lt;-<span class="st"> </span><span class="kw">geocode_many</span>(ucce_df<span class="op">$</span>ID, ucce_df<span class="op">$</span>address, ucce_df<span class="op">$</span>city, ucce_df<span class="op">$</span>state, ucce_df<span class="op">$</span>zip, my_esri_token)</a>
+<a class="sourceLine" id="cb26-6" title="6"></a>
+<a class="sourceLine" id="cb26-7" title="7"><span class="co">## Inspect results</span></a>
+<a class="sourceLine" id="cb26-8" title="8"><span class="kw">head</span>(ucce_gc_esri)</a></code></pre></div>
+<pre><code>##   ID       lon      lat  score locName status
+## 1  1 -122.0958 37.65858 100.00   World      M
+## 2  3 -121.5682 39.52589  98.60   World      M
+## 3  5 -121.9977 39.18854 100.00   World      M
+## 4  7 -124.2005 41.75359 100.00   World      M
+## 5  8 -120.8277 38.72768 100.00   World      M
+## 6  2 -120.8015 38.37605  98.59   World      M
+##                                       matchAddr side   addressType
+## 1  224 W Winton Ave, Hayward, California, 94544    R  PointAddress
+## 2 2279 Del Oro Ave, Oroville, California, 95965    L  PointAddress
+## 3   100 Sunrise Blvd, Colusa, California, 95932    L StreetAddress
+## 4    586 G St, Crescent City, California, 95531    L  PointAddress
+## 5   311 Fair Ln, Placerville, California, 95667    L  PointAddress
+## 6  12200 Airport Rd, Jackson, California, 95642    R StreetAddress</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">ucce_loc_df &lt;-<span class="st"> </span><span class="kw">merge</span>(ucce_df, ucce_gc_esri, <span class="dt">by =</span> <span class="st">&quot;ID&quot;</span>, <span class="dt">all.x =</span> T)</a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="kw">head</span>(ucce_loc_df)</a></code></pre></div>
+<pre><code>##   ID            office                              address          city
+## 1  1      Alameda UCCE               224 West Winton Avenue       Hayward
+## 2  2       Amador UCCE                 12200-B Airport Road       Jackson
+## 3  3        Butte UCCE                2279-B Del Oro Avenue      Oroville
+## 4  4    Calaveras UCCE 891 Mountain Ranch Rd., County Annex   San Andreas
+## 5  5       Colusa UCCE                100 Sunrise Blvd., #E        Colusa
+## 6  6 Contra Costa UCCE                75 Santa Barbara Road Pleasant Hill
+##   state   zip       lon      lat  score locName status
+## 1    CA 94544 -122.0958 37.65858 100.00   World      M
+## 2    CA 95642 -120.8015 38.37605  98.59   World      M
+## 3    CA 95965 -121.5682 39.52589  98.60   World      M
+## 4    CA 95249 -120.6690 38.19120  97.18   World      M
+## 5    CA 95932 -121.9977 39.18854 100.00   World      M
+## 6    CA 94523 -122.0702 37.93527 100.00   World      M
+##                                               matchAddr side   addressType
+## 1          224 W Winton Ave, Hayward, California, 94544    R  PointAddress
+## 2          12200 Airport Rd, Jackson, California, 95642    R StreetAddress
+## 3         2279 Del Oro Ave, Oroville, California, 95965    L  PointAddress
+## 4 891 Mountain Ranch Rd, San Andreas, California, 95249    R  PointAddress
+## 5           100 Sunrise Blvd, Colusa, California, 95932    L StreetAddress
+## 6 75 Santa Barbara Rd, Pleasant Hill, California, 94523    R StreetAddress</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">ucce_sp &lt;-<span class="st"> </span><span class="kw">SpatialPoints</span>(<span class="dt">coords=</span>ucce_loc_df[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)],</a>
+<a class="sourceLine" id="cb30-2" title="2">                         <span class="dt">proj4string =</span> <span class="kw">CRS</span>(<span class="st">&quot;+init=epsg:4326&quot;</span>))</a>
+<a class="sourceLine" id="cb30-3" title="3"><span class="kw">plot</span>(ca_counties_ll, <span class="dt">axes=</span>T, <span class="dt">asp=</span><span class="dv">1</span>, <span class="dt">border=</span><span class="st">&quot;gray&quot;</span>)</a>
+<a class="sourceLine" id="cb30-4" title="4"><span class="kw">plot</span>(ucce_sp, <span class="dt">pch=</span><span class="dv">18</span>, <span class="dt">col=</span><span class="st">&quot;navy&quot;</span>, <span class="dt">cex=</span><span class="fl">1.2</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="geocoding_files/figure-slidy/plot_ucce_offices-1.png" width="768" /></p>
+</div>
+</div>
+</div>
+<div id="google-maps-api" class="slide section level1">
+<h1>Google Maps API</h1>
+<h2 id="getting-a-google-api-key">Getting a Google API Key</h2>
+<p><strong>Billing Enabled required!</strong> As of mid-2018, Google requires you to link your API key to a billing account (e.g., connected to a credit card). According to them, this helps ensure actual people are getting keys, and provides them a way to bill customers who use Google API services heavily.</p>
+<p>The documentation states you will automatically get $200/month worth of API services (enough for about 40,000 Gecode queries, minus other services you use). You may also get a $300 credit for the first year.</p>
+<p>This highlights the importance of <strong>protecting your API key</strong>.</p>
+<h2 id="getting-an-api-key">Getting an API Key</h2>
+<p>Instructions adapted from <em><a href="https://developers.google.com/maps/documentation/geocoding/get-api-key" target="_blank">Getting a Geocoding API Key</a></em>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Log into Google with the account you want to use</p></li>
+<li><p>Go to the <a href="https://console.cloud.google.com/google/maps-apis" target="_blank">Google Cloud Platform Console</a></p></li>
+<li><p>From the Project drop-down menu, select or create the project for which you want to add an API key.</p></li>
+<li><p>From the Navigation Menu, select <em>API and Services</em> &gt;&gt; <em>Library</em>. Search for “Geocoding API” and enable it for the project.</p></li>
+<li><p>From the Navigation menu, select <em>APIs &amp; Services</em> &gt;&gt; <em>Credentials</em>.</p></li>
+<li><p>On the Credentials page, click <em>Create credentials</em> &gt;&gt; <em>API ke</em>y. Your key is created and displayed immediately.</p></li>
+<li><p>On the same page, click <em>Restrictions</em> &gt;&gt; <em>API Restrictions</em>. Restrict your API to just Geocoding API. Now if someone steals it, at least they can only use it for geocoding. Of course if you want to use the same key for downloading background tiles or other services, enable those APIs as well.</p></li>
+</ol>
+<p>For additional info, see the <a href="https://developers.google.com/maps/documentation/geocoding/start" target="_blank">Google Geocoding API Documentation</a></p>
 </div>
 <div id="geocoding-with-google-using-ggmap" class="slide section level1">
 <h1>Geocoding with Google using <tt>ggmap</tt></h1>
@@ -301,24 +566,28 @@ Use a browser interface</p>
 </ul></li>
 </ul>
 </div>
-<div class="info">
+<div class="tip">
 <p>Use <tt>ggmap</tt> version 2.7.900 or later, it has better features for protecting your API keys. You can check which version you have by running:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">packageVersion</span>(<span class="st">&quot;ggmap&quot;</span>)</a></code></pre></div>
+<div class="indented1">
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">packageVersion</span>(<span class="st">&quot;ggmap&quot;</span>)</a></code></pre></div>
+</div>
 <p>If the version on <a href="https://cran.r-project.org/web/packages/ggmap/index.html" target="_blank">CRAN</a> is not current, you can install from Github.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(devtools)</a>
-<a class="sourceLine" id="cb5-2" title="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;dkahle/ggmap&quot;</span>, <span class="dt">ref =</span> <span class="st">&quot;tidyup&quot;</span>)</a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="kw">library</span>(ggmap)</a></code></pre></div>
+<div class="indented1">
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb32-2" title="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;dkahle/ggmap&quot;</span>, <span class="dt">ref =</span> <span class="st">&quot;tidyup&quot;</span>)</a>
+<a class="sourceLine" id="cb32-3" title="3"><span class="kw">library</span>(ggmap)</a></code></pre></div>
+</div>
 <p>As always, if you get error messages about a package already in use, restart R and try again.</p>
 </div>
 <h2 id="step-1.-tell-ggmap-your-api-key">Step 1. Tell <tt>ggmap</tt> your API Key</h2>
 <p>Register your API key with <tt>ggmap::register_google()</tt>. This instructs ggmap to ‘remember’ your key and transmit it whenever needed for calls to the geocoding service.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">library</span>(ggmap)</a>
-<a class="sourceLine" id="cb6-2" title="2">ggmap<span class="op">::</span><span class="kw">register_google</span>(<span class="dt">key =</span> mykey_google)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">library</span>(ggmap)</a>
+<a class="sourceLine" id="cb33-2" title="2">ggmap<span class="op">::</span><span class="kw">register_google</span>(<span class="dt">key =</span> mykey_google)</a></code></pre></div>
 <h2 id="step-2.-geocode">Step 2. Geocode()</h2>
 <p>You’re now ready to use the <tt>geocode()</tt> function. Start with something simple.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Geocode a city</span></a>
-<a class="sourceLine" id="cb7-2" title="2">ggmap<span class="op">::</span><span class="kw">geocode</span>(<span class="st">&quot;San Francisco, CA&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] &quot;Source : https://maps.googleapis.com/maps/api/geocode/json?address=San%20Francisco%2C%20CA&amp;key=xxx-_jxqSpkCM_4TVw&quot;</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="co"># Geocode a city</span></a>
+<a class="sourceLine" id="cb34-2" title="2">ggmap<span class="op">::</span><span class="kw">geocode</span>(<span class="st">&quot;San Francisco, CA&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;Source: https://maps.googleapis.com/maps/api/geocode/json?address=San%20Francisco%2C%20CA&amp;key=xxx-_jxqSpkCM_4TVw&quot;</code></pre>
 <pre><code>##         lon      lat
 ## 1 -122.4194 37.77493</code></pre>
 <div class="tryit">
@@ -365,12 +634,12 @@ lat, long, address, &amp; type of result (e.g., approximate, rooftop)
 </tbody>
 </table>
 <p>Compare the following:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">ggmap<span class="op">::</span><span class="kw">geocode</span>(<span class="st">&quot;City College Mission Campus, San Francisco, CA&quot;</span>, <span class="dt">output=</span><span class="st">&quot;latlona&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">ggmap<span class="op">::</span><span class="kw">geocode</span>(<span class="st">&quot;City College Mission Campus, San Francisco, CA&quot;</span>, <span class="dt">output=</span><span class="st">&quot;latlona&quot;</span>)</a></code></pre></div>
 <pre><code>##         lon      lat
 ## 1 -122.4206 37.75483
 ##                                                                 address
 ## 1 1125 valencia st., 4th floor,, san francisco, ca 94110, united states</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">ggmap<span class="op">::</span><span class="kw">geocode</span>(<span class="st">&quot;City College Mission Campus, San Francisco, CA&quot;</span>, <span class="dt">output=</span><span class="st">&quot;more&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">ggmap<span class="op">::</span><span class="kw">geocode</span>(<span class="st">&quot;City College Mission Campus, San Francisco, CA&quot;</span>, <span class="dt">output=</span><span class="st">&quot;more&quot;</span>)</a></code></pre></div>
 <pre><code>##         lon      lat          type          loctype
 ## 1 -122.4206 37.75483 establishment geometric_center
 ##                                                                 address
@@ -379,19 +648,21 @@ lat, long, address, &amp; type of result (e.g., approximate, rooftop)
 ## 1 37.75618 37.75348 -122.4193 -122.422 San Francisco
 ##   administrative_area_level_1       country postal_code
 ## 1                  California United States       94110</code></pre>
-<h2 id="geocoding-multiple-locations">Geocoding Multiple Locations</h2>
+<div class="tip">
+<p>Geocoding Multiple Locations</p>
 <p><tt>geocode()</tt> is vectorized, so you can pass it multiple locations and it will return a data frame with the matched results. If you want to add the lat-lon columns in the data frame (so you don’t have to merge them later) use <tt>ggmap::mutate_geocode()</tt>.</p>
+</div>
 </div>
 <div id="example-geocode-california-breweries-with-google-maps" class="slide section level1">
 <h1>Example: Geocode California Breweries with Google Maps</h1>
 <p>First we import the <em>ca_breweries.csv</em> file.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">csv_fn &lt;-<span class="st"> &quot;../outputs/rspatial_scgis19/docs/data/ca_breweries.csv&quot;</span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="kw">file.exists</span>(csv_fn)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">csv_fn &lt;-<span class="st"> &quot;./data/ca_breweries.csv&quot;</span></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="kw">file.exists</span>(csv_fn)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">cabrew_df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(csv_fn, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">cabrew_df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(csv_fn, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>For now we’ll just work with the first 40 records.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">cabrew_df &lt;-<span class="st"> </span>cabrew_df[<span class="dv">1</span><span class="op">:</span><span class="dv">40</span>,]</a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="kw">head</span>(cabrew_df)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">cabrew_df &lt;-<span class="st"> </span>cabrew_df[<span class="dv">1</span><span class="op">:</span><span class="dv">40</span>,]</a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="kw">head</span>(cabrew_df)</a></code></pre></div>
 <pre><code>##                                   Name                     Address
 ## 1              10 Mile Brewing Company            1136 E Willow St
 ## 2                    101 North Brewing       1304 Scott St Suite D
@@ -407,8 +678,8 @@ lat, long, address, &amp; type of result (e.g., approximate, rooftop)
 ## 5        San Diego    CA (858) 480-5437 Brewery
 ## 6       Sand Diego    CA   619-363-2622 Brewery</code></pre>
 <p>It looks like the addresses are split across the ‘Address’, ‘City’, and ‘State’ columns. Let’s combine those and add them to the data frame as a new column.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">fulladdr &lt;-<span class="st"> </span><span class="kw">paste</span>(cabrew_df<span class="op">$</span>Address, cabrew_df<span class="op">$</span>City, cabrew_df<span class="op">$</span>State, <span class="dt">sep=</span><span class="st">&quot;, &quot;</span>)</a>
-<a class="sourceLine" id="cb19-2" title="2">fulladdr</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">fulladdr &lt;-<span class="st"> </span><span class="kw">paste</span>(cabrew_df<span class="op">$</span>Address, cabrew_df<span class="op">$</span>City, cabrew_df<span class="op">$</span>State, <span class="dt">sep=</span><span class="st">&quot;, &quot;</span>)</a>
+<a class="sourceLine" id="cb46-2" title="2">fulladdr</a></code></pre></div>
 <pre><code>##  [1] &quot;1136 E Willow St, Signal Hill, CA&quot;                
 ##  [2] &quot;1304 Scott St Suite D, Petaluma, CA&quot;              
 ##  [3] &quot;31125 Via Colinas Suite 907, Westlake Village, CA&quot;
@@ -450,189 +721,29 @@ lat, long, address, &amp; type of result (e.g., approximate, rooftop)
 ## [39] &quot;2575 Pioneer Ave #104, Vista, CA&quot;                 
 ## [40] &quot;3055 Limestone Way, Paso Robles, CA&quot;</code></pre>
 <p>Now we can run the geocode service. In order to add the coordinate columns to the existing data frame, we’ll use <tt>mutate_geocode()</tt> and save the result as a new data frame.</p>
-<p><tt>mutate_geocode()</tt> requires the locations be saved in a column in the datqa frame, so we add that first.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">cabrew_df<span class="op">$</span>address_city_state &lt;-<span class="st"> </span>fulladdr</a>
-<a class="sourceLine" id="cb21-2" title="2">cabrew_gc_df &lt;-<span class="st"> </span><span class="kw">mutate_geocode</span>(cabrew_df, address_city_state, <span class="dt">output=</span><span class="st">&quot;latlona&quot;</span>)</a>
-<a class="sourceLine" id="cb21-3" title="3"><span class="kw">head</span>(cabrew_gc_df)</a></code></pre></div>
+<p><tt>mutate_geocode()</tt> requires the locations be saved in a column in the data frame, so we add that first.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">cabrew_df<span class="op">$</span>address_city_state &lt;-<span class="st"> </span>fulladdr</a>
+<a class="sourceLine" id="cb48-2" title="2">cabrew_gc_df &lt;-<span class="st"> </span><span class="kw">mutate_geocode</span>(cabrew_df, address_city_state, <span class="dt">output=</span><span class="st">&quot;latlona&quot;</span>)</a>
+<a class="sourceLine" id="cb48-3" title="3"><span class="kw">head</span>(cabrew_gc_df)</a></code></pre></div>
 <p>If there are any addresses that did not yield a match, the coordinate columns will come back as <tt>NA</tt>. we can investigate them using an attribute filter.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">cabrew_gc_df[<span class="kw">is.na</span>(cabrew_gc_df<span class="op">$</span>lon),]</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">cabrew_gc_df[<span class="kw">is.na</span>(cabrew_gc_df<span class="op">$</span>lon),]</a></code></pre></div>
 <pre><code>##  [1] Name               Address            City              
 ##  [4] State              Phone              Type              
 ##  [7] address_city_state lon                lat               
 ## [10] address           
 ## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
 <p>Plot the locations that geocoded successfully.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co">## Create a spatial points object</span></a>
-<a class="sourceLine" id="cb24-2" title="2">cabrew_sp_ll &lt;-<span class="st"> </span>sp<span class="op">::</span><span class="kw">SpatialPoints</span>(cabrew_gc_df[<span class="op">!</span><span class="kw">is.na</span>(cabrew_gc_df<span class="op">$</span>lon),<span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>,<span class="st">&quot;lat&quot;</span>)], <span class="dt">proj4string =</span> <span class="kw">CRS</span>(<span class="st">&quot;+init=epsg:4326&quot;</span>))</a>
-<a class="sourceLine" id="cb24-3" title="3"></a>
-<a class="sourceLine" id="cb24-4" title="4"><span class="co">## Transform county boundaries boundaries into lat-long</span></a>
-<a class="sourceLine" id="cb24-5" title="5">ca_counties_ll &lt;-<span class="st"> </span>sp<span class="op">::</span><span class="kw">spTransform</span>(ca_counties_alb, <span class="kw">CRS</span>(<span class="st">&quot;+init=epsg:4326&quot;</span>))</a>
-<a class="sourceLine" id="cb24-6" title="6"></a>
-<a class="sourceLine" id="cb24-7" title="7"><span class="co"># Plot</span></a>
-<a class="sourceLine" id="cb24-8" title="8"><span class="kw">plot</span>(ca_counties_ll, <span class="dt">axes=</span>T, <span class="dt">asp=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb24-9" title="9"><span class="kw">plot</span>(cabrew_sp_ll, <span class="dt">pch=</span><span class="dv">18</span>, <span class="dt">col=</span><span class="st">&quot;purple&quot;</span>, <span class="dt">cex=</span><span class="fl">1.2</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co">## Create a spatial points object</span></a>
+<a class="sourceLine" id="cb51-2" title="2">cabrew_sp_ll &lt;-<span class="st"> </span>sp<span class="op">::</span><span class="kw">SpatialPoints</span>(cabrew_gc_df[<span class="op">!</span><span class="kw">is.na</span>(cabrew_gc_df<span class="op">$</span>lon),<span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>,<span class="st">&quot;lat&quot;</span>)], <span class="dt">proj4string =</span> <span class="kw">CRS</span>(<span class="st">&quot;+init=epsg:4326&quot;</span>))</a>
+<a class="sourceLine" id="cb51-3" title="3"></a>
+<a class="sourceLine" id="cb51-4" title="4"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb51-5" title="5"><span class="kw">plot</span>(ca_counties_ll, <span class="dt">axes=</span>T, <span class="dt">asp=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb51-6" title="6"><span class="kw">plot</span>(cabrew_sp_ll, <span class="dt">pch=</span><span class="dv">18</span>, <span class="dt">col=</span><span class="st">&quot;purple&quot;</span>, <span class="dt">cex=</span><span class="fl">1.2</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="geocoding_files/figure-slidy/plot_brew_saved-1.png" width="768" style="display: block; margin: auto;" /></p>
 <div class="info">
-<p><strong>Other Things You Can Do with Geocode</strong></p>
+<p><strong>Other Things You Can Do with Google’s Geocode Service</strong></p>
 <p><tt>revgeocode()</tt> performs a reverse geocode</p>
 </div>
-</div>
-<div id="esri-world-geocoding-service" class="slide section level1">
-<h1>ESRI World Geocoding Service</h1>
-<p>If you have a Developer or an Organizational account with ESRI, you can use their Geocding API in R.</p>
-<div class="tip">
-<p>You can sign up for an account in the <a href="https://developers.arcgis.com/sign-up" target="_blank">ArcGIS Developer Program</a> for free. A free account will give you <a href="https://developers.arcgis.com/pricing/credits/" target="_blank">50 credits per month</a>. One geocode query consumes 0.04 credits, so that’s enough for ~1250 geocode queries / month.</p>
-</div>
-<h2 id="step-1.-create-a-project">Step 1. Create a Project</h2>
-<p>ESRI calls an API key <em>tokens</em>. To get a token, you need to first create a Project.</p>
-<p>After you log-in into the <a href="https://developers.arcgis.com/dashboard/" target="_blank">Dashboard</a>, click on ‘Applications’ then ‘New Application’. Fill in the short form that appears. ESRI requires you to enter at least one tag.</p>
-<p>When your project is created, you’ll see your Client ID and Client Secret (long strings). Copy those. You’ll also get a Temporary Token, valid for about two hours. If two hours is long enough for you to do your work, you’re good to go and can skip the next step.</p>
-<div class="info">
-<p>For detailed instructions, see ESRI’s <a href="https://developers.arcgis.com/rest/geocode/api-reference/geocoding-authenticate-a-request.htm" target="_blank">API documentation</a></p>
-</div>
-<h2 id="generate-a-new-token">Generate a New Token</h2>
-<p>If you need a token that is valid for more than two hours (the maximum is two weeks), copy-paste the following URL into notepad, then insert your Client ID and Client Scret strings into the placeholders.</p>
-<p>
-<textarea name="token_url_template-dashes" rows="4" cols="100">
-&#104;ttps://www.arcgis.com/sharing/oauth2/token?client_id=your-client-id-here&grant_type=client_credentials&client_secret=your-client-secret-here&f=pjson&expiration=num-minutes-to-expire
-</textarea>
-</p>
-<p>Replace <em>your-client-id-here</em> and <em>your-client-secret-here</em> with your ‘Client ID’ and ‘Client Secret’ string. Replace <em>num-minutes-to-expire</em> with the number of minutes before the token should expire. Note the maximum is 20160 (two weeks).</p>
-<p>After you’ve edited the URL, copy it into your browser’s address bar and hit Enter. After a few seconds you’ll see a JSON object appear with your new token. It will look something like:</p>
-<p>
-<textarea name="token_url_json" rows="4" cols="100">
-{
-  "access_token": "nk1tIwBnYv3n9mrxE40Fy_lsN28sinvzQD-NyKuYNptMaLK99klZFXjTjzGn7OBc2FZSL6kRxPogwVL5RSzb6MB-Igto7jmIbfg7T3y6v8rQ..",
-  "expires_in": 1209600
-}
-</textarea>
-</p>
-<p>The token is the long string between the quotes. Copy-paste it to your script, or better yet follow best practices and save it in an external file and read it into R programmatically (<a href="#(5)">see above</a>) .</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">token_fn &lt;-<span class="st"> &quot;~/My Keys/esri-token.txt&quot;</span></a>
-<a class="sourceLine" id="cb25-2" title="2">f &lt;-<span class="st"> </span><span class="kw">file</span>(token_fn, <span class="dt">open =</span> <span class="st">&quot;rt&quot;</span>)</a>
-<a class="sourceLine" id="cb25-3" title="3">my_esri_token &lt;-<span class="st"> </span><span class="kw">readLines</span>(f, <span class="dt">n=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb25-4" title="4"><span class="kw">close</span>(f)</a></code></pre></div>
-<h2 id="load-esri-geocoding-functions">Load ESRI Geocoding Functions</h2>
-<p>There isn’t a R package for using the ESRI Geocoding Service, but thanks to <a href="https://github.com/cengel/ArcGIS_geocoding" target="_blank">Claudia Engel</a> and others there’s a script with two functions for geocoding with ESRI. To load these functions into R, source the script:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">source</span>(<span class="st">&#39;../outputs/rspatial_scgis19/docs/scripts/geocode_esri.R&#39;</span>)  <span class="co">## change path to the scripts folder you downloaded</span></a></code></pre></div>
-<p>You should now have two additional functions you can use, <tt>geocode_one()</tt> and <tt>geocode_many()</tt>.</p>
-<h2 id="geocode-a-single-address">Geocode a Single Address</h2>
-<p>Like other geocoders, ESRI WGS can take place name or an address.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">geocode_one</span>(<span class="st">&quot;Millennium Tower, San Francisco, CA&quot;</span>, my_esri_token, <span class="dt">postal=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>##        lon      lat score locName status  matchAddr side addressType
-## 1 -122.413 37.78679 89.66   World      M Millennium    L         POI</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">geocode_one</span>(<span class="st">&quot;547 Emerson St, Palo Alto, CA 94301&quot;</span>, my_esri_token, <span class="dt">postal=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>##         lon      lat score locName status
-## 1 -122.1619 37.44418   100   World      M
-##                                      matchAddr side  addressType
-## 1 547 Emerson St, Palo Alto, California, 94301    R PointAddress</code></pre>
-</div>
-<div id="batch-geocode-multiple-addresses-with-esri-wgs" class="slide section level1">
-<h1>Batch Geocode Multiple Addresses with ESRI WGS</h1>
-<p>Let’s look at the arguments of the <tt>geocode_many()</tt> function.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">args</span>(geocode_many)</a></code></pre></div>
-<pre><code>## function (id, street, city, state, zip, token) 
-## NULL</code></pre>
-<div class="info">
-<p><strong><tt>geocode_many()</tt> usage</strong></p>
-<div class="indented1">
-<ul>
-<li><tt>geocode_many(id, street, city, state, zip, token)</tt></li>
-<li><tt>id</tt> should be a numeric vector with unique values. This will be returned in the ouptut as column ‘ID’ so you can merge the lat and lon columns into the original data frame.</li>
-<li>Unlike <tt>geocode_one()</tt>, the addresses must be split up into <tt>street</tt>, <tt>city</tt>, <tt>state</tt>, and <tt>zip</tt>. This is how ESRI requires the data and makes the process more efficient (i.e., they don’t have to try to unpack an address string).</li>
-<li>Only 1,000 addresses can be geocoded at a time. If you have more than that, you have to break it up into chunks.</li>
-</ul>
-</div>
-</div>
-<h2 id="example-geocode-san-francisco-libraries">Example: Geocode San Francisco Libraries</h2>
-<p><strong>Step 1. Load the csv file</strong></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">csv_fn &lt;-<span class="st"> &quot;../outputs/rspatial_scgis19/docs/data/sf_libraries.csv&quot;</span>; <span class="kw">file.exists</span>(csv_fn)</a></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">sflib_df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(csv_fn, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb35-2" title="2"><span class="kw">str</span>(sflib_df)</a></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    28 obs. of  6 variables:
-##  $ branch   : chr  &quot;ANZA&quot; &quot;BAYVIEW / LINDA BROOKS-BURTON&quot; &quot;BERNAL HEIGHTS&quot; &quot;CHINATOWN / HIM MARK LAI&quot; ...
-##  $ phone.num: chr  &quot; (415) 355-5717&quot; &quot; (415) 355-5757&quot; &quot; (415) 355-2810&quot; &quot; (415) 355-2888&quot; ...
-##  $ address  : chr  &quot; 550 37th Ave.&quot; &quot; 5075 Third St.&quot; &quot; 500 Cortland Ave.&quot; &quot; 1135 Powell St.&quot; ...
-##  $ city     : chr  &quot; San Francisco&quot; &quot; San Francisco&quot; &quot; San Francisco&quot; &quot; San Francisco&quot; ...
-##  $ state    : chr  &quot; CA&quot; &quot; CA&quot; &quot; CA&quot; &quot; CA&quot; ...
-##  $ zip      : int  94121 94124 94110 94108 94114 94112 94131 94123 94112 94102 ...</code></pre>
-<p><strong>Step 2: Inspect the columns</strong></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">head</span>(sflib_df)</a></code></pre></div>
-<pre><code>##                                 branch       phone.num
-## 1                                 ANZA  (415) 355-5717
-## 2        BAYVIEW / LINDA BROOKS-BURTON  (415) 355-5757
-## 3                       BERNAL HEIGHTS  (415) 355-2810
-## 4             CHINATOWN / HIM MARK LAI  (415) 355-2888
-## 5 EUREKA VALLEY / HARVEY MILK MEMORIAL  (415) 355-5616
-## 6                            EXCELSIOR  (415) 355-2868
-##                address           city state   zip
-## 1        550 37th Ave.  San Francisco    CA 94121
-## 2       5075 Third St.  San Francisco    CA 94124
-## 3    500 Cortland Ave.  San Francisco    CA 94110
-## 4      1135 Powell St.  San Francisco    CA 94108
-## 5  1 Jose Sarria Court  San Francisco    CA 94114
-## 6     4400 Mission St.  San Francisco    CA 94112</code></pre>
-<p>The address, city, and zip columns look pretty good, but the data frame doesn’t have an ‘ID’ column which geocode_many() requires. Let’s add that now.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">sflib_df<span class="op">$</span>ID &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(sflib_df)</a></code></pre></div>
-<p>Note how we made ID capitalized. That’s because the ID column in the results is capitalized, so this will make it easier to merge the new columns with the original.</p>
-<p>Now we’re ready to geocode:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">sflib_gc_esri &lt;-<span class="st"> </span><span class="kw">geocode_many</span>(sflib_df<span class="op">$</span>ID, sflib_df<span class="op">$</span>address, sflib_df<span class="op">$</span>city, sflib_df<span class="op">$</span>state, sflib_df<span class="op">$</span>zip, my_esri_token)</a>
-<a class="sourceLine" id="cb40-2" title="2"><span class="kw">head</span>(sflib_gc_esri)</a></code></pre></div>
-<pre><code>##   ID       lon      lat score locName status
-## 1  2 -122.3914 37.73254   100   World      M
-## 2  4 -122.4098 37.79525   100   World      M
-## 3  1 -122.4975 37.77852   100   World      M
-## 4  3 -122.4160 37.73899   100   World      M
-## 5 19 -122.4511 37.77040   100   World      M
-## 6  9 -122.4562 37.72394   100   World      M
-##                                            matchAddr side  addressType
-## 1      5075 3rd St, San Francisco, California, 94124    R PointAddress
-## 2   1135 Powell St, San Francisco, California, 94108    L PointAddress
-## 3     550 37th Ave, San Francisco, California, 94121    R PointAddress
-## 4 500 Cortland Ave, San Francisco, California, 94110    L PointAddress
-## 5     1833 Page St, San Francisco, California, 94117    R PointAddress
-## 6   1298 Ocean Ave, San Francisco, California, 94112    R PointAddress</code></pre>
-<p>That looks pretty good. Let’s merge the new columns back into the original. This is easy because both the results and the original data frame have a numeric column ID that we can use to match the records.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">sflib_loc_df &lt;-<span class="st"> </span><span class="kw">merge</span>(sflib_df, sflib_gc_esri, <span class="dt">by =</span> <span class="st">&quot;ID&quot;</span>, <span class="dt">all.x =</span> T)</a>
-<a class="sourceLine" id="cb42-2" title="2"><span class="kw">head</span>(sflib_loc_df)</a></code></pre></div>
-<pre><code>##   ID                               branch       phone.num
-## 1  1                                 ANZA  (415) 355-5717
-## 2  2        BAYVIEW / LINDA BROOKS-BURTON  (415) 355-5757
-## 3  3                       BERNAL HEIGHTS  (415) 355-2810
-## 4  4             CHINATOWN / HIM MARK LAI  (415) 355-2888
-## 5  5 EUREKA VALLEY / HARVEY MILK MEMORIAL  (415) 355-5616
-## 6  6                            EXCELSIOR  (415) 355-2868
-##                address           city state   zip       lon      lat score
-## 1        550 37th Ave.  San Francisco    CA 94121 -122.4975 37.77852   100
-## 2       5075 Third St.  San Francisco    CA 94124 -122.3914 37.73254   100
-## 3    500 Cortland Ave.  San Francisco    CA 94110 -122.4160 37.73899   100
-## 4      1135 Powell St.  San Francisco    CA 94108 -122.4098 37.79525   100
-## 5  1 Jose Sarria Court  San Francisco    CA 94114 -122.4318 37.76423   100
-## 6     4400 Mission St.  San Francisco    CA 94112 -122.4331 37.72697   100
-##   locName status                                          matchAddr side
-## 1   World      M     550 37th Ave, San Francisco, California, 94121    R
-## 2   World      M      5075 3rd St, San Francisco, California, 94124    R
-## 3   World      M 500 Cortland Ave, San Francisco, California, 94110    L
-## 4   World      M   1135 Powell St, San Francisco, California, 94108    L
-## 5   World      M 1 Jose Sarria Ct, San Francisco, California, 94114    R
-## 6   World      M  4400 Mission St, San Francisco, California, 94112    L
-##     addressType
-## 1  PointAddress
-## 2  PointAddress
-## 3  PointAddress
-## 4  PointAddress
-## 5 StreetAddress
-## 6  PointAddress</code></pre>
-<p>To plot these, we can turn it into a <tt>SpatialPointsDataFrame</tt>.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">coord_cols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)</a>
-<a class="sourceLine" id="cb44-2" title="2">attribute_tbl_cols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;branch&quot;</span>, <span class="st">&quot;phone.num&quot;</span>, <span class="st">&quot;address&quot;</span>, <span class="st">&quot;city&quot;</span>, <span class="st">&quot;state&quot;</span>, <span class="st">&quot;zip&quot;</span>, <span class="st">&quot;matchAddr&quot;</span>)</a>
-<a class="sourceLine" id="cb44-3" title="3">sflib_spdf &lt;-<span class="st"> </span><span class="kw">SpatialPointsDataFrame</span>(<span class="dt">coords =</span> sflib_loc_df[, coord_cols],</a>
-<a class="sourceLine" id="cb44-4" title="4">                                     <span class="dt">data  =</span> sflib_loc_df[, attribute_tbl_cols],</a>
-<a class="sourceLine" id="cb44-5" title="5">                                     <span class="dt">proj4string =</span> <span class="kw">CRS</span>(<span class="st">&quot;+init=epsg:4326&quot;</span>))</a>
-<a class="sourceLine" id="cb44-6" title="6"><span class="kw">plot</span>(sfnb_ll, <span class="dt">axes=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb44-7" title="7"><span class="kw">plot</span>(sflib_spdf, <span class="dt">add=</span><span class="ot">TRUE</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<p><img src="geocoding_files/figure-slidy/plot_sflib_gc_spdf-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="geocode-with-osm-nominatim" class="slide section level1">
 <h1>Geocode with OSM Nominatim</h1>
@@ -640,10 +751,10 @@ lat, long, address, &amp; type of result (e.g., approximate, rooftop)
 <p>OSM Nominatim does not require an API Key, but to control overuse it restricts searches to 1 per second. Excessive use could result in other restrictions, so if you have a big job it would be best to contact them. See also the <a href="http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy" target="_blank">Nominatim Usage Policy</a></p>
 <h2 id="geocoding-with-tmaptools">Geocoding with <tt>tmaptools</tt></h2>
 <p>There are a couple of R packages that have functions that work with OSM Nominatim. One of them is <tt>tmaptools</tt>. The latest version is on github:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">library</span>(devtools)</a>
-<a class="sourceLine" id="cb45-2" title="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mtennekes/tmaptools&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb52-2" title="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;mtennekes/tmaptools&quot;</span>)</a></code></pre></div>
 <p>The OSM geocoding function in <tt>tmaptools</tt> is <tt>geocode_OSM()</tt>.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">tmaptools<span class="op">::</span><span class="kw">geocode_OSM</span>(<span class="dt">q=</span><span class="st">&quot;2090 Kittredge St., Berkeley, CA 94704&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">tmaptools<span class="op">::</span><span class="kw">geocode_OSM</span>(<span class="dt">q=</span><span class="st">&quot;2090 Kittredge St., Berkeley, CA 94704&quot;</span>)</a></code></pre></div>
 <pre><code>## $query
 ## [1] &quot;2090 Kittredge St., Berkeley, CA 94704&quot;
 ## 
@@ -655,13 +766,13 @@ lat, long, address, &amp; type of result (e.g., approximate, rooftop)
 ##       xmin       ymin       xmax       ymax 
 ## -122.26918   37.86757 -122.26813   37.86835</code></pre>
 <p><tt>geocode_OSM()</tt> is vectorized so you can feed it multiple locations. Remember however the one-search-per-second limit.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">berkeley_lib_addr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2090 Kittredge St., Berkeley, CA 94704&quot;</span>, </a>
-<a class="sourceLine" id="cb48-2" title="2">                       <span class="st">&quot;2940 Benvenue Ave., Berkeley, CA 94705&quot;</span>, </a>
-<a class="sourceLine" id="cb48-3" title="3">                       <span class="st">&quot;1170 The Alameda, Berkeley, CA 94707&quot;</span>, </a>
-<a class="sourceLine" id="cb48-4" title="4">                       <span class="st">&quot;1901 Russell St., Berkeley, CA 94703&quot;</span>, </a>
-<a class="sourceLine" id="cb48-5" title="5">                       <span class="st">&quot;1125 University Ave., Berkeley, CA 94702&quot;</span>)</a>
-<a class="sourceLine" id="cb48-6" title="6">berkeley_lib_gc &lt;-<span class="st"> </span>tmaptools<span class="op">::</span><span class="kw">geocode_OSM</span>(<span class="dt">q=</span>berkeley_lib_addr, <span class="dt">as.data.frame=</span><span class="ot">TRUE</span>) </a>
-<a class="sourceLine" id="cb48-7" title="7">berkeley_lib_gc</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1">berkeley_lib_addr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2090 Kittredge St., Berkeley, CA 94704&quot;</span>, </a>
+<a class="sourceLine" id="cb55-2" title="2">                       <span class="st">&quot;2940 Benvenue Ave., Berkeley, CA 94705&quot;</span>, </a>
+<a class="sourceLine" id="cb55-3" title="3">                       <span class="st">&quot;1170 The Alameda, Berkeley, CA 94707&quot;</span>, </a>
+<a class="sourceLine" id="cb55-4" title="4">                       <span class="st">&quot;1901 Russell St., Berkeley, CA 94703&quot;</span>, </a>
+<a class="sourceLine" id="cb55-5" title="5">                       <span class="st">&quot;1125 University Ave., Berkeley, CA 94702&quot;</span>)</a>
+<a class="sourceLine" id="cb55-6" title="6">berkeley_lib_gc &lt;-<span class="st"> </span>tmaptools<span class="op">::</span><span class="kw">geocode_OSM</span>(<span class="dt">q=</span>berkeley_lib_addr, <span class="dt">as.data.frame=</span><span class="ot">TRUE</span>) </a>
+<a class="sourceLine" id="cb55-7" title="7">berkeley_lib_gc</a></code></pre></div>
 <pre><code>##                                      query      lat       lon  lat_min
 ## 1   2090 Kittredge St., Berkeley, CA 94704 37.86795 -122.2689 37.86757
 ## 2   2940 Benvenue Ave., Berkeley, CA 94705 37.85672 -122.2544 37.85666
@@ -676,8 +787,19 @@ lat, long, address, &amp; type of result (e.g., approximate, rooftop)
 ## 5 37.86972 -122.2911 -122.2908</code></pre>
 <p>OSM is a volunteer driven effort, so the quality and completeness of the data varies. In some places it is as good as and frequently better than commercial products from ESRI or Google. In other places, address locations may be thin. You can check the results for your area before processing a large number of queries.</p>
 </div>
-<div id="additional-resources" class="slide section level1">
-<h1>Additional Resources</h1>
+<div id="summary" class="slide section level1">
+<h1>Summary</h1>
+<p>Today we covered:</p>
+<div class="compact">
+<ul>
+<li>what geocoding is and why its useful</li>
+<li>different types of geocoding platforms, including web apps and APIs</li>
+<li>how to get an API key, and how to protect it</li>
+<li>how to geocoding in R using geocoding services from ESRI, Google, and OSM</li>
+</ul>
+</div>
+<div class="info">
+<p><strong>Additional Resources</strong></p>
 <div class="compact indented1">
 <ul>
 <li><a href="https://github.com/dlab-geo/geocoding" target="_blank">Intro to Geocoding</a>, Patty Frontiera</li>
@@ -686,6 +808,7 @@ lat, long, address, &amp; type of result (e.g., approximate, rooftop)
 <li><a href="https://github.com/cengel/r_IPgeocode" target="_blank">Geocoding IP addresses</a>, Claudia Engel</li>
 <li><em>ggmap</em> Vignette</li>
 </ul>
+</div>
 </div>
 </div>
 

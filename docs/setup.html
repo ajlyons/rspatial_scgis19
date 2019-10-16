@@ -263,7 +263,7 @@ h2 {
 R packages are like add-ins - they expand the capabilities of R. To install the packages we’ll be using for the workshop, open RStudio and execute the following commands by copy-pasting them into the console and hitting enter (internet connection required).
 </p>
 <textarea name="msg" cols="120" rows="7" style="font-family:monospace;">
-pkgs_req <- c("sp", "sf", "rgdal", "rgeos", "tmap", "leaflet", "ggmap", "maptools", "RColorBrewer", "raster", "maps", "zipcode", "tidyverse",  "jsonlite", "rasterVis", "GISTools", "adehabitatHR")
+pkgs_req <- c("sp", "sf", "rgdal", "rgeos", "tmap", "leaflet", "ggmap", "maptools", "RColorBrewer", "raster", "maps", "zipcode", "tidyverse",  "jsonlite", "rasterVis", "GISTools", "lwgeom", "adehabitatHR", "nngeo")
 
 pkgs_missing <- pkgs_req[!(pkgs_req %in% installed.packages()[,"Package"])]
 
