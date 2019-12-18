@@ -7,7 +7,11 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Working with Color" />
-  <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href='../index.html'>Course Homepage</a></span><span class='footer-right'>Forum:&nbsp<a href=' https://tinyurl.com/rspatial-scgis19 ' target='_blank'> https://tinyurl.com/rspatial-scgis19 </a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
+  <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span>
+                    <span class='footer-right'><a href='../ https://tinyurl.com/rspatial-scgis19 ' target='_blank'>Forum</a></span>
+                    <span class='footer-right'><a href=' https://ajlyons.github.io/rspatial_scgis19/ '> https://ajlyons.github.io/rspatial_scgis19/ </a></span>
+                    <span class='footer-right'><a href='../index.html'>Home</a></span>
+                    <span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
   <meta name="font-size-adjustment" content="2"/>
   <title>Spatial Data Analysis with R  SCGIS Conference, 2019</title>
   <style type="text/css">code{white-space: pre;}</style>
@@ -189,7 +193,7 @@ Working with Color <br/><img src='images/color-brewer-palette_782x132.png'/>
 <p><img src="06_color_files/figure-slidy/plot_purple-1.png" width="150" height="150" /></p>
 </div>
 </div>
-<div class="info">
+<div class="infobox">
 <p>Hexadecimal values should be entered as text, including the ‘#’, e.g., <tt>“#00A949”</tt></p>
 </div>
 </div>
@@ -241,7 +245,7 @@ hsv()</code></pre>
 <div class="tryit">
 <p>Modify the code above, using different transparency values (i.e., change the last two characters of the color values).</p>
 </div>
-<div class="info">
+<div class="infobox">
 <p>Not all graphic file formats preserve transparency (e.g., JPG).</p>
 </div>
 </div>
@@ -337,6 +341,22 @@ topo.colors(n)  </code></pre>
 </div>
 </div>
 </div>
+<div id="palettes-for-qualitative-categorical-data" class="slide section level1">
+<h1>Palettes for Qualitative / Categorical Data</h1>
+<p>RColorBrewer has eight color palettes designed for categorical or qualitative data. These palettes have 8-12 colors each. For example the ‘Paired’ palette looks like:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">colors_qual_paired &lt;-<span class="st"> </span>RColorBrewer<span class="op">::</span><span class="kw">brewer.pal</span>(<span class="dv">8</span>, <span class="st">&quot;Paired&quot;</span>)</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="kw">barplot</span>(<span class="dt">height=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">8</span>), <span class="dt">col=</span>colors_qual_paired, <span class="dt">axes=</span><span class="ot">FALSE</span>, <span class="dt">space=</span><span class="dv">0</span>)</a></code></pre></div>
+<p><img src="06_color_files/figure-slidy/rcolorbrew-1.png" width="768" height="200" /></p>
+<div class="tip">
+<p>The following expression returns a vector of 433 colors excluding shades of gray. You can draw a random sample from this list with <tt>sample()</tt> to get a palette for categorical data.</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">many_colors &lt;-<span class="st"> </span>grDevices<span class="op">::</span><span class="kw">colors</span>()[<span class="kw">grep</span>(<span class="st">&#39;gr(a|e)y&#39;</span>, grDevices<span class="op">::</span><span class="kw">colors</span>(), <span class="dt">invert =</span> T)]</a></code></pre></div>
+</div>
+<p>You can also get more than a dozen qualitative colors using <tt>tmaptools::get_brewer_pal()</tt></p>
+</div>
+<!--- tip --->
+</div>
 <div id="other-packages-for-colors-and-plotting" class="slide section level1">
 <h1>Other Packages for Colors and Plotting</h1>
 <p>Packages that provide additional color palettes and ramps:</p>
@@ -344,6 +364,14 @@ topo.colors(n)  </code></pre>
 <p><a href="https://cran.r-project.org/web/packages/colorspace/" target="_blank"><tt>colorspace</tt></a></p>
 <p><a href="https://cran.r-project.org/web/packages/RColorBrewer/index.html" target="_blank"><tt>RColorBrewer</tt></a></p>
 <p><a href="https://cran.r-project.org/web/packages/colorRamps/index.html" target="_blank"><tt>colorRamps</tt></a></p>
+<p><a href="https://cran.r-project.org/package=tmaptools" target="_blank"><tt>tmaptools</tt></a></p>
+<div class="tip">
+<p>To view and select color palettes interactively, run:</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb25"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">tmaptools<span class="op">::</span><span class="kw">palette_explorer</span>()</a></code></pre></div>
+</div>
+</div>
+<!--- tip --->
 </div>
 </div>
 <div id="summary" class="slide section level1">

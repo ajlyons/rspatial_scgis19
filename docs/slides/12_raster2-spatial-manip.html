@@ -1,0 +1,1052 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Raster Data Pt 2: Common Raster Manipulations" />
+  <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href='../ https://tinyurl.com/rspatial-scgis19 ' target='_blank'>Forum</a></span><span class='footer-right'><a href=' https://ajlyons.github.io/rspatial_scgis19/ '> https://ajlyons.github.io/rspatial_scgis19/ </a></span><span class='footer-right'><a href='../index.html'>Home</a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
+  <meta name="font-size-adjustment" content="2"/>
+  <title>Spatial Data Analysis with R  SCGIS Conference, 2019</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACkUlEQVQ4jX2SW0jTcRTHTzNyeZlh6lqmm3POdNPC6SxSEzaqafkykOFoIxTDWpKRFV6iQMNLFyMSsQvUW0WORc2WWBmGKEGZXUyz0NrmNmfa1PYgfHsQ1v5oHjgvX875/M45vy/R8mDJ9caxrFIL5CUWJB00Q9n+7Q+l1BetUMuMTL3JpTB0QVnejd1Hu9DQ60G5eQbqB7PIvj0L2bUZ0KZzghWbs0o7Fx3Tc/B6vStm6+g0wrQvIKh2gKKyUxnNSZoO685SC1YDeL1e9Ll+Ia7WCd5pJ4hojQ8g1nViezETYBqZx93BOdwa9jAgsdUT4J6ZQqC6f4GIiLYU9/RzNWYIdU9hd/8rLjN7UGT8DbWROVVMlQsBBWas142DiIikdfbFMF0POIVm2NzM1zwLS+mvcSsnEajpBSv/8RIgucGJ1EYXEs+NwjrlWfUGMee/Y2PFJIJLrFibex8kOsahhCYnUlpnIL1kh9X9/yMKG2yIOOlAsPYnAveZsE75EEQUQLwTwy5Rsxvx9UxApKEPEYY+BiSizA623oaggkdgq4xLKwRLq7i8sy6EFlpg8wNEVwyAd3wAbZ8cPu3CazeCC/sRojYjaL8Jvm8MPWLDBm03A8CveQ9+7RBia4cYU4QfeokwzTOwc6/4OzKXHap/C5ufD0RNo0i4OAZR81dcnnD69Mp3PxBe9GRkuZdFKk7sqTcQ132EpGUMydetSLnpgOSGHVtbxpHU9AX8mkFEG55/ZrjQL1h82V6esPLVh8Sr40i940J6xzzS7s1C0m6HqHEEiTnatgT5gcPijHxltFwhjpRIQpZjBAJ2lFTBFW5TiOPT8mXx6apdcRl5OaJM1Q6hLC9ls3RPTLgok0NELCKiv02kPqt/O1MZAAAAAElFTkSuQmCC" rel="icon" type="image/x-icon" />
+  <script language="javascript" type="text/javascript">
+  function TriShowHide(shID) {
+    shIDspan = shID + "span";
+    shIDdiv = shID + "div";
+    if (document.getElementById(shIDdiv).style.display != 'block') {
+      document.getElementById(shIDdiv).style.display = 'block';
+      txtSpan = "&#9660;";
+    } else {
+      document.getElementById(shIDdiv).style.display = 'none';
+      txtSpan = "&#9654;";
+    }
+    document.getElementById(shIDspan).innerHTML = txtSpan + " ";
+  }
+  function showHide(shID) {
+    if (shID=="soln-show-all") {
+      var allAnswerCode = document.getElementsByClassName("answer-code");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'block';
+      }
+    } else if (shID=="soln-hide-all") {
+      var allAnswerCode = document.getElementsByClassName("answer-code");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'none';
+      }
+    } else if (shID=="hints-show-all") {
+      var allAnswerCode = document.getElementsByClassName("hint");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'block';
+      }
+    } else if (shID=="hints-hide-all") {
+      var allAnswerCode = document.getElementsByClassName("hint");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'none';
+      }
+    } else {
+      if (document.getElementById(shID)) {
+        if (document.getElementById(shID).style.display != 'block') {
+          document.getElementById(shID).style.display = 'block';
+        } else {
+          document.getElementById(shID).style.display = 'none';
+        }
+      }
+    }
+  }
+  function CopyToClipboard(containerid) {
+  if (document.selection) {
+      var range = document.body.createTextRange();
+      range.moveToElementText(document.getElementById(containerid));
+      range.select().createTextRange();
+      document.execCommand("copy");
+  } else if (window.getSelection) {
+      var range = document.createRange();
+      range.selectNode(document.getElementById(containerid));
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      // alert("text copied")
+  }}
+  </script>
+  <link href="lib/slidy-2/styles/slidy.css" rel="stylesheet" />
+  <script src="lib/slidy-2/scripts/slidy.js"></script>
+  <script src="lib/clipboard-1.7.1/clipboard.min.js"></script>
+  <link href="lib/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+  <link href="lib/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+  <script src="lib/klippy-0.0.0.9500/js/klippy.min.js"></script>
+  <script src="lib/kePrint-0.0.1/kePrint.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+   href="..\css\slidy_styles.css" />
+  <meta name="duration" content="0" />
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title"><span class="course-title">Spatial Data Analysis with R </span><br/><span class="course-subtitle">SCGIS Conference, 2019</span></h1>
+  <p class="author">
+Raster Data Pt 2: Common Raster Manipulations <br/><img src='images/zonal_stats256_366x220.png'/>
+  </p>
+</div>
+<div id="viewing-raster-properties" class="slide section level1">
+<h1>Viewing <tt>Raster*</tt> properties</h1>
+<script language="javascript" type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
+<script>
+  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p>A number of functions are available to view the properties of a raster object. Most of these are read-only.</p>
+<table class="tbl_compact">
+<thead>
+<tr>
+<th style="text-align:left;">
+Property
+</th>
+<th style="text-align:left;">
+Function(s)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+image dimensions
+</td>
+<td style="text-align:left;font-family: monospace;">
+nrow(), ncol(), ncell(), dim()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+resolution (pixel size)
+</td>
+<td style="text-align:left;font-family: monospace;">
+res()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+number of layers
+</td>
+<td style="text-align:left;font-family: monospace;">
+nlayers(), nbands()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+layer names
+</td>
+<td style="text-align:left;font-family: monospace;">
+names()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+coordinate reference system
+</td>
+<td style="text-align:left;font-family: monospace;">
+proj4string(), projection()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+extent
+</td>
+<td style="text-align:left;font-family: monospace;">
+extent()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+in memory or not
+</td>
+<td style="text-align:left;font-family: monospace;">
+inMemory()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+source file
+</td>
+<td style="text-align:left;font-family: monospace;">
+filename()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+has values
+</td>
+<td style="text-align:left;font-family: monospace;">
+hasValues()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cell values data type
+</td>
+<td style="text-align:left;font-family: monospace;">
+dataType()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+has a raster attribute table
+</td>
+<td style="text-align:left;font-family: monospace;">
+is.factor()
+</td>
+</tr>
+</tbody>
+</table>
+<div class="tryit">
+<p>Try some of the above functions on the Yosemite DEM. (You can use the following code to import and clip the DEM.)</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(sf)</a>
+<a class="sourceLine" id="cb1-2" title="2">yose_bnd &lt;-<span class="st"> </span>sf<span class="op">::</span><span class="kw">st_read</span>(<span class="dt">dsn=</span><span class="st">&quot;./data&quot;</span>, <span class="dt">layer=</span><span class="st">&quot;yose_boundary&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4">srtm_fn &lt;-<span class="st"> &quot;./data/srtm_13_05.tif&quot;</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">file.exists</span>(srtm_fn)</a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="kw">library</span>(raster)</a>
+<a class="sourceLine" id="cb1-8" title="8">srtm_<span class="dv">13</span>_<span class="dv">05</span>_rst &lt;-<span class="st"> </span><span class="kw">raster</span>(srtm_fn)</a>
+<a class="sourceLine" id="cb1-9" title="9"></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="co">## Crop it the park boundary</span></a>
+<a class="sourceLine" id="cb1-11" title="11">yose_dem_ll &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">crop</span>(srtm_<span class="dv">13</span>_<span class="dv">05</span>_rst, yose_bnd)</a>
+<a class="sourceLine" id="cb1-12" title="12"></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="co">## Plot the DEM</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="kw">plot</span>(yose_dem_ll)</a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(yose_bnd), <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;black&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## Reading layer `yose_boundary&#39; from data source `C:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_scgis19\docs\data&#39; using driver `ESRI Shapefile&#39;
+## Simple feature collection with 1 feature and 11 fields
+## geometry type:  POLYGON
+## dimension:      XY
+## bbox:           xmin: -119.8864 ymin: 37.4947 xmax: -119.1964 ymax: 38.18515
+## epsg (SRID):    4269
+## proj4string:    +proj=longlat +datum=NAD83 +no_defs
+## [1] TRUE</code></pre>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/imp_srtm_klippy-1.png" width="768" /></p>
+</div>
+</div>
+<!-- try it --->
+</div>
+<div id="raster-data-manipulations" class="slide section level1">
+<h1>Raster Data Manipulations</h1>
+<p>Common raster manipulations include:</p>
+<table class="tbl_compact">
+<thead>
+<tr>
+<th style="text-align:left;">
+Task
+</th>
+<th style="text-align:left;">
+Function(s)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+visualize
+</td>
+<td style="text-align:left;font-family: monospace;">
+image(), plot()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+(re)project
+</td>
+<td style="text-align:left;font-family: monospace;">
+projectRaster()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+crop
+</td>
+<td style="text-align:left;font-family: monospace;">
+crop()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mask
+</td>
+<td style="text-align:left;font-family: monospace;">
+mask()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+resample (i.e., change the pixel size)
+</td>
+<td style="text-align:left;font-family: monospace;">
+aggregate(), resample()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+adjust pixel values (stretch, reclassify, etc.)
+</td>
+<td style="text-align:left;font-family: monospace;">
+getValues(), rst[], setValues()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stack
+</td>
+<td style="text-align:left;font-family: monospace;">
+stack()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mosaic
+</td>
+<td style="text-align:left;font-family: monospace;">
+mosaic()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vector –&gt; raster
+</td>
+<td style="text-align:left;font-family: monospace;">
+rasterize()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+export to disk
+</td>
+<td style="text-align:left;font-family: monospace;">
+writeRaster(), writeGDAL()
+</td>
+</tr>
+</tbody>
+</table>
+<div class="preview">
+<p>In future a section, we’ll look at some raster analytical functions such as:</p>
+<table class="tbl_compact">
+<thead>
+<tr>
+<th style="text-align:left;">
+Task
+</th>
+<th style="text-align:left;">
+Function(s)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+descriptive cell statistics
+</td>
+<td style="text-align:left;font-family: monospace;">
+cellStats()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+binary mask
+</td>
+<td style="text-align:left;font-family: monospace;">
+myrast[]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+raster algebra (local operations)
+</td>
+<td style="text-align:left;font-family: monospace;">
+* + - /
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+focal (neighborhood) operations
+</td>
+<td style="text-align:left;font-family: monospace;">
+focal()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+zonal stats
+</td>
+<td style="text-align:left;font-family: monospace;">
+zonal()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+distance surface
+</td>
+<td style="text-align:left;font-family: monospace;">
+distance()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+spatial join (enrichment)
+</td>
+<td style="text-align:left;font-family: monospace;">
+extract()
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+spatial interpolation
+</td>
+<td style="text-align:left;font-family: monospace;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+classify pixels
+</td>
+<td style="text-align:left;font-family: monospace;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+time series analysis
+</td>
+<td style="text-align:left;font-family: monospace;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="projecting-rasters" class="slide section level1">
+<h1>Projecting Rasters</h1>
+<p>Like <tt>sf</tt> objects, projection info in rasters is saved. You can <strong>view</strong> (or <strong>assign</strong>) a CRS object to a raster object using <tt>proj4string()</tt>.</p>
+<div class="infobox">
+<p>Unlike <tt>sf::st_crs()</tt> which can take a EPSG code, <tt>CRS()</tt> requires a text argument. If you know the EPSG code you can generate the CRS object as follows:</p>
+<p><tt>CRS(“+init=epsg:4326”)</tt></p>
+</div>
+<!--- infobox --->
+<p><strong>Projecting rasters</strong> is a little more complicated than vector features because of the additional spatial structure implicit in the grid. If you blindly apply a projection equation to cell coordinates, you’ll very likely wind up with <strong>non-square</strong> cells. That’s a problem if your goal is to combine the projected raster with other rastesrs for analysis or visualization, because the cells may not align properly.</p>
+<p>To help with this, the <tt>projectRaster()</tt> function has some <strong>additional arguments</strong>:</p>
+<div class="indented2">
+<tt><strong>projectRaster(from, to, res, crs, method, filename="")</strong></tt>
+</div>
+<p>If you’re trying to project a raster to <strong>match another one</strong>, you can simply enter the existing one as the <tt><strong>to</strong></tt> argument and R will match the cell size and extent:</p>
+<div class="indented2">
+<tt><strong>projectRaster(from, to, method)</strong></tt>
+</div>
+<p>Alternately you can also manually specify the CRS and the resolution with <tt><strong>res</strong></tt>:</p>
+<div class="indented2">
+<tt><strong>projectRaster(from, res, crs, method, filename="")</strong></tt>
+</div>
+<h2 id="resampling-method">Resampling Method</h2>
+<p><tt><strong>method</strong></tt> - determines how the projected cell values will be computed. <em>Very important</em> to pay attention:</p>
+<div class="indented2">
+<p><strong>categorical rasters</strong> - pixel values are merely integrates that correspond to a category, let <tt><strong>method=‘ngb’</strong></tt> (nearest neighbor) so the output cell values remain integers.</p>
+<p><strong>continous rasters</strong> - use <strong>bilinear</strong> to interpolate new values.</p>
+</div>
+<h3 id="example-project-elevation-data-from-lat-long-to-utm">Example: Project Elevation Data from Lat-Long to UTM</h3>
+<p>Project the Yosemite DEM to UTM:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co">## Project the clipped DEM to UTM</span></a>
+<a class="sourceLine" id="cb3-2" title="2">yose_dem_utm &lt;-<span class="st"> </span><span class="kw">projectRaster</span>(yose_dem_ll, <span class="dt">crs=</span><span class="kw">CRS</span>(<span class="st">&quot;+init=epsg:26910&quot;</span>), <span class="dt">res=</span><span class="dv">90</span>, <span class="dt">method=</span><span class="st">&quot;bilinear&quot;</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3">yose_dem_utm</a></code></pre></div>
+<pre><code>## class      : RasterLayer 
+## dimensions : 887, 716, 635092  (nrow, ncol, ncell)
+## resolution : 90, 90  (x, y)
+## extent     : 772271.1, 836711.1, 4153850, 4233680  (xmin, xmax, ymin, ymax)
+## crs        : +init=epsg:26910 +proj=utm +zone=10 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
+## source     : memory
+## names      : srtm_13_05 
+## values     : 443.8879, 3959.429  (min, max)</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co">## Project the park boundary to UTM so we can overlay it on the projected DEM</span></a>
+<a class="sourceLine" id="cb5-2" title="2">yose_bnd_utm &lt;-<span class="st"> </span>yose_bnd <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_transform</span>(<span class="dv">26910</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co">## Plot the DEM</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="kw">plot</span>(yose_dem_utm)</a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(yose_bnd_utm), <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;black&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/project_srtm_klippy-1.png" width="768" /></p>
+</div>
+<div id="working-with-extent-objects" class="slide section level1">
+<h1>Working with Extent Objects</h1>
+<p>The extent of a Raster is simply the rectangular area it reflects, like a bounding box. Extent objects can saved on their own and used for cropping, creating new raster objects, etc. You can increase an Extent object on all sides using <tt>raster::extend()</tt>, and even project it with <tt>raster::projectExtent()</tt>. The former offers an easy way to enlarge the area is cropped to have a little buffer on all sides.</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co">## Project the SRTM tile</span></a>
+<a class="sourceLine" id="cb6-2" title="2">srtm_<span class="dv">13</span>_<span class="dv">05</span>_utm &lt;-<span class="st"> </span><span class="kw">projectRaster</span>(srtm_<span class="dv">13</span>_<span class="dv">05</span>_rst, <span class="dt">crs=</span><span class="kw">CRS</span>(<span class="st">&quot;+init=epsg:26910&quot;</span>), <span class="dt">res=</span><span class="dv">90</span>, <span class="dt">method=</span><span class="st">&quot;bilinear&quot;</span>)</a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">## Compute an extent that goes 1 km beyond the boundaries of the park</span></a>
+<a class="sourceLine" id="cb6-5" title="5">yose_big_ext &lt;-<span class="st"> </span><span class="kw">extend</span>(<span class="kw">extent</span>(yose_dem_utm), <span class="dv">1000</span>)    </a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co">## Crop the projected SRTM tile</span></a>
+<a class="sourceLine" id="cb6-8" title="8">yose_dem_ext &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">crop</span>(srtm_<span class="dv">13</span>_<span class="dv">05</span>_utm, yose_big_ext)</a>
+<a class="sourceLine" id="cb6-9" title="9"></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="co">## Plot to see if it worked</span></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="kw">plot</span>(yose_dem_ext)</a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(yose_bnd_utm), <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;black&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/extend_ext_klippy-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="masking" class="slide section level1">
+<h1>Masking</h1>
+<p>Masking is similar to cropping, but rather than chopping off rows and columns, pixels that fall outside the study area are simply set to <tt>NA</tt>. This allows you to perform raster analyses for irregular areas, because most statistical functions ignore <tt>NA</tt> values, and R will generally make <tt>NA</tt> pixels transparent when plotting.</p>
+<p>To mask a raster, use <tt>raster::mask(<em>rst</em>, <em>mask</em>)</tt> where <em>rst</em> is your raster and <em>mask</em> is an another Raster or Spatial object (e.g., polygon).</p>
+<h2 id="mask-example">Mask Example</h2>
+<p>Mask the Yosemite DEM by the park boundary:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co">## Mask the Yosemite DEM to the park boundary</span></a>
+<a class="sourceLine" id="cb7-2" title="2">yose_dem_msk &lt;-<span class="st"> </span><span class="kw">mask</span>(yose_dem_utm, yose_bnd_utm)</a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co">## Plot to see if it worked</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="kw">plot</span>(yose_dem_msk)</a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(yose_bnd_utm), <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;black&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/mask_klippy-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="multi-layer-rasters" class="slide section level1">
+<h1>Multi-Layer Rasters</h1>
+<h2 id="stacking-rasters">Stacking Rasters</h2>
+<p><tt>RasterStack</tt> and <tt>RasterBrick</tt> objects store multi-layer rasters. When you import a multi-layer raster from disk using the <tt>raster::brick()</tt> function, you get a <tt>RasterBrick</tt> object. Sometimes your source data come from different files. In this case, feed the filenames into the <tt>raster::stack()</tt> function.</p>
+<!--
+Example: Importing Multiple TIF Files into <tt>RasterStack</tt>
+TAKEN OUT BECAUSE I DON'T HAVE SEVERAL SMALL TIFF IN THE DATA FOLDER
+
+
+```r
+## Find tif files (should all be in the same CRS)
+data_dir <- "../docs/data"
+tiffs <- list.files(path=data_dir, pattern="^m(.*)tif$")
+tiffs
+
+## Add the path
+tiffs_fn <- file.path(data_dir, tiffs)
+head(tiffs_fn)
+file.exists(tiffs_fn)
+
+## Import the files as a stack
+big_stack <- raster::stack(tiffs_fn)
+big_stack
+
+## Plot layers one by one
+plot(big_stack, legend=FALSE)
+```
+
+<div class="tip">
+If you want to plot a multi-layered raster as a RGB image, use <tt>plotRGB()</tt> and use the <tt>r</tt>, <tt>g</tt>, and <tt>b</tt> arguments to indicate which layers to use as red, green and blue.
+</div>
+-->
+<h2 id="working-with-multi-layer-rasters">Working with Multi-Layer Rasters</h2>
+<p>Most functions like cropping and masking will work on all layers combined.</p>
+<p>You can grab a single layer the same way you would a list, such as <tt>big_stack[[1]]</tt> or <tt>big_stack$<em>layer_name</em></tt>. To pull out multiple layers, use <tt>raster::subset()</tt>.</p>
+<p>Add and delete layers with <tt>raster::addLayer()</tt> and <tt>raster::dropLayer()</tt>.</p>
+<div class="tryit">
+<p>Import the <em>mission_tempXX.tif</em> files in the data folder as a <tt>RasterStack</tt>.</p>
+</div>
+<p>See also: <a href="http://rspatial.org/rs/rst/2-exploration.html#view-image-properties" target="_blank">Remote Sensing Image Analysis</a> by Robert Hijmans</p>
+</div>
+<div id="changing-the-resolution-pixel-size" class="slide section level1">
+<h1>Changing the Resolution (Pixel Size)</h1>
+<p>You may want to change the pixel size to reduce the amount of data and therefore computation time required. Another common case is where you need to match the resolution of two rasters so you can do pixel-by-pixel computations.</p>
+<p>The raster package has two functions to change pixel size:</p>
+<div class="indented4">
+<p><tt>aggregate(x, fact=2, fun=mean, …)</tt></p>
+<p><tt>resample(x, y, method=“bilinear”, …)</tt></p>
+</div>
+<p>Use <tt>aggregate()</tt> when you want to increase pixel size by a numeric factor, for example by 2 (twice as big). The <tt>fun</tt> agrument allows you to specify the function uses to summarize values (e.g., take the mean). <tt>resample()</tt> will match the pixel size of another raster. Remeber with discrete or categorical data, use <tt>method=‘ngb’</tt> so the cell values in the output will remain integers.</p>
+<h2 id="example-resample-a-dem-with-aggregate">Example: Resample a DEM with aggregate()</h2>
+<p>Let’s reduce the resolution of the DEM by a factor of 10. Note the discernably larger pixel sizes.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co">## Resample the DEM</span></a>
+<a class="sourceLine" id="cb8-2" title="2">yose_dem1k_msk &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">aggregate</span>(yose_dem_msk, <span class="dt">fact=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb8-3" title="3"></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">## View the new resolution, num rows and columns</span></a>
+<a class="sourceLine" id="cb8-5" title="5">yose_dem1k_msk</a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">## Plot</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="kw">plot</span>(yose_dem1k_msk)</a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="kw">plot</span>(yose_bnd_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;black&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## class      : RasterLayer 
+## dimensions : 89, 72, 6408  (nrow, ncol, ncell)
+## resolution : 900, 900  (x, y)
+## extent     : 772271.1, 837071.1, 4153580, 4233680  (xmin, xmax, ymin, ymax)
+## crs        : +init=epsg:26910 +proj=utm +zone=10 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
+## source     : memory
+## names      : srtm_13_05 
+## values     : 914.7991, 3771.192  (min, max)</code></pre>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/yose_dem_resample_klippy-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="slope-aspect-and-hill-shade" class="slide section level1">
+<h1>Slope, Aspect, and Hill Shade</h1>
+<p>A slope surface is a raster whose cell values represent the slope of the terrain, while an aspect raster records the direction of the compass is uphill. Both of these can be created from a DEM with the raster package’s <tt>terrain()</tt> function.</p>
+<p>You can feed slope and aspect rasters into the <tt>hillShade()</tt> function to generate a raster the simulates shading.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co">## Compute the slope, aspect, and hillshade</span></a>
+<a class="sourceLine" id="cb10-2" title="2">yose_slope &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">terrain</span>(yose_dem_msk, <span class="dt">opt=</span><span class="st">&quot;slope&quot;</span>)</a>
+<a class="sourceLine" id="cb10-3" title="3">yose_aspect &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">terrain</span>(yose_dem_msk, <span class="dt">opt=</span><span class="st">&quot;aspect&quot;</span>)</a>
+<a class="sourceLine" id="cb10-4" title="4">yose_hillshade &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">hillShade</span>(yose_slope, yose_aspect, <span class="dv">40</span>, <span class="dv">270</span>)</a>
+<a class="sourceLine" id="cb10-5" title="5"></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co">## Plot results</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="kw">plot</span>(yose_hillshade, <span class="dt">col=</span><span class="kw">grey</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">100</span><span class="op">/</span><span class="dv">100</span>), <span class="dt">legend=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="kw">plot</span>(yose_bnd_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">col=</span><span class="ot">NA</span>, <span class="dt">border=</span><span class="st">&quot;black&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/yose_hillshade_klippy-1.png" width="768" style="display: block; margin: auto;" /></p>
+<div class="quiz">
+<p>What do the two numeric arguments in the <tt>hillShade()</tt> function do?</p>
+<div class="indented1">
+<tt>yose_hillshade &lt;- hillShade(yose_slope, yose_aspect, 40, 270)</tt>
+</div>
+<p>[<span id="soln_cvcaep" class="showhidesoln" onclick="showHide(&#39;cvcaep&#39;);return false;">Answer</span>]</p>
+<div id="cvcaep" class="hint">
+<p>Determine the angle and direction of the simulated sunlight.</p>
+</div>
+<!--- soln_cvcaep --->
+</div>
+<!-- quiz -->
+</div>
+<div id="rasterize-vector-features" class="slide section level1">
+<h1>Rasterize Vector Features</h1>
+<p>Occassionally you have to convert vector features to a raster format for an analysis. Points, lines and polygons can all be converted to raster with the <tt>rasterize()</tt> function.</p>
+<div class="indented4">
+<p><tt>rasterize(<em>sp_object</em>, <em>rast</em>, <em>field</em>, <em>fun=‘last’</em>, <em>background=NA</em>, <em>mask=FALSE</em>)</tt></p>
+</div>
+<p>Details you have to think about are what <strong>cell size</strong> to use, how the <strong>values of the cells</strong> should be computed, and what to do when two or more <strong>features overlap</strong> or fall in the same cell.</p>
+<p>Typically, you use another raster (i.e., the one you’re trying to match) as the ‘template’ for the rasterized features, passed as <tt>rast</tt> (<strong>must have the same CRS</strong>).</p>
+<p>The <tt>field</tt> argument has a number of options for the cell output values, including a constant value, or the name of a column in the vector attribute table.</p>
+<h2 id="example-rasterize-watersheds">Example: Rasterize watersheds</h2>
+<p>Rasterize the Yosemite watersheds, using the DEM as the raster template.</p>
+<p>First load the watersheds, and project them to match the raster.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co">## Import watersheds from a geopackage</span></a>
+<a class="sourceLine" id="cb11-2" title="2">gpkg_watershd_fn &lt;-<span class="st"> &quot;./data/yose_watersheds.gpkg&quot;</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="kw">file.exists</span>(gpkg_watershd_fn)</a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="co">## Import and project to UTM</span></a>
+<a class="sourceLine" id="cb11-6" title="6">yose_watersheds_utm &lt;-<span class="st"> </span>sf<span class="op">::</span><span class="kw">st_read</span>(gpkg_watershd_fn, <span class="dt">layer=</span><span class="st">&quot;calw221&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="st">  </span><span class="kw">st_transform</span>(<span class="dv">26910</span>)</a>
+<a class="sourceLine" id="cb11-8" title="8"></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="co">## Plot </span></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="kw">plot</span>(yose_watersheds_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">axes=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb11-11" title="11"></a>
+<a class="sourceLine" id="cb11-12" title="12"><span class="co">## Get the bigger watersheds by group on the HU column</span></a>
+<a class="sourceLine" id="cb11-13" title="13">yose_hu_utm &lt;-<span class="st"> </span>yose_watersheds_utm <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-14" title="14"><span class="st">  </span><span class="kw">group_by</span>(HU) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-15" title="15"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">HUNAME =</span> <span class="kw">first</span>(HUNAME), </a>
+<a class="sourceLine" id="cb11-16" title="16">            <span class="dt">NUM_WATERSHEDS =</span> <span class="kw">n</span>())</a>
+<a class="sourceLine" id="cb11-17" title="17"><span class="kw">plot</span>(yose_hu_utm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">axes=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## [1] TRUE
+## Reading layer `calw221&#39; from data source `C:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_scgis19\docs\data\yose_watersheds.gpkg&#39; using driver `GPKG&#39;
+## Simple feature collection with 127 features and 38 fields
+## geometry type:  POLYGON
+## dimension:      XY
+## bbox:           xmin: 1383.82 ymin: -61442.93 xmax: 81596.71 ymax: 26405.66
+## epsg (SRID):    NA
+## proj4string:    +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</code></pre>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/yose_impwatersheds_klippy-1.png" width="768" style="display: block; margin: auto;" /><img src="12_raster2-spatial-manip_files/figure-slidy/yose_impwatersheds_klippy-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Next, we rasterize!</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co">## Rasterize the watershed boundaries, using the DEM as the template.</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="co">## By omitting the field argument, the cell values will be the index (row number) of the overlapping polygon</span></a>
+<a class="sourceLine" id="cb13-3" title="3">yose_hu_rst &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">rasterize</span>(yose_hu_utm, yose_dem_msk)</a>
+<a class="sourceLine" id="cb13-4" title="4"></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="co">## Plot</span></a>
+<a class="sourceLine" id="cb13-6" title="6">colors_qual_paired &lt;-<span class="st"> </span>RColorBrewer<span class="op">::</span><span class="kw">brewer.pal</span>(<span class="kw">nrow</span>(yose_hu_utm), <span class="st">&quot;Paired&quot;</span>)</a>
+<a class="sourceLine" id="cb13-7" title="7"><span class="kw">plot</span>(yose_hu_rst, <span class="dt">col=</span>colors_qual_paired)</a></code></pre></div>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/yose_watersheds_rasterize_klippy-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="working-with-categorical-rasters" class="slide section level1">
+<h1>Working with Categorical Rasters</h1>
+<p>We just created a categorical raster where the cell values are integers that refer to a category. We can see the frequency of cell values as a matrix with <tt>freq()</tt>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">freq</span>(yose_hu_rst)</a></code></pre></div>
+<pre><code>##      value  count
+## [1,]     1  22756
+## [2,]     2  23299
+## [3,]     3   4626
+## [4,]     4 236103
+## [5,]     5 192447
+## [6,]     6  26357
+## [7,]    NA 129504</code></pre>
+<!----
+<div class="tryit">
+What was the largest watershed? How big was it?
+
+**NEEDS WORK**
+
+[<span id="soln_eijwng" class="showhidesoln" onclick="showHide('eijwng');return false;">Solution</span>]
+
+<div id="eijwng" class="hint">
+
+```r
+head(sort(freq(yose_hu_rst), decreasing = TRUE))
+```
+
+```
+## [1] 236103 192447 129504  26357  23299  22756
+```
+
+```r
+#head(freq(yose_watersheds_rst))
+```
+</div>
+</div>
+--->
+<p>To save the category labels as part of our raster, it needs a “Raster Attribute Table” (RAT). We can see if our raster has one by entering it at the console:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">yose_hu_rst</a></code></pre></div>
+<pre><code>## class      : RasterLayer 
+## dimensions : 887, 716, 635092  (nrow, ncol, ncell)
+## resolution : 90, 90  (x, y)
+## extent     : 772271.1, 836711.1, 4153850, 4233680  (xmin, xmax, ymin, ymax)
+## crs        : +proj=utm +zone=10 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs 
+## source     : memory
+## names      : layer 
+## values     : 1, 6  (min, max)
+## attributes :
+##        ID HU            HUNAME NUM_WATERSHEDS
+##  from:  1  1              MONO              7
+##   to :  6 40 SAN JOAQUIN RIVER              6</code></pre>
+<div class="tip">
+<p>If needed, the <tt>ratify()</tt> function will return a categorical (factor) raster with a bare bones attribute that we can then add columns to.</p>
+</div>
+<!--- tip --->
+<p>We can grab the RAT with <tt>levels()</tt>.</p>
+<div class="infobox">
+<p><tt>levels()</tt> when applied to a categorical raster returns a <em><strong>list</strong></em> of data frames (one for each layer).</p>
+</div>
+<!--- infobox --->
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">levels</span>(yose_hu_rst)[[<span class="dv">1</span>]]</a></code></pre></div>
+<pre><code>##   ID HU            HUNAME NUM_WATERSHEDS
+## 1  1  1              MONO              7
+## 2  2 30 EAST WALKER RIVER              5
+## 3  3 31 WEST WALKER RIVER              2
+## 4  4 36    TUOLUMNE RIVER             60
+## 5  5 37      MERCED RIVER             47
+## 6  6 40 SAN JOAQUIN RIVER              6</code></pre>
+<p>To plot the raster with the watershed names in the legend, we have to turn to the <em>rasterVis</em> package which has the <tt>levelplot()</tt> function. We also need to generate a set of random colors, and tell it which column from the attriute table to show in the legend.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">library</span>(rasterVis)</a>
+<a class="sourceLine" id="cb20-2" title="2"></a>
+<a class="sourceLine" id="cb20-3" title="3">colors_qual_pastel1 &lt;-<span class="st"> </span>RColorBrewer<span class="op">::</span><span class="kw">brewer.pal</span>(<span class="kw">nrow</span>(<span class="kw">levels</span>(yose_hu_rst)[[<span class="dv">1</span>]]), <span class="st">&quot;Pastel1&quot;</span>)</a>
+<a class="sourceLine" id="cb20-4" title="4"></a>
+<a class="sourceLine" id="cb20-5" title="5"><span class="co">## Make the plot with levelplot</span></a>
+<a class="sourceLine" id="cb20-6" title="6">rasterVis<span class="op">::</span><span class="kw">levelplot</span>(yose_hu_rst, <span class="dt">colorkey=</span><span class="kw">list</span>(<span class="dt">height=</span><span class="dv">1</span>), <span class="dt">col.regions=</span>colors_qual_pastel1, <span class="dt">att=</span><span class="st">&quot;HUNAME&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/plot_hist_rst-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="working-with-cell-values" class="slide section level1">
+<h1>Working with Cell Values</h1>
+<p>We’ve already seen you can visualize the distribution of cell values with the <tt>hist()</tt> function.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co">## Create a histogram of the pixel values</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="kw">hist</span>(yose_dem_msk, <span class="dt">col=</span><span class="st">&quot;grey50&quot;</span>)</a></code></pre></div>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/yose_hist_rst_klippy-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>There are couple of ways to <em>get</em> cell values so you can analyze them or feed them into a statistical model.</p>
+<div class="indented2">
+<p><tt><strong>getValues()</strong></tt> - returns a copy of all pixel values as a vector (useful for global operations)</p>
+<p><tt><strong>getValuesBlock()</strong></tt> - returns a copy of a rectangular block of cell values</p>
+</div>
+</div>
+<div id="editing-cell-values" class="slide section level1">
+<h1>Editing Cell Values</h1>
+<p>Other common manipulations of raster data leave the spatial structure intact, but modify the cell values. For example you may want to ‘clip’ the values so that all values below a certain threshhold are changed to ‘0’. Another example would be a linear stretch for better visualization.</p>
+<p>To both read and write (edit) cell values, you can use square brackets. Like data frames, you can add an expression for the rows and columns to work with.</p>
+<div class="indented2">
+<p><tt><strong>myrast[]</strong>, <strong>myrast[<em>rows</em>, <em>cols</em>]</strong></tt></p>
+</div>
+<div class="tip">
+<p>By default, the <strong>myrast[]</strong> notation will return cell values as a numeric vector. If you want to return select columns and rows as a Raster object, add <tt>drop=FALSE</tt>.</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb22"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">yose_dem_msk[<span class="dv">500</span><span class="op">:</span><span class="dv">501</span>, <span class="dv">450</span><span class="op">:</span><span class="dv">451</span>, drop=<span class="ot">FALSE</span>]</a></code></pre></div>
+<pre><code>## class      : RasterLayer 
+## dimensions : 2, 2, 4  (nrow, ncol, ncell)
+## resolution : 90, 90  (x, y)
+## extent     : 812681.1, 812861.1, 4188590, 4188770  (xmin, xmax, ymin, ymax)
+## crs        : +init=epsg:26910 +proj=utm +zone=10 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
+## source     : memory
+## names      : layer 
+## values     : 2929.605, 2948.87  (min, max)</code></pre>
+</div>
+</div>
+<div class="infobox">
+<p>Another function you can use to change cell values is <tt><strong>setValues()</strong></tt>. Note however that <tt><strong>setValues()</strong></tt> requires you to pass a numeric vector for all cells, whereas square bracket notation (e.g, <strong>myrast[<em>expr</em>]</strong>) allow you to assign new values to only those cells that meet a condition in <em>expr</em>.</p>
+</div>
+<!--- infobox --->
+<h3 id="example-zero-out-small-values">Example: Zero-out small values</h3>
+<p>In the following example, we identify pixel values that are below a threshhold, and then set them to 0.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co">## Make copy of the DEM</span></a>
+<a class="sourceLine" id="cb24-2" title="2">yose_dem_msk_copy &lt;-<span class="st"> </span>yose_dem_msk</a>
+<a class="sourceLine" id="cb24-3" title="3"></a>
+<a class="sourceLine" id="cb24-4" title="4"><span class="co">## Get the values (not a copy)</span></a>
+<a class="sourceLine" id="cb24-5" title="5">dem_vals &lt;-<span class="st"> </span><span class="kw">getValues</span>(yose_dem_msk_copy)</a>
+<a class="sourceLine" id="cb24-6" title="6"></a>
+<a class="sourceLine" id="cb24-7" title="7"><span class="co">## Get a logical vectors of the values less than 1500 (meters)</span></a>
+<a class="sourceLine" id="cb24-8" title="8">small_vals &lt;-<span class="st"> </span>(dem_vals <span class="op">&lt;</span><span class="st"> </span><span class="dv">1500</span>)   <span class="co">## Create a Boolean vector</span></a>
+<a class="sourceLine" id="cb24-9" title="9"><span class="kw">table</span>(small_vals)</a>
+<a class="sourceLine" id="cb24-10" title="10"></a>
+<a class="sourceLine" id="cb24-11" title="11"><span class="co">## Change the value of those smallish values to 0</span></a>
+<a class="sourceLine" id="cb24-12" title="12">yose_dem_msk_copy[small_vals] &lt;-<span class="st"> </span><span class="dv">0</span></a></code></pre></div>
+<pre><code>## small_vals
+##  FALSE   TRUE 
+## 350785  22426</code></pre>
+<p>Compare results:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb26-2" title="2">x &lt;-<span class="st"> </span><span class="kw">hist</span>(yose_dem_msk, <span class="dt">col=</span><span class="st">&quot;grey50&quot;</span>, <span class="dt">main=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">Original&quot;</span>)</a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="kw">hist</span>(yose_dem_msk_copy, <span class="dt">col=</span><span class="st">&quot;grey50&quot;</span>, <span class="dt">main=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">Small Vals Zeroed&quot;</span>)</a></code></pre></div>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/yose_compare_zero_small_dem_klippy-1.png" width="768" style="display: block; margin: auto;" /></p>
+<div class="tryit">
+<p>How many cells got zeroed out? How much area do they represent?</p>
+<p>[<span id="soln_pqjseb" class="showhidesoln" onclick="showHide(&#39;pqjseb&#39;);return false;">Solution</span>]</p>
+<div id="pqjseb" class="hint">
+<p>The number of cells that got zeroed out is recorded in <tt>small_vals</tt>. We can multiple that times are area of each pixel to get the total area.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co">## Number of cells that have low elevation</span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="kw">sum</span>(small_vals, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb27-3" title="3"></a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="co">## Area of one cell</span></a>
+<a class="sourceLine" id="cb27-5" title="5"><span class="kw">prod</span>(<span class="kw">res</span>(yose_dem_msk))</a>
+<a class="sourceLine" id="cb27-6" title="6"></a>
+<a class="sourceLine" id="cb27-7" title="7"><span class="co">## Total area of low elevatino areas</span></a>
+<a class="sourceLine" id="cb27-8" title="8"><span class="kw">prod</span>(<span class="kw">res</span>(yose_dem_msk)) <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(small_vals, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## [1] 22426
+## [1] 8100
+## [1] 181650600</code></pre>
+</div>
+<!--- soln_pqjseb --->
+<p>What happens if you change the values of the small cells to <tt>NA</tt>?</p>
+<p>[<span id="soln_ataury" class="showhidesoln" onclick="showHide(&#39;ataury&#39;);return false;">Answer</span>]</p>
+<div id="ataury" class="hint">
+<p>They’ll appear transparent when plotted.</p>
+</div>
+<!--- soln_ataury --->
+</div>
+<div class="tip">
+<p>Functions that return a <em>copy</em> of a raster with modified cell values are <tt>calc()</tt> and <tt>reclassify()</tt>.</p>
+<!--
+The example above could be created with
+```
+zero_if_small <- function(x) { x[x<50] <- 0; return(x) }
+dem_zeroed <- calc(sfcity_msk_dem, zero_if_small)
+```
+-->
+</div>
+</div>
+<div id="reclassify" class="slide section level1">
+<h1>Reclassify</h1>
+<p>Reclassifying changes groups of cell values to other values all at once. For example, you could change all cell values between 1 and 10 to become 1, all values between 11 and 15 become 2, etc. We can do this with:</p>
+<div class="indented2">
+<tt><strong>reclassify(rst, rcl)</strong></tt>
+</div>
+<p>The key to <tt>reclassify()</tt> is the <tt>rcl</tt> argument, which is a 3-column matrix with columns for the lower bound, upper bound, and new value for each group.</p>
+<h3 id="example-reclassify-slopes-into-low-medium-and-high">Example: Reclassify slopes into Low, Medium, and High</h3>
+<p>Earlier we computed the slope of the Yosemite DEM. Let’s look at that distribution:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="co">## Plot the distribution of slope values</span></a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="kw">hist</span>(yose_slope, <span class="dt">col=</span><span class="st">&quot;gray50&quot;</span>, <span class="dt">breaks=</span><span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb29-3" title="3"></a>
+<a class="sourceLine" id="cb29-4" title="4"><span class="co">## Slope is measured in RADIANS. To convert to degrees we multiply times 180 / pi</span></a>
+<a class="sourceLine" id="cb29-5" title="5"><span class="kw">hist</span>(yose_slope <span class="op">*</span><span class="st"> </span><span class="dv">180</span> <span class="op">/</span><span class="st"> </span>pi, <span class="dt">col=</span><span class="st">&quot;gray50&quot;</span>, <span class="dt">breaks=</span><span class="dv">20</span>)</a></code></pre></div>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/yose_slope_hist_klippy-1.png" width="768" style="display: block; margin: auto;" /><img src="12_raster2-spatial-manip_files/figure-slidy/yose_slope_hist_klippy-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p><strong>Step 1. Create the reclassification matrix</strong>. The first and second columns should define the range of input values, and the third column should be the new value in the output. Rows should be mutually exclusive.</p>
+<p>We’ll bin the slopes as follows:</p>
+<div class="indented1">
+<p><em>low</em>: 0 to 15 degrees<br />
+<em>medium</em>: 15 - 30<br />
+<em>high</em>: 30+</p>
+</div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co">## Create a reclassification matrix using degrees (more intuitive)</span></a>
+<a class="sourceLine" id="cb30-2" title="2">rcl_mat_deg &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">15</span>,<span class="dv">1</span>,<span class="dv">15</span>,<span class="dv">30</span>,<span class="dv">2</span>,<span class="dv">30</span>,<span class="dv">90</span>,<span class="dv">3</span>), <span class="dt">ncol=</span><span class="dv">3</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb30-3" title="3">rcl_mat_deg</a>
+<a class="sourceLine" id="cb30-4" title="4"></a>
+<a class="sourceLine" id="cb30-5" title="5"><span class="co">## Convert the first two columns from degrees to radians</span></a>
+<a class="sourceLine" id="cb30-6" title="6">rcl_mat_rad &lt;-<span class="st"> </span>rcl_mat_deg</a>
+<a class="sourceLine" id="cb30-7" title="7">rcl_mat_rad[ ,<span class="dv">1</span>] &lt;-<span class="st"> </span>rcl_mat_rad[ ,<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>pi <span class="op">/</span><span class="st"> </span><span class="dv">180</span></a>
+<a class="sourceLine" id="cb30-8" title="8">rcl_mat_rad[ ,<span class="dv">2</span>] &lt;-<span class="st"> </span>rcl_mat_rad[ ,<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>pi <span class="op">/</span><span class="st"> </span><span class="dv">180</span></a>
+<a class="sourceLine" id="cb30-9" title="9">rcl_mat_rad</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    0   15    1
+## [2,]   15   30    2
+## [3,]   30   90    3
+##           [,1]      [,2] [,3]
+## [1,] 0.0000000 0.2617994    1
+## [2,] 0.2617994 0.5235988    2
+## [3,] 0.5235988 1.5707963    3</code></pre>
+<p><strong>Step 2. Apply the reclassifcation matrix:</strong></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="co">## Apply the reclassification</span></a>
+<a class="sourceLine" id="cb32-2" title="2">yose_slope_lmh &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">reclassify</span>(yose_slope, rcl_mat_rad)</a>
+<a class="sourceLine" id="cb32-3" title="3">yose_slope_lmh</a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="kw">freq</span>(yose_slope_lmh)</a></code></pre></div>
+<pre><code>## class      : RasterLayer 
+## dimensions : 887, 716, 635092  (nrow, ncol, ncell)
+## resolution : 90, 90  (x, y)
+## extent     : 772271.1, 836711.1, 4153850, 4233680  (xmin, xmax, ymin, ymax)
+## crs        : +init=epsg:26910 +proj=utm +zone=10 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
+## source     : memory
+## names      : slope 
+## values     : 0, 3  (min, max)
+## 
+##      value  count
+## [1,]     0    141
+## [2,]     1 213116
+## [3,]     2 119686
+## [4,]     3  36364
+## [5,]    NA   3202
+## [6,]   NaN 262583</code></pre>
+<div class="tip">
+<p><tt>reclassify()</tt> has optional argument(s) to fine-tune whether the lower and upper bounds are open or closed. See the help page for details.</p>
+</div>
+<!--- tip --->
+<p><strong>Step 3. View results:</strong></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">plot</span>(yose_slope_lmh, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;cyan&quot;</span>, <span class="st">&quot;green4&quot;</span>, <span class="st">&quot;tan&quot;</span>))</a></code></pre></div>
+<p><img src="12_raster2-spatial-manip_files/figure-slidy/yose_slope_reclass_plot_klippy-1.png" width="768" /></p>
+<div class="tryit">
+<p>Use <tt>reclassify()</tt> to reclassify aspect into facing north, east, south, and west.</p>
+<p>[Solution]</p>
+<p><em>Coming soon</em></p>
+</div>
+</div>
+<div id="dealing-with-missing-data" class="slide section level1">
+<h1>Dealing with Missing Data</h1>
+<p>Remotely sensed raster data often have pixels around the edges that are ‘missing’ values because the sensor didn’t record that area. Other times, an analyst may chose to manually ‘erase’ pixel values outside a non-rectangular study areas so those pixels are omitted from analyses.</p>
+<p>There are a variety of conventions for flagging ‘missing’ data depending on the file format. Sometimes they are simply recorded as ‘0’, but that doesn’t always work because 0 can also mean no reflectance. Other common values for <tt>NoData</tt> are -9999 or -3.4e+38 for floating point rasters.</p>
+<div class="tryit">
+<p>TIF files can have a tag in the header which records the value used for ‘NoData’. You can see this with the <tt>GDALinfo()</tt> function.</p>
+<p>View the missing data value for the landsat image:</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb35"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co">## View the digital number that represents missing data in the Landsat 8 image</span></a>
+<a class="sourceLine" id="cb35-2" title="2">rgdal<span class="op">::</span><span class="kw">GDALinfo</span>(<span class="st">&quot;./data/yose_l8_20180822_b2345.tif&quot;</span>)</a></code></pre></div>
+<pre><code>## rows        2555 
+## columns     2014 
+## bands       4 
+## lower left origin.x        246315 
+## lower left origin.y        4152885 
+## res.x       30 
+## res.y       30 
+## ysign       -1 
+## oblique.x   0 
+## oblique.y   0 
+## driver      GTiff 
+## projection  +proj=utm +zone=11 +datum=WGS84 +units=m +no_defs 
+## file        ./data/yose_l8_20180822_b2345.tif 
+## apparent band summary:
+##   GDType hasNoDataValue NoDataValue blockSize1 blockSize2
+## 1  Int16           TRUE      -32768          1       2014
+## 2  Int16           TRUE      -32768          1       2014
+## 3  Int16           TRUE      -32768          1       2014
+## 4  Int16           TRUE      -32768          1       2014
+## apparent band statistics:
+##   Bmin  Bmax     Bmean      Bsd
+## 1 7208 29840  9706.296 1516.573
+## 2 6100 30960  9498.375 1919.447
+## 3 5357 32595  9637.470 2457.824
+## 4 4330 30481 14146.935 2610.648
+## Metadata:
+## AREA_OR_POINT=Area</code></pre>
+</div>
+<p>The no data value for this floating point image is -32768.</p>
+</div>
+<div class="infobox">
+<p>R uses <tt><strong>NA</strong></tt> to signify missing data, which most statistical functions ignore and most plotting functions make transparent. <tt>raster()</tt> converts the missing data values in a file to <tt>NA</tt> when importing.</p>
+</div>
+<!--- infobox --->
+</div>
+<div id="exporting-a-raster" class="slide section level1">
+<h1>Exporting a Raster</h1>
+<p>The <tt>raster</tt> package has its own export function, <tt>writeRaster()</tt>, that can export a raster to a number of common file formats including <strong>GeoTIFF, ENVI, IDRISI, netCDF, ERDAS</strong>, and others. You can of course also export using <tt>writeGDAL()</tt> from the <tt>rgdal</tt> package.</p>
+<h3 id="example-save-a-raster-to-disk-as-a-tif-file">Example: Save a raster to disk as a TIF file</h3>
+<p>Save the masked DEM to to disk as a TIF file:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">writeRaster</span>(yose_dem_msk, <span class="dt">filename=</span><span class="st">&quot;yose_dem.tif&quot;</span>)</a></code></pre></div>
+<div class="tip">
+<p>If the filename has a known extension, you don’t have to specify the format.</p>
+<p>To (over)write cell values to an existing file on disk (i.e., without having to save the whole thing), use <tt>writeValues()</tt>.</p>
+</div>
+<!--- tip --->
+</div>
+<div id="summary" class="slide section level1">
+<h1>Summary</h1>
+<p>Today we saw how to:</p>
+<div class="compact">
+<ul>
+<li>view a raster’s properties</li>
+<li>project a raster</li>
+<li>mask a master to a polygon</li>
+<li>resample</li>
+<li>rescale values</li>
+<li>stack</li>
+<li>rasterize vectors</li>
+<li>export</li>
+</ul>
+</div>
+<div class="infobox">
+<p>Additional Resources</p>
+<div class="indented1">
+<ul>
+<li><a href="https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure/" target="_blank">Intro to Raster Data in R</a>, DataCarpentry</li>
+</ul>
+</div>
+</div>
+<p>
+<strong>Next: </strong> <a href="13_raster3-analysis.html">Raster Pt III. Raster Analysis Functions</a>
+</p>
+</div>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+</body>
+</html>
